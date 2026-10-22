@@ -33,8 +33,16 @@ const browser = await chromium.launch({
 const ctx = await browser.newContext({ locale: "en-GB", timezoneId: "Europe/London", viewport: { width: 1366, height: 900 } });
 fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: true });
 const raw = [], status = {};
+// Vue and Curzon block GitHub's servers, so a job on the owner's computer (local/fetch.mjs) sends their times here.
+const local = read("./local/listings.json", { sources: {} });
 for (const [key, src] of Object.entries(SOURCES)) {
   if (only && key !== only) continue;
+  const l = local.sources[key];
+  if (!only && l && Date.now() - Date.parse(l.at) < 36 * 3600e3 && l.rows.length) {
+    raw.push(...l.rows.filter(r => r.date >= today && r.date <= last));
+    status[key] = { ok: true, count: l.rows.length, via: "local", at: l.at };
+    continue;
+  }
   const page = await ctx.newPage();
   try {
     const rows = (await src.scrape(page, { today, days: DAYS })).filter(r => r.date >= today && r.date <= last && r.time);

@@ -23,6 +23,15 @@ If a cinema's site fails to load, that cinema's previous listings are kept, and 
 2. Repo **Settings → Pages → Source: GitHub Actions**.
 3. **Actions → Update listings → Run workflow**. The site appears at `https://<user>.github.io/<repo>/`.
 
+## Vue and Curzon: the job on your computer
+
+Vue and Curzon block GitHub's servers, so a small job on your own computer fetches their times once a day and sends them to `scraper/local/listings.json`. The site uses those times while they are less than 36 hours old.
+
+- **Windows:** in PowerShell, run `irm https://raw.githubusercontent.com/Undertow6248/FilmsInOxford/main/local/setup-windows.ps1 | iex`. This adds the scheduled task "Films in Oxford".
+- **Mac:** in Terminal, run `curl -fsSL https://raw.githubusercontent.com/Undertow6248/FilmsInOxford/main/local/setup-mac.sh | bash`.
+
+Setup asks for a GitHub fine-grained token that has access to this repo only, with **Contents: Read and write** permission. Each run downloads the latest scraper code from the repo, so fixes made here apply to the job without reinstalling. A log is kept in `fetch.log` in the install folder.
+
 ## Everyday edits
 
 - **Add a one-off screening.** Add a line to `scraper/extras.json`, using an existing line as the pattern. `venue` must be one of the venue keys in `site/index.html`; to add a new venue, add it to `V` there. Past screenings drop off automatically.
