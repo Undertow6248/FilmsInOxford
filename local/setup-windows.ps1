@@ -38,7 +38,8 @@ if (-not (Test-Path $Config)) {
   Write-Host ""
   Write-Host "Paste your GitHub token (starts github_pat_). It won't show as you paste, then press Enter:" -ForegroundColor Yellow
   $sec = Read-Host -AsSecureString
-  $tok = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)).Trim()
+  $tok = ([System.Net.NetworkCredential]::new("", $sec).Password).Trim()  # works in Windows PowerShell and PowerShell 7
+  if ($tok -notmatch "github_pat_|^gh[pousr]_") { throw "That doesnt look like a GitHub token (it should start github_pat_). Run setup again and paste the token." }
   if (-not $tok) { throw "No token entered" }
   [IO.File]::WriteAllText($Config, (@{ token = $tok } | ConvertTo-Json))  # UTF-8 without BOM
   icacls $Config /inheritance:r /grant:r "$($env:USERNAME):(R,W)" | Out-Null
