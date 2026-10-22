@@ -44,6 +44,7 @@ export function cleanTitle(t) {
     .replace(/\s*\((?:\d{4}|re-?release|\d+(?:st|nd|rd|th) anniversary[^)]*|tamil|hindi|telugu|subtitled|4k[^)]*)\)\s*/gi, " ")
     .replace(/\s*-\s*preview$/i, "")
     .replace(/\s*(\.{3}|…)\s*$/, "")
+    .replace(/\s*\[(?:U|PG|12A?|15|18|R18|TBC)\]/gi, "")
     .replace(/^(NTLive|National Theatre Live):\s*/i, "NT Live: ")
     .replace(/^RBO (Live|Encore) \d{4}-\d{2}:\s*/i, "Royal Ballet & Opera: ")
     .replace(/^RBO:\s*/i, "Royal Ballet & Opera: ")
