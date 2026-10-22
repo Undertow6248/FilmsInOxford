@@ -1,5 +1,7 @@
 # Films In Oxford
 
+> **AI declaration:** Due to the lack of any coding knowledge, experience, or skill on the part of the creator of this website, all coding work on this project was completed using an LLM.
+
 Every film showing in Oxford over the next two weeks: the five cinemas plus colleges, pubs, libraries and one-off community screenings. The site is a single static page hosted on GitHub Pages and updated by a scheduled GitHub Action.
 
 ## How it works
