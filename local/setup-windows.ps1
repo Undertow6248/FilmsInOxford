@@ -40,7 +40,7 @@ if (-not (Test-Path $Config)) {
   $sec = Read-Host -AsSecureString
   $tok = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)).Trim()
   if (-not $tok) { throw "No token entered" }
-  @{ token = $tok } | ConvertTo-Json | Set-Content -Encoding UTF8 $Config
+  [IO.File]::WriteAllText($Config, (@{ token = $tok } | ConvertTo-Json))  # UTF-8 without BOM
   icacls $Config /inheritance:r /grant:r "$($env:USERNAME):(R,W)" | Out-Null
 }
 

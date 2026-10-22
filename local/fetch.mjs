@@ -21,10 +21,10 @@ const log = (...a) => { const line = `${new Date().toISOString()} ${a.join(" ")}
 async function main() {
   const force = process.argv.includes("--force");
   try {
-    const last = JSON.parse(fs.readFileSync(STATE, "utf8"));
+    const last = JSON.parse(fs.readFileSync(STATE, "utf8").replace(/^\uFEFF/, ""));
     if (!force && Date.now() - Date.parse(last.ok) < 12 * 3600e3) return log("already ran today, skipping");
   } catch {}
-  const { token } = JSON.parse(fs.readFileSync(CONFIG, "utf8"));
+  const { token } = JSON.parse(fs.readFileSync(CONFIG, "utf8").replace(/^\uFEFF/, "")); // Windows may add a BOM
 
   // Always use the latest scraper code from the repo, so fixes there apply here too.
   const code = path.join(HERE, "code", "scraper");
