@@ -260,11 +260,21 @@ async function magdalen(page, { today, last }) {
 export const EVENT_SOURCES = { dailyinfo: dailyInfo, oxevents: oxEvents, wegottickets: weGotTickets, eventbrite, magdalen };
 
 /** Run every source; a failure in one doesn't stop the others. */
-export async function scrapeEvents(ctx, { today, days }) {
+// The University calendar and Eventbrite block GitHub's servers; the job on the owner's computer fetches them instead.
+export const LOCAL_EVENT_SOURCES = ["oxevents", "eventbrite"];
+
+export async function scrapeEvents(ctx, { today, days, local = {} }) {
   const last = addDays(today, days - 1);
   const events = [], status = {};
   let cinemas = [];
   for (const [key, fn] of Object.entries(EVENT_SOURCES)) {
+    const l = local["ev:" + key];
+    if (l && Date.now() - Date.parse(l.at) < 36 * 3600e3) {
+      const rows = l.rows.filter(r => r.date >= today && r.date <= last);
+      events.push(...rows);
+      status[key] = { ok: true, count: rows.length, via: "local", at: l.at };
+      continue;
+    }
     const page = await ctx.newPage();
     try {
       const r = await fn(page, { today, last });

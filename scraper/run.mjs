@@ -38,7 +38,7 @@ const raw = [], status = {};
 const local = read("./local/listings.json", { sources: {} });
 // Screenings outside cinemas (and Daily Info's copy of the cinema times, used as a back-up below).
 let ev = { events: [], cinemas: [], status: {} };
-if (!only || only === "events") ev = await scrapeEvents(ctx, { today, days: DAYS });
+if (!only || only === "events") ev = await scrapeEvents(ctx, { today, days: DAYS, local: local.sources });
 const diCinema = dailyInfoCinemaRows(ev.cinemas);
 for (const [key, src] of Object.entries(SOURCES)) {
   if (only && key !== only) continue;

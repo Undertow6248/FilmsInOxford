@@ -25,7 +25,7 @@ If a cinema's site fails to load, that cinema's previous listings are kept, and 
 
 ## Vue and Curzon: the job on your computer
 
-Vue and Curzon block GitHub's servers, so a small job on your own computer fetches their times once a day and sends them to `scraper/local/listings.json`. The site uses those times while they are less than 36 hours old.
+Some sites block GitHub's servers: Vue, Curzon, Eventbrite and the University events calendar. Daily Info's listings cover Vue's and Curzon's times, so the site keeps working without your computer. A small job on your computer adds the rest: once a day it fetches Vue's and Curzon's own times, plus film screenings from Eventbrite and the University calendar, and sends them to `scraper/local/listings.json`. The site uses those listings while they are less than 36 hours old.
 
 - **Windows:** in PowerShell, run `irm https://raw.githubusercontent.com/Undertow6248/FilmsInOxford/main/local/setup-windows.ps1 | iex`. This adds the scheduled task "Films in Oxford".
 - **Mac:** in Terminal, run `curl -fsSL https://raw.githubusercontent.com/Undertow6248/FilmsInOxford/main/local/setup-mac.sh | bash`.

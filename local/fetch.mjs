@@ -14,6 +14,7 @@ const CONFIG = path.join(HERE, "config.json");   // { "token": "github_pat_..." 
 const STATE = path.join(HERE, "last-run.json");
 const LOG = path.join(HERE, "fetch.log");
 const SOURCES = { vue: "sources/vue.mjs", cur: "sources/curzon.mjs" };
+const EVENTS = "sources/events.mjs"; // University events calendar + Eventbrite
 
 const log = (...a) => { const line = `${new Date().toISOString()} ${a.join(" ")}`; console.log(line); fs.appendFileSync(LOG, line + "\n"); };
 
@@ -28,7 +29,7 @@ async function main() {
   // Always use the latest scraper code from the repo, so fixes there apply here too.
   const code = path.join(HERE, "code", "scraper");
   fs.mkdirSync(path.join(code, "sources"), { recursive: true });
-  for (const f of ["lib.mjs", ...Object.values(SOURCES)]) {
+  for (const f of ["lib.mjs", ...Object.values(SOURCES), EVENTS]) {
     const r = await fetch(`https://raw.githubusercontent.com/${REPO}/main/scraper/${f}`, { cache: "no-store" });
     if (!r.ok) throw new Error(`couldn't download ${f}: ${r.status}`);
     fs.writeFileSync(path.join(code, f), await r.text());
@@ -58,6 +59,20 @@ async function main() {
     }
     await page.close();
   }
+  // Screenings outside cinemas from the sites that block GitHub.
+  try {
+    const ev = await import(pathToFileURL(path.join(code, EVENTS)) + `?v=${Date.now()}`);
+    const { addDays } = await import(pathToFileURL(path.join(code, "lib.mjs")) + `?v=${Date.now()}`);
+    for (const key of ev.LOCAL_EVENT_SOURCES || []) {
+      const page = await ctx.newPage();
+      try {
+        const rows = await ev.EVENT_SOURCES[key](page, { today, last: addDays(today, 20) });
+        out.sources["ev:" + key] = { at: new Date().toISOString(), rows };
+        log(key, rows.length, "screenings");
+      } catch (e) { log(key, "FAILED:", e.message.split("\n")[0]); }
+      await page.close();
+    }
+  } catch (e) { log("events FAILED:", e.message); }
   await browser.close();
   if (!Object.keys(out.sources).length) throw new Error("nothing fetched");
 
@@ -74,7 +89,7 @@ async function main() {
     } catch {}
   }
   const body = {
-    message: `Times from Vue and Curzon (${today})`,
+    message: `Listings from this computer (${today})`,
     content: Buffer.from(JSON.stringify(out)).toString("base64"),
     ...(sha ? { sha } : {}),
   };
