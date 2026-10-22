@@ -18,7 +18,7 @@ export async function scrape(page, { today, days }) {
     const out = [];
     for (const m of j.movies || []) for (const s of m.show_times || []) {
       if (s.CinemaId !== "014" || s.date_f < today || s.date_f > last) continue;
-      out.push({ date: s.date_f, time: s.time, title: m.Title, attrs: s.SessionAttributesNames || [], sid: s.SessionId });
+      out.push({ date: s.date_f, time: s.time, title: m.Title, attrs: s.SessionAttributesNames || [], sid: s.SessionId, fid: m.ScheduledFilmId });
     }
     return out;
   }, { today, last });
@@ -26,6 +26,7 @@ export async function scrape(page, { today, days }) {
   return rows.map(r => ({
     date: r.date, time: r.time, title: r.title, venue: "phx",
     tags: r.attrs.filter(a => KEEP.test(a)).map(a => a.replace(/^Silver Scr.*/, "Silver Screen").replace(/^Toddler Ti.*/, "Toddler Time").replace(/^LiveSat.*/, "Live")),
-    url: "https://www.picturehouses.com/cinema/phoenix-picturehouse",
+    // Straight to seat selection for that screening.
+    url: r.sid ? `https://web.picturehouses.com/order/showtimes/014-${r.sid}/seats` : "",
   }));
 }

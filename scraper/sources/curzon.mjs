@@ -8,8 +8,11 @@ export async function scrape(page, { today }) {
   await page.waitForSelector(".v-showtime-picker-film", { timeout: 20000 }).catch(() => {}); // today may be over
   const read = () => page.evaluate(() => [...document.querySelectorAll(".v-showtime-picker-film")].map(f => ({
     title: f.querySelector(".v-showtime-picker-film-details a")?.textContent.trim(),
-    times: [...new Set([...f.querySelectorAll(".v-showtime-picker-site-list button, .v-showtime-picker-site-list a")]
-      .map(b => b.innerText.replace(/\s+/g, " ").trim()).filter(x => /^\d{1,2}:\d\d\s?[AP]M/i.test(x)))],
+    filmUrl: f.querySelector(".v-showtime-picker-film-details a")?.href || "",
+    // Each time is a link straight to seat selection for that screening.
+    times: [...f.querySelectorAll(".v-showtime-picker-site-list button, .v-showtime-picker-site-list a")]
+      .map(b => ({ t: b.innerText.replace(/\s+/g, " ").trim(), href: b.href || "" })).filter(x => /^\d{1,2}:\d\d\s?[AP]M/i.test(x.t))
+      .filter((x, i, a) => a.findIndex(y => y.t === x.t) === i),
   })));
   const n = (await page.$$(".v-date-picker [role=tab]")).length;
   const out = [];
@@ -26,8 +29,8 @@ export async function scrape(page, { today }) {
     const fromUrl = (page.url().match(/date=(\d{4}-\d\d-\d\d)/) || [])[1];
     const date = fromUrl || (/today/i.test(label) ? today : parseDayMonth(label, today));
     for (const f of await read()) for (const t of f.times) {
-      const time = to24(t.match(/^\d{1,2}:\d\d\s?[AP]M/i)[0]);
-      if (f.title && time && date) out.push({ date, time, title: f.title, venue: "cur", tags: [], url: "https://www.curzon.com/venues/oxford/" });
+      const time = to24(t.t.match(/^\d{1,2}:\d\d\s?[AP]M/i)[0]);
+      if (f.title && time && date) out.push({ date, time, title: f.title, venue: "cur", tags: [], url: t.href || f.filmUrl, filmUrl: f.filmUrl });
     }
   }
   log("curzon", out.length);

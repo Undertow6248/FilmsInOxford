@@ -98,7 +98,7 @@ for (const r of raw) {
   const k = [r.date, r.time, t, r.venue].join("|");
   if (seen.has(k)) continue; seen.add(k);
   const tag = (r.tags || []).join(" · ");
-  shows.push([r.date, r.time, t, r.venue, tag, r.url && r.url !== VENUE_HOME[r.venue] ? r.url : ""]);
+  shows.push([r.date, r.time, t, r.venue, tag, r.url && r.url !== VENUE_HOME[r.venue] ? r.url : "", r.filmUrl || ""]);
 }
 // Same film spelt differently by two cinemas ("NAZA"/"Naza"), or cut short ("Shaun the Sheep: The Beast Of Mo"):
 // map each to the most-used full spelling.
@@ -116,6 +116,16 @@ for (const r of raw) {
   for (let i = shows.length - 1; i >= 0; i--) { const k = shows[i].slice(0, 4).join("|"); if (seen2.has(k)) shows.splice(i, 1); else seen2.add(k); }
 }
 shows.sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1]));
+
+// Links: each time links to that screening's booking page where the cinema gives one. Where it doesn't
+// (e.g. times taken from Daily Info), link to the film's page at that cinema, remembered from earlier runs.
+{
+  const LINKS = new URL("../data/links.json", import.meta.url);
+  let links = {}; try { links = JSON.parse(fs.readFileSync(LINKS, "utf8")); } catch {}
+  for (const s of shows) if (s[6]) links[s[3] + "|" + s[2]] = s[6];
+  for (const s of shows) { if (!s[5]) s[5] = links[s[3] + "|" + s[2]] || ""; s.length = 6; }
+  fs.writeFileSync(LINKS, JSON.stringify(links, null, 1));
+}
 
 // 4. Look each film up on TMDB and pick a section for it.
 const EVENT = /^(NT Live|National Theatre Live|RBO|Royal Ballet|Met Opera|Bolshoi|Book Club)|Live Viewing|in Concert|: Live$|\bConcert\b|The Musical$|Cinema Club/i;

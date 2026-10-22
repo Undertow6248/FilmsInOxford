@@ -15,7 +15,7 @@ export async function scrape(page, { today, days }) {
       const j = await r.json();
       for (const f of j.result || []) for (const g of f.showingGroups || []) for (const s of g.sessions || []) {
         if (s.startTime.slice(0, 10) !== d) continue;
-        out.push({ date: d, time: s.startTime.slice(11, 16), title: f.filmTitle, attrs: (s.attributes || []).map(a => a.name), url: /^https?:/.test(s.bookingUrl || "") ? s.bookingUrl : "https://www.myvue.com" + (s.bookingUrl || "/cinema/oxford/whats-on"), release: (f.releaseDate || "").slice(0, 10) });
+        out.push({ date: d, time: s.startTime.slice(11, 16), title: f.filmTitle, attrs: (s.attributes || []).map(a => a.name), url: /^https?:/.test(s.bookingUrl || "") ? s.bookingUrl : "https://www.myvue.com" + (s.bookingUrl || "/cinema/oxford/whats-on"), release: (f.releaseDate || "").slice(0, 10), filmUrl: f.filmUrl || "" });
       }
     }
     return out;

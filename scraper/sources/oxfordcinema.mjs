@@ -11,6 +11,16 @@ export async function scrape(page, { today }) {
       if (/^\d+h( \d+m)?$|^\d+m$/.test(L[i]) && i > 0) { cur = { t: L[i - 1], ts: [] }; out.push(cur); }
       else if (cur && /^\d{1,2}:\d\d\s?[AP]M$/i.test(L[i])) cur.ts.push(L[i]);
     }
+    // Each time is a link to ticket selection for that screening; they appear in the same order as the times above.
+    const links = [...document.querySelectorAll("main a.pc-show-time")].map(a => a.href);
+    const n = out.reduce((k, f) => k + f.ts.length, 0);
+    if (links.length === n) { let i = 0; for (const f of out) f.links = f.ts.map(() => links[i++]); }
+    // Each film also has a "More Performances" link to its own page.
+    const more = [...document.querySelectorAll("main a")].filter(a => /more performances/i.test(a.textContent)).map(a => a.href);
+    out.forEach((f, i) => {
+      f.film = more.length === out.length ? more[i] : "";
+      if (f.links) f.links = f.links.map(l => /\/movies\//.test(l) ? l : f.film); // sold-out/closed times link elsewhere
+    });
     return out;
   });
   const buttons = await page.$$("main button");
@@ -23,7 +33,7 @@ export async function scrape(page, { today }) {
     await page.waitForTimeout(2500);
     let films = await parse();
     if (!films.length) { await page.waitForTimeout(4000); films = await parse(); } // some days load slowly
-    for (const f of films) for (const t of f.ts) out.push({ date, time: to24(t), title: f.t, venue: "ocf", tags: [], url: "https://www.oxfordcinema.co.uk/en/buy-tickets" });
+    for (const f of films) f.ts.forEach((t, i) => out.push({ date, time: to24(t), title: f.t, venue: "ocf", tags: [], url: f.links?.[i] || f.film || "", filmUrl: f.film || "" }));
   }
   log("oxford cinema", out.length);
   return out;

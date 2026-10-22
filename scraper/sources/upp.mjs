@@ -11,10 +11,10 @@ export async function scrape(page, { today }) {
     document.querySelectorAll("table tr").forEach(tr => {
       const m = tr.innerText.match(/(\w+day \d{1,2}\w\w \w+ \d{4}) : (\d{1,2}\.\d\d[ap]m)/i);
       if (!m) return;
-      let el = tr.closest("table"), title = null, tag = (tr.querySelector("strong, b")?.innerText || "").trim();
-      while (el && !title) { el = el.previousElementSibling; if (el && el.querySelector) { const a = el.matches('a[href*="/show/"]') ? el : el.querySelector('a[href*="/show/"]'); if (a && a.innerText.trim()) title = a.innerText.trim(); } }
-      const book = tr.querySelector('a[href*="savoysystems"]')?.href || "https://uppcinema.com/whats-on/";
-      if (title) out.push({ when: m[1], time: m[2], title, tag, book });
+      let el = tr.closest("table"), title = null, titleHref = "", tag = (tr.querySelector("strong, b")?.innerText || "").trim();
+      while (el && !title) { el = el.previousElementSibling; if (el && el.querySelector) { const a = el.matches('a[href*="/show/"]') ? el : el.querySelector('a[href*="/show/"]'); if (a && a.innerText.trim()) { title = a.innerText.trim(); titleHref = a.href; } } }
+      // The film's own page at UPP (its times and booking); UPP's booking links all go to one generic page.
+      if (title) out.push({ when: m[1], time: m[2], title, tag, book: titleHref });
     });
     return out;
   });
@@ -23,7 +23,7 @@ export async function scrape(page, { today }) {
     const date = parseDayMonth(r.when, today), time = to24(r.time);
     const title = r.title.replace(/\s*\((?:Cert[- ]?)?(?:U|PG|12A?|15|18|R18|N\/A|TBC|[^)]*TBC)\)\s*$/i, "").trim();
     const k = date + time + title; if (seen.has(k)) continue; seen.add(k);
-    out.push({ date, time, title, venue: "upp", tags: r.tag ? r.tag.split("/").map(s => s.trim()).filter(Boolean) : [], url: r.book });
+    out.push({ date, time, title, venue: "upp", tags: r.tag ? r.tag.split("/").map(s => s.trim()).filter(Boolean) : [], url: r.book, filmUrl: r.book });
   }
   log("upp", out.length);
   return out;
