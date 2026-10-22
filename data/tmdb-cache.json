@@ -1330,5 +1330,143 @@
   ],
   "poster": "/LXqHnaJ4ffkcx5YCuJN1noxkhr.jpg",
   "lang": "English"
+ },
+ "exact:harakiri": {
+  "title": "Harakiri",
+  "at": 1792701423722
+ },
+ "exact:bram stokerandrsquo": {
+  "title": "",
+  "at": 1792701423724
+ },
+ "exact:evidence trust and the climate and nature crisis": {
+  "title": "",
+  "at": 1792701423728
+ },
+ "exact:network": {
+  "title": "Network",
+  "at": 1792701423729
+ },
+ "exact:ninotchka": {
+  "title": "Ninotchka",
+  "at": 1792701423736
+ },
+ "exact:monsters inc": {
+  "title": "Monsters, Inc.",
+  "at": 1792701423744
+ },
+ "exact:an evening of film music and conversation": {
+  "title": "",
+  "at": 1792701423747
+ },
+ "exact:community screening at rewley house": {
+  "title": "",
+  "at": 1792701423748
+ },
+ "exact:beetlejuice": {
+  "title": "Beetlejuice",
+  "at": 1792701423748
+ },
+ "exact:ukrainian film evening": {
+  "title": "",
+  "at": 1792701423748
+ },
+ "exact:the bride of frankenstein": {
+  "title": "The Bride of Frankenstein",
+  "at": 1792701423749
+ },
+ "exact:masked demons feudal fears and ghosts in the machine": {
+  "title": "",
+  "at": 1792701423750
+ },
+ "exact:screening of documentary film on historian romila thapar": {
+  "title": "",
+  "at": 1792701423750
+ },
+ "exact:coup 53": {
+  "title": "Coup 53",
+  "at": 1792701423751
+ },
+ "exact:bradford forwards and backwards": {
+  "title": "",
+  "at": 1792701423752
+ },
+ "exact:the lego batman movie screening and buildalong": {
+  "title": "",
+  "at": 1792701423754
+ },
+ "exact:people s emergency briefing": {
+  "title": "People's Emergency Briefing",
+  "at": 1792701423760
+ },
+ "exact:bram stoker s dracula": {
+  "title": "Bram Stoker's Dracula",
+  "at": 1792701423783
+ },
+ "exact:screening and buildalong": {
+  "title": "",
+  "at": 1792701423786
+ },
+ "exact:lego batman": {
+  "title": "",
+  "at": 1792701423852
+ },
+ "exact:the rediscovery of charlotte sohy": {
+  "title": "",
+  "at": 1792701424248
+ },
+ "exact:japanese horror": {
+  "title": "",
+  "at": 1792701424362
+ },
+ "exact:the people s emergency climate briefing": {
+  "title": "",
+  "at": 1792701424471
+ },
+ "exact:screening": {
+  "title": "Screening",
+  "at": 1792701424506
+ },
+ "exact:bradford forwards and backwards qanda": {
+  "title": "",
+  "at": 1792701424713
+ },
+ "Derek vs Derek": {
+  "id": 1638280,
+  "year": "2027",
+  "release": "2027-03-08",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/xAMl5jYNuY482LZxgejyUVXjBM0.jpg",
+  "lang": "English"
+ },
+ "People's Emergency Briefing": {
+  "id": 1674893,
+  "year": "2026",
+  "release": "2026-04-07",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [],
+  "poster": "/wLecI5aX1igefG2hhqgazKYKRhF.jpg",
+  "lang": "English"
+ },
+ "Coup 53": {
+  "id": 626979,
+  "year": "2019",
+  "release": "2019-09-01",
+  "genres": [
+   "Documentary",
+   "History"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/Ar7iq23QZNh0ZX57uPc8e2IasvD.jpg",
+  "lang": "English"
  }
 }
