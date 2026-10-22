@@ -119,7 +119,7 @@ async function oxEvents(page, { today, last }) {
     }
     return out;
   }, { today, last });
-  const strongDesc = /\b(film screening|screening of|documentary screening|free screening|followed by (?:a )?(?:q&a|discussion)|the film will be screened|will be screening)\b/i;
+  const strongDesc = /\b(film screening|screening of|documentary screening|free screening|the film will be screened|will be screening)\b/i;
   const out = rows.filter(r => (FILM_NAME.test(r.name) || strongDesc.test(r.desc)) && !NOT_FILM.test(r.name) && r.start)
     .map(r => ({ date: r.start.slice(0, 10), time: r.start.slice(11, 16) || "TBC", name: r.name, venueName: r.venue, venueAddr: "Oxford", url: r.url, src: "oxevents" }));
   diag.oxevents = { found: rows.length, sample: rows.slice(0, 3).map(r => r.name) };
