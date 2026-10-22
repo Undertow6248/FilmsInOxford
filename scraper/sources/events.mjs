@@ -34,6 +34,7 @@ export function firstTime(s) {
   }
 }
 
+export const diag = {};
 const isoDate = ms => new Date(ms).toISOString().slice(0, 10);
 
 // ---------- Daily Info ----------
@@ -69,10 +70,12 @@ async function dailyInfo(page, { today, last }) {
       continue;
     }
     if (/workshops|courses/i.test(h.col)) continue;
+    if (!OXFORD_POSTCODE.test(h.addr)) continue; // Oxford itself only (OX1–OX4), not Abingdon, Wantage etc.
     const film = h.col === "Cinema" || h.type === "film" || FILM_NAME.test(h.name);
     if (!film || NOT_FILM.test(h.name)) continue;
     events.push({ date, time: firstTime(h.times), name: h.name, venueName: h.venue, venueAddr: h.addr, url: h.web || h.url, src: "dailyinfo" });
   }
+  diag.dailyinfo = { listings: hits.length };
   log("dailyinfo", events.length, "events,", cinemas.length, "cinema listings");
   return { events, cinemas };
 }
@@ -119,6 +122,7 @@ async function oxEvents(page, { today, last }) {
   const strongDesc = /\b(film screening|screening of|documentary screening|free screening|followed by (?:a )?(?:q&a|discussion)|the film will be screened|will be screening)\b/i;
   const out = rows.filter(r => (FILM_NAME.test(r.name) || strongDesc.test(r.desc)) && !NOT_FILM.test(r.name) && r.start)
     .map(r => ({ date: r.start.slice(0, 10), time: r.start.slice(11, 16) || "TBC", name: r.name, venueName: r.venue, venueAddr: "Oxford", url: r.url, src: "oxevents" }));
+  diag.oxevents = { found: rows.length, sample: rows.slice(0, 3).map(r => r.name) };
   log("oxevents", out.length);
   return out;
 }
@@ -165,6 +169,7 @@ async function weGotTickets(page, { today, last }) {
       date: r.date, time: r.start && r.start.length > 10 && r.start.slice(11, 16) !== "00:00" ? r.start.slice(11, 16) : firstTime(r.when),
       name: r.name, venueName: r.where.replace(/^OXFORD:\s*/i, ""), venueAddr: r.place || "Oxford", url: r.url, src: "wegottickets",
     }));
+  diag.wegottickets = { oxfordEvents: rows.length, screeningType: rows.filter(r => /Screening/.test(r.type)).length };
   log("wegottickets", out.length, "of", rows.length, "Oxford events");
   return out;
 }
@@ -210,6 +215,7 @@ async function eventbrite(page, { today, last }) {
   const out = rows.filter(r => OXFORD_POSTCODE.test(r.pc) && FILM_NAME.test(r.name) && !NOT_FILM.test(r.name))
     .map(r => ({ date: r.start.slice(0, 10), time: r.start.length > 10 ? r.start.slice(11, 16) : "TBC", name: r.name, venueName: r.venue,
       venueAddr: [r.street, r.pc].filter(Boolean).join(", "), url: r.url.replace(/^https:\/\/www\.eventbrite\.com\//, "https://www.eventbrite.co.uk/"), src: "eventbrite" }));
+  diag.eventbrite = { found: rows.length, oxford: rows.filter(r => OXFORD_POSTCODE.test(r.pc)).length, sample: rows.slice(0, 3).map(r => r.name + " " + r.pc) };
   log("eventbrite", out.length, "of", rows.length);
   return out;
 }
@@ -265,7 +271,8 @@ export async function scrapeEvents(ctx, { today, days }) {
       const ev = Array.isArray(r) ? r : r.events;
       if (!Array.isArray(r)) cinemas = r.cinemas;
       events.push(...ev);
-      status[key] = { ok: true, count: ev.length };
+      status[key] = { ok: true, count: ev.length, ...(diag[key] || {}) };
+      if (!ev.length) status[key].page = { url: page.url(), title: await page.title().catch(() => "") };
     } catch (e) {
       log(key, "FAILED:", e.message.split("\n")[0]);
       status[key] = { ok: false, error: e.message.split("\n")[0], page: { title: await page.title().catch(() => "") } };
