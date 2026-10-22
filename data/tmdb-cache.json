@@ -1104,5 +1104,144 @@
    "USA"
   ],
   "poster": "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg"
+ },
+ "Street Fighter#2026": {
+  "id": 1153576,
+  "year": "2026",
+  "release": "2026-10-13",
+  "genres": [
+   "Action",
+   "Fantasy"
+  ],
+  "countries": [
+   "Japan",
+   "USA"
+  ],
+  "poster": "/ccxdepKqORLwccbzvO4eAGkN0IC.jpg"
+ },
+ "Sorry to Bother You#2018": {
+  "id": 424781,
+  "year": "2018",
+  "release": "2018-07-06",
+  "genres": [
+   "Fantasy",
+   "Sci-fi",
+   "Comedy"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/peTl1V04E9ppvhgvNmSX0r2ALqO.jpg"
+ },
+ "Who's Afraid of Virginia Woolf?#1966": {
+  "id": 396,
+  "year": "1966",
+  "release": "1966-06-22",
+  "genres": [
+   "Drama"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg"
+ },
+ "Hocus Pocus#1993": {
+  "id": 10439,
+  "year": "1993",
+  "release": "1993-07-16",
+  "genres": [
+   "Fantasy",
+   "Comedy",
+   "Family"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/by4D4Q9NlUjFSEUA1yrxq6ksXmk.jpg"
+ },
+ "Pan's Labyrinth#2006": {
+  "id": 1417,
+  "year": "2006",
+  "release": "2006-10-11",
+  "genres": [
+   "Fantasy",
+   "Drama",
+   "War"
+  ],
+  "countries": [
+   "Mexico",
+   "Spain",
+   "USA"
+  ],
+  "poster": "/khBQ6nN5FLfg9XgPXIZDkABJjqo.jpg"
+ },
+ "Scream#1996": {
+  "id": 4232,
+  "year": "1996",
+  "release": "1996-12-20",
+  "genres": [
+   "Crime",
+   "Horror",
+   "Mystery"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/lr9ZIrmuwVmZhpZuTCW8D9g0ZJe.jpg"
+ },
+ "COUP 53": {
+  "id": 626979,
+  "year": "2019",
+  "release": "2019-09-01",
+  "genres": [
+   "Documentary",
+   "History"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/Ar7iq23QZNh0ZX57uPc8e2IasvD.jpg"
+ },
+ "Godzilla Minus Zero": {
+  "id": 1381071,
+  "year": "2026",
+  "release": "2026-11-03",
+  "genres": [
+   "Sci-fi",
+   "Horror",
+   "Action"
+  ],
+  "countries": [
+   "Japan"
+  ],
+  "poster": "/hSmIJluOJmTWvJs4d7kHRxjc8s8.jpg"
+ },
+ "Ramayana: Rise Of A Legend": {
+  "id": 656908,
+  "year": "2026",
+  "release": "2026-11-05",
+  "genres": [
+   "Fantasy",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "India",
+   "UK"
+  ],
+  "poster": "/hX94xNPYwazKOVGGqL1GiwMSNuY.jpg"
+ },
+ "George Michael: The Faith Tour": {
+  "id": 1649403,
+  "year": "2026",
+  "release": "2026-11-05",
+  "genres": [
+   "Music",
+   "Documentary"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/LXqHnaJ4ffkcx5YCuJN1noxkhr.jpg"
  }
 }
