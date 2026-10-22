@@ -149,6 +149,12 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
 saveCache();
 
 status.tmdb = tmdbStats;
+// When did the job on the owner's computer last send listings? (Checked by the workflow's last step.)
+{
+  const times = Object.values(local.sources || {}).map(v => Date.parse(v.at)).filter(Boolean);
+  const last = times.length ? Math.max(...times) : 0;
+  status.localJob = { last: last ? new Date(last).toISOString() : null, hoursAgo: last ? Math.round((Date.now() - last) / 36e5) : null };
+}
 const out = { updated: new Date().toISOString(), status, venues, shows, films };
 fs.writeFileSync(OUT, JSON.stringify(out));
 log(`wrote ${shows.length} screenings of ${Object.keys(films).length} films`, JSON.stringify(status));
