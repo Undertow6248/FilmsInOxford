@@ -36,10 +36,14 @@ if ($LASTEXITCODE -ne 0) { throw "npm install failed" }
 $Config = Join-Path $Dir "config.json"
 if (-not (Test-Path $Config)) {
   Write-Host ""
-  Write-Host "Paste your GitHub token (starts github_pat_). It won't show as you paste, then press Enter:" -ForegroundColor Yellow
-  $sec = Read-Host -AsSecureString
-  $tok = ([System.Net.NetworkCredential]::new("", $sec).Password).Trim()  # works in Windows PowerShell and PowerShell 7
-  if ($tok -notmatch "github_pat_|^gh[pousr]_") { throw "That doesnt look like a GitHub token (it should start github_pat_). Run setup again and paste the token." }
+  # Token from $env:FIO_TOKEN if set (most reliable), otherwise typed/pasted at a normal prompt.
+  $tok = "$env:FIO_TOKEN"
+  if (-not $tok) {
+    Write-Host "Paste your GitHub token (starts github_pat_) and press Enter:" -ForegroundColor Yellow
+    $tok = Read-Host
+  }
+  if ($tok -match "(github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]+)") { $tok = $Matches[1] }
+  else { throw "That doesn't look like a GitHub token (it should start github_pat_)." }
   if (-not $tok) { throw "No token entered" }
   [IO.File]::WriteAllText($Config, (@{ token = $tok } | ConvertTo-Json))  # UTF-8 without BOM
   icacls $Config /inheritance:r /grant:r "$($env:USERNAME):(R,W)" | Out-Null
