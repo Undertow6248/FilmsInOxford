@@ -47,10 +47,17 @@ jobs:
         run: |
           git config user.name "listings-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A site/data.json data/
-          git diff --cached --quiet || git commit -m "Update listings $(date -u +%F)"
-          git pull --rebase -X theirs origin main
-          git push
+          # Other commits (e.g. from the job on the owner's computer) may have landed while this ran:
+          # put the new listings on top of the latest main rather than rebasing.
+          mkdir -p "$RUNNER_TEMP/out" && cp site/data.json "$RUNNER_TEMP/out/" && cp -r data "$RUNNER_TEMP/out/"
+          for i in 1 2 3 4; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/out/data.json" site/data.json && rm -rf data && cp -r "$RUNNER_TEMP/out/data" data
+            git add -A site/data.json data/
+            if git diff --cached --quiet; then break; fi
+            git commit -q -m "Update listings $(date -u +%F)" && git push -q origin HEAD:main && break
+            sleep $((i * 5))
+          done
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
