@@ -37,7 +37,10 @@ async function main() {
     const r = await gh(`https://raw.githubusercontent.com/${REPO}/main/local/fetch.mjs`, { cache: "no-store" });
     if (r.ok) { const t = await r.text(); if (t.includes("films-in-oxford-local") && t !== fs.readFileSync(fileURLToPath(import.meta.url), "utf8")) fs.writeFileSync(fileURLToPath(import.meta.url), t); }
   } catch {}
-  const { token } = JSON.parse(fs.readFileSync(CONFIG, "utf8").replace(/^\uFEFF/, "")); // Windows may add a BOM
+  const saved = JSON.parse(fs.readFileSync(CONFIG, "utf8").replace(/^\uFEFF/, "")).token || ""; // Windows may add a BOM
+  // Pasting into a terminal can add invisible characters around the token; keep just the token itself.
+  const token = (saved.match(/github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]+/) || [])[0];
+  if (!token) throw new Error(`the saved GitHub token doesn't look right (${saved.length} characters, should start github_pat_). Delete config.json in ${HERE} and run setup again.`);
 
   // Always use the latest scraper code from the repo, so fixes there apply here too.
   const code = path.join(HERE, "code", "scraper");
