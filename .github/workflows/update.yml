@@ -35,12 +35,13 @@ jobs:
       - name: Install scraper
         run: |
           npm install --no-audit --no-fund
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chrome
 
       - name: Scrape cinemas and look films up on TMDB
         env:
           TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
-        run: node scraper/run.mjs
+          HEADFUL: "1"
+        run: xvfb-run -a node scraper/run.mjs
 
       - name: Save the new listings to the repo
         run: |

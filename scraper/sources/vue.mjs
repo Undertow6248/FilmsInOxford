@@ -5,6 +5,8 @@ const KEEP = /Subtitled|Autism|Captioned|Over 18|Hindi|Tamil|Telugu/i;
 
 export async function scrape(page, { today, days }) {
   await page.goto("https://www.myvue.com/cinema/oxford/whats-on", { waitUntil: "domcontentloaded" });
+  // Wait out Cloudflare's "Just a moment..." check if it appears.
+  for (let i = 0; i < 30 && /just a moment/i.test(await page.title()); i++) await page.waitForTimeout(1000);
   await page.waitForTimeout(3000);
   const dates = Array.from({ length: days }, (_, i) => addDays(today, i));
   const rows = await page.evaluate(async (dates) => {

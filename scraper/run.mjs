@@ -24,11 +24,16 @@ const overrides = read("./overrides.json", { aliases: {}, films: {} });
 const extras = read("./extras.json", { screenings: [] });
 
 // 1. Scrape the cinemas. If one fails, keep its previous listings so the site never goes blank.
-const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
-const ctx = await browser.newContext({
-  locale: "en-GB", timezoneId: "Europe/London",
-  userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+// Some cinemas sit behind bot protection, so look as much like an ordinary Chrome window as possible:
+// real Chrome (not Chromium) when available, a visible window (under xvfb on the server), no automation flag.
+const browser = await chromium.launch({
+  ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : process.env.CI ? { channel: "chrome" } : {}),
+  headless: !process.env.HEADFUL,
+  args: ["--disable-blink-features=AutomationControlled"],
 });
+const ctx = await browser.newContext({ locale: "en-GB", timezoneId: "Europe/London", viewport: { width: 1366, height: 900 } });
+await ctx.addInitScript(() => Object.defineProperty(navigator, "webdriver", { get: () => undefined }));
+fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: true });
 const raw = [], status = {};
 for (const [key, src] of Object.entries(SOURCES)) {
   if (only && key !== only) continue;

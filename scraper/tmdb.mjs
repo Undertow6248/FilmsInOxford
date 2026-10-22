@@ -8,14 +8,19 @@ const CACHE = new URL("../data/tmdb-cache.json", import.meta.url);
 const API = "https://api.themoviedb.org/3";
 const COUNTRY = { "United States of America": "USA", "United Kingdom": "UK", "Korea, Republic of": "South Korea", "Russian Federation": "Russia", "Iran, Islamic Republic of": "Iran", "Czech Republic": "Czechia" };
 
-export const stats = { token: !!process.env.TMDB_TOKEN, lookups: 0, found: 0, errors: [] };
+export const stats = { token: !process.env.TMDB_TOKEN ? "missing" : process.env.TMDB_TOKEN.trim().startsWith("eyJ") ? "read token" : `key, ${process.env.TMDB_TOKEN.trim().length} chars`, lookups: 0, found: 0, errors: [] };
 let cache = {};
 try { cache = JSON.parse(fs.readFileSync(CACHE, "utf8")); } catch {}
 
 async function get(path, params = {}) {
   const url = new URL(API + path);
   for (const [k, v] of Object.entries(params)) if (v !== undefined && v !== "") url.searchParams.set(k, v);
-  const r = await fetch(url, { headers: { Authorization: `Bearer ${process.env.TMDB_TOKEN}`, accept: "application/json" } });
+  // Accept either credential TMDB gives you: the long "API Read Access Token" (sent as a header)
+  // or the short "API Key" (sent as ?api_key=).
+  const cred = (process.env.TMDB_TOKEN || "").trim().replace(/^["']|["']$/g, "").replace(/^Bearer\s+/i, "");
+  const headers = { accept: "application/json" };
+  if (cred.startsWith("eyJ")) headers.Authorization = `Bearer ${cred}`; else url.searchParams.set("api_key", cred);
+  const r = await fetch(url, { headers });
   if (!r.ok) throw new Error(`TMDB ${r.status} ${path}`);
   return r.json();
 }
