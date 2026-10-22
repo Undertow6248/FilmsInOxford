@@ -24,15 +24,13 @@ const overrides = read("./overrides.json", { aliases: {}, films: {} });
 const extras = read("./extras.json", { screenings: [] });
 
 // 1. Scrape the cinemas. If one fails, keep its previous listings so the site never goes blank.
-// Some cinemas sit behind bot protection, so look as much like an ordinary Chrome window as possible:
-// real Chrome (not Chromium) when available, a visible window (under xvfb on the server), no automation flag.
+// A normal Chrome window (under a virtual display on the server). We don't try to get round bot protection:
+// if a cinema blocks the server, its last-known times are kept and the page says so.
 const browser = await chromium.launch({
   ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : process.env.CI ? { channel: "chrome" } : {}),
   headless: !process.env.HEADFUL,
-  args: ["--disable-blink-features=AutomationControlled"],
 });
 const ctx = await browser.newContext({ locale: "en-GB", timezoneId: "Europe/London", viewport: { width: 1366, height: 900 } });
-await ctx.addInitScript(() => Object.defineProperty(navigator, "webdriver", { get: () => undefined }));
 fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: true });
 const raw = [], status = {};
 for (const [key, src] of Object.entries(SOURCES)) {
