@@ -66,14 +66,7 @@ jobs:
       - id: deploy
         uses: actions/deploy-pages@v4
 
-      # Fail the run (so GitHub emails you) if the job on your computer hasn't sent anything for 4 days.
-      # The site keeps working regardless: Vue and Curzon fall back to Daily Info's times.
-      - name: Check the job on your computer is still running
-        run: |
-          node -e '
-            const j = require("./site/data.json").status.localJob || {};
-            if (j.hoursAgo == null || j.hoursAgo > 96) {
-              console.log("::error::The Films in Oxford job on your computer last sent listings " + (j.last ? j.hoursAgo + " hours ago (" + j.last + ")" : "never") + ". Check fetch.log in %LOCALAPPDATA%\\FilmsInOxford, or re-run the setup command.");
-              process.exit(1);
-            }
-            console.log("Job on your computer last sent listings " + j.hoursAgo + " hours ago.");'
+      # Fail the run (so GitHub emails you) if anything didn't work: a cinema, an event source, TMDB,
+      # or the job on your computer going quiet for 4 days. The site is already published either way.
+      - name: Check everything worked
+        run: node scraper/check.mjs
