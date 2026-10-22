@@ -17,7 +17,9 @@
   "RBO Encore: Manon": "Royal Ballet & Opera: Manon",
   "National Theatre Live: The Misanthrope": "NT Live: The Misanthrope",
   "BTS World Tour 'Arirang' in Buenos Aires: Live Viewing": "BTS World Tour 'Arirang': Live Viewing",
-  "BTS World Tour 'Arirang' in São Paulo: Live Viewing": "BTS World Tour 'Arirang': Live Viewing"
+  "BTS World Tour 'Arirang' in São Paulo: Live Viewing": "BTS World Tour 'Arirang': Live Viewing",
+  "The People's Emergency Briefing": "People's Emergency Briefing",
+  "The People's Emergency Climate Briefing": "People's Emergency Briefing"
  },
  "films": {
   "Forgotten Island": {
@@ -234,18 +236,6 @@
    "cat": "L",
    "note": "Persian",
    "year": 2025
-  },
-  "The People's Emergency Climate Briefing": {
-   "cat": "L",
-   "note": "Documentary"
-  },
-  "People's Emergency Briefing (Old Marston)": {
-   "cat": "L",
-   "note": "Documentary"
-  },
-  "People's Emergency Briefing (New Marston)": {
-   "cat": "L",
-   "note": "Documentary"
   },
   "Becoming American: Philadelphia's Story": {
    "cat": "L",
@@ -502,6 +492,10 @@
   "We're Going on a Bear Hunt + The Tiger Who Came to Tea": {
    "cat": "K",
    "note": "TV specials"
+  },
+  "People's Emergency Briefing": {
+   "cat": "L",
+   "note": "Documentary"
   }
  },
  "hide": [

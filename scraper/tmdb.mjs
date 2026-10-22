@@ -54,6 +54,22 @@ async function find(title, hint) {
   return null;
 }
 
+/** Is there a film on TMDB with exactly this title? Returns its TMDB title, or null. Cached (misses for a week). */
+export async function exactTitle(q) {
+  q = String(q || "").trim();
+  if (!process.env.TMDB_TOKEN || q.length < 2) return null;
+  const key = "exact:" + norm(q);
+  const c = cache[key];
+  if (c && (c.title || Date.now() - c.at < 7 * 864e5)) return c.title || null;
+  try {
+    const j = await get("/search/movie", { query: q, include_adult: "false", language: "en-GB" });
+    const hit = (j.results || []).filter(r => norm(r.title) === norm(q) || norm(r.original_title) === norm(q))
+      .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))[0];
+    cache[key] = { title: hit ? hit.title : "", at: Date.now() };
+    return hit ? hit.title : null;
+  } catch { return null; }
+}
+
 /** Returns {id, year, genres[], countries[], poster, release} or null. */
 export async function enrich(title, hint = {}) {
   const key = title + (hint.tmdb ? "#" + hint.tmdb : hint.year ? "#" + hint.year : "");

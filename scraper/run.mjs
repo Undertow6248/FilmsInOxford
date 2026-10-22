@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import { chromium } from "playwright";
 import { londonToday, addDays, cleanTitle, log } from "./lib.mjs";
-import { enrich, saveCache, stats as tmdbStats } from "./tmdb.mjs";
+import { enrich, saveCache, exactTitle, stats as tmdbStats } from "./tmdb.mjs";
 import * as vue from "./sources/vue.mjs";
 import * as phx from "./sources/phoenix.mjs";
 import * as cur from "./sources/curzon.mjs";
@@ -81,7 +81,7 @@ if (only) { console.log(JSON.stringify(only === "events" ? ev : raw.slice(0, 20)
 Object.assign(status, Object.fromEntries(Object.entries(ev.status).map(([k, v]) => ["ev:" + k, v])));
 
 // 2. Screenings outside cinemas: the hand-entered ones in extras.json, then everything the event sources found.
-const { rows: eventRows, venues } = buildEvents(extras.screenings.filter(s => s.date >= today), ev.events, overrides.hide || []);
+const { rows: eventRows, venues } = await buildEvents(extras.screenings.filter(s => s.date >= today), ev.events, overrides.hide || []);
 raw.push(...eventRows);
 
 // 3. Tidy titles and merge duplicates.
@@ -161,7 +161,7 @@ log(`wrote ${shows.length} screenings of ${Object.keys(films).length} films`, JS
 if (Object.keys(SOURCES).every(k => !status[k]?.ok)) { log("every source failed"); process.exit(1); }
 
 // ---------- screenings outside cinemas ----------
-function buildEvents(fixed, found, hide) {
+async function buildEvents(fixed, found, hide) {
   // Venues the page already knows about (see V in site/index.html); others are added from the listing.
   const KNOWN = [[/magdalen/i, "mag"], [/divinity school/i, "bod"], [/tap social/i, "tap"], [/maison fran/i, "mfo"],
     [/oxford castle|^the castle$/i, "cas"], [/schwarzman/i, "swz"], [/rewley house/i, "rew"], [/human genetics/i, "chg"],
@@ -186,6 +186,33 @@ function buildEvents(fixed, found, hide) {
     .replace(/\s*[–-]\s*independent film.*$/i, "")
     .replace(/\s*\((?:19|20)\d\d\)/, "")
     .replace(/^['"‘“](.+?)['"’”]$/, "$1").replace(/\s+/g, " ").trim() || n;
+  // Which film is this event showing? Events often wrap a film in a talk or a series name, e.g.
+  // "Evidence, Trust and the Climate & Nature Crisis" ("People's Emergency Briefing film screening + panel"),
+  // "COUP 53 Screening with Walter Murch". Collect likely titles from the name and description,
+  // prefer one TMDB knows exactly, else the strongest guess.
+  async function filmOf(e) {
+    const name = e.name || "", desc = (e.desc || "").replace(/\s+/g, " ");
+    const strong = [], weak = [];
+    const Q = /(?:^|[\s(:–-])[‘“"']([A-Z0-9][^‘’“”"]{1,60}?)[’”"'](?=$|[\s),.:;!?–-])/g;
+    // "Halloween Film Screening: Monsters Inc" / "Film Club: X": a screening label before a colon, film after it.
+    const colon = name.match(/^([^:]{0,60}\b(?:screening|film|cinema|movie|documentary)s?\b[^:]{0,30}):\s*(.+)$/i);
+    if (colon) strong.push(eventTitle(colon[2]));
+    for (const m of name.matchAll(Q)) strong.push(m[1]);
+    const before = /((?:[A-Z0-9][\w’'&.-]*\s+(?:(?:of|the|and|vs|a|in|on|to)\s+)?){0,6}[A-Z0-9][\w’'&.-]*)\s+(?:(?:[Dd]ocumentary|[Ff]ilm)\s+)?[Ss]creening/;
+    const of = /screening of (?:the )?(?:(?:award-winning|new|feature-length|feature|documentary|short|classic|acclaimed)\s+)*(?:(?:documentary|film|feature)\s+)?(?:film\s+)?[‘“"']?([A-Z0-9][^‘’“”"'.,;:()]{1,60}?)[’”"']?(?=\s*(?:\(|,|\.|;|:|\bby\b|\bwith\b|\bfollowed\b|\band\b|$))/;
+    for (const src of [name, desc]) { const m1 = src.match(of); if (m1) strong.push(m1[1]); }
+    for (const src of [name, desc]) {
+      const m2 = src.match(before);
+      if (m2 && !/^(film|a|the|free|community|special|documentary|halloween|christmas|outdoor|family|kids|silent|charity)$/i.test(m2[1])) strong.push(m2[1]);
+    }
+    if (/screen|film|documentary|cinema/i.test(desc)) for (const m of desc.matchAll(Q)) strong.push(m[1]);
+    if (name.includes(":")) { const parts = name.split(":"); weak.push(parts.slice(1).join(":"), parts[0]); }
+    weak.push(eventTitle(name));
+    const clean = c => cleanTitle(c.replace(/^(?:film|documentary)\s+/i, "")).replace(/\s+(?:film|documentary)$/i, "").trim();
+    const cands = [...new Set([...strong, ...weak].map(clean).filter(c => c.length >= 2 && c.length <= 70))];
+    for (const c of cands) { const t = await exactTitle(c); if (t) return t; }
+    return strong.length ? clean(strong[0]) : eventTitle(name);
+  }
   const words = t => new Set(t.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(" ").filter(w => w.length >= 4 && !/^(film|screening|with|from|the|and|night|oxford|documentary)$/.test(w)));
   const mins = t => /^\d\d:\d\d$/.test(t) ? +t.slice(0, 2) * 60 + +t.slice(3) : null;
   const same = (a, b) => {
@@ -202,13 +229,13 @@ function buildEvents(fixed, found, hide) {
   const ORDER = { magdalen: 1, oxevents: 2, dailyinfo: 3, eventbrite: 4, wegottickets: 5 };
   const cands = [
     ...fixed.map(s => ({ date: s.date, time: s.time, title: s.title, raw: s.title, venue: s.venue, tags: s.tag ? [s.tag] : [], url: s.url || "", fixed: true })),
-    ...found.slice().sort((a, b) => (ORDER[a.src] || 9) - (ORDER[b.src] || 9)).map(e => {
-      const title = eventTitle(e.name);
+    ...(await Promise.all(found.slice().sort((a, b) => (ORDER[a.src] || 9) - (ORDER[b.src] || 9)).map(async e => {
+      const title = await filmOf(e);
       const tags = [];
       if (/q\s*&\s*a/i.test(e.name)) tags.push("Q&A");
       if (e.tag) tags.push(e.tag);
-      return { date: e.date, time: e.time || "TBC", title, raw: e.name, venue: venueKey(e), tags, url: e.url, src: e.src, name: e.name };
-    }),
+      return { date: e.date, time: e.time || "TBC", title, raw: e.name + " " + title, venue: venueKey(e), tags, url: e.url, src: e.src, name: e.name };
+    }))),
   ];
   for (const c of cands) {
     if (hideRes.some(re => re.test(c.raw) || re.test(c.title))) continue;

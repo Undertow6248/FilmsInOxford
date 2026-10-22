@@ -41,6 +41,7 @@ export function parseDayMonth(text, today = londonToday()) {
 export function cleanTitle(t) {
   return String(t)
     .replace(/\s+/g, " ")
+    .replace(/[‘’]/g, "'")
     .replace(/\s*\((?:\d{4}|re-?release|\d+(?:st|nd|rd|th) anniversary[^)]*|tamil|hindi|telugu|subtitled|4k[^)]*)\)\s*/gi, " ")
     .replace(/\s*-\s*preview$/i, "")
     .replace(/\s*(\.{3}|…)\s*$/, "")
@@ -52,6 +53,8 @@ export function cleanTitle(t) {
     .replace(/\s*[-–]\s*Broadcast$|\s*\(broadcast\)$/i, "")
     .replace(/\s*\((?:\d{1,2}\+|PG|12A?|15|18|U)\)\s*$/i, "")
     .replace(/^(ken russell's|evolution of horror presents:|film club:[^:]*:)\s*/i, "")
+    // Cinemas' strand names in front of the film: "Green Screen: Derek vs Derek" -> "Derek vs Derek"
+    .replace(/^(green screen|silver screen|kino kids(?: cinema club)?|kids'? club|big scream|toddler time|doc ?'?n'? ?roll|queer screen|pink palace|members'? screening|preview|special screening)\s*[:–-]\s*/i, "")
     .replace(/\s+/g, " ")
     .trim();
 }
