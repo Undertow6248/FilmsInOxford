@@ -269,6 +269,7 @@ $("#nonCinema").checked=st.nonCin;
 $("#nonCinema").addEventListener("change",e=>{st.nonCin=e.target.checked;save();render()});
 fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
   DATA=d;
+  Object.entries(d.venues||{}).forEach(([k,v])=>{if(!V[k])V[k]={c:"--oth",...v}});
   const up=new Date(d.updated);
   const bad=Object.entries(d.status||{}).filter(([k,v])=>!v.ok).map(([k])=>V[k]?V[k].n:k);
   $("#updated").textContent=`Last checked ${up.toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}.`+(bad.length?` ${bad.join(", ")} couldn't be reached last time, so ${bad.length>1?"their":"its"} times may be out of date.`:"");

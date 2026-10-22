@@ -10,6 +10,7 @@ import * as phx from "./sources/phoenix.mjs";
 import * as cur from "./sources/curzon.mjs";
 import * as ocf from "./sources/oxfordcinema.mjs";
 import * as upp from "./sources/upp.mjs";
+import { scrapeEvents, dailyInfoCinemaRows } from "./sources/events.mjs";
 
 const SOURCES = { vue, phx, cur, ocf, upp };
 const DAYS = 21; // scrape three weeks; the page shows two
@@ -35,6 +36,10 @@ fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: 
 const raw = [], status = {};
 // Vue and Curzon block GitHub's servers, so a job on the owner's computer (local/fetch.mjs) sends their times here.
 const local = read("./local/listings.json", { sources: {} });
+// Screenings outside cinemas (and Daily Info's copy of the cinema times, used as a back-up below).
+let ev = { events: [], cinemas: [], status: {} };
+if (!only || only === "events") ev = await scrapeEvents(ctx, { today, days: DAYS });
+const diCinema = dailyInfoCinemaRows(ev.cinemas);
 for (const [key, src] of Object.entries(SOURCES)) {
   if (only && key !== only) continue;
   const l = local.sources[key];
@@ -50,10 +55,18 @@ for (const [key, src] of Object.entries(SOURCES)) {
     raw.push(...rows);
     status[key] = { ok: true, count: rows.length };
   } catch (e) {
-    log(`${key} FAILED: ${e.message.split("\n")[0]} (keeping previous data)`);
+    const di = diCinema.filter(r => r.venue === key && r.date >= today && r.date <= last);
     const old = previous.shows.filter(s => s[3] === key && s[0] >= today);
-    raw.push(...old.map(s => ({ date: s[0], time: s[1], title: s[2], venue: key, tags: s[4] ? [s[4]] : [], url: s[5], kept: true })));
-    status[key] = { ok: false, error: e.message.split("\n")[0], kept: old.length };
+    if (di.length) {
+      // Fall back to Daily Info's copy of this cinema's times (it lists the next couple of weeks).
+      log(`${key} FAILED: ${e.message.split("\n")[0]} (using Daily Info's listing)`);
+      raw.push(...di);
+      status[key] = { ok: true, count: di.length, via: "dailyinfo", error: e.message.split("\n")[0] };
+    } else {
+      log(`${key} FAILED: ${e.message.split("\n")[0]} (keeping previous data)`);
+      raw.push(...old.map(s => ({ date: s[0], time: s[1], title: s[2], venue: key, tags: s[4] ? [s[4]] : [], url: s[5], kept: true })));
+      status[key] = { ok: false, error: e.message.split("\n")[0], kept: old.length };
+    }
     // Save what the page looked like, so a failure can be diagnosed from the repo (data/debug/).
     try {
       fs.mkdirSync(new URL("../data/debug/", import.meta.url), { recursive: true });
@@ -64,10 +77,12 @@ for (const [key, src] of Object.entries(SOURCES)) {
   await page.close();
 }
 await browser.close();
-if (only) { console.log(JSON.stringify(raw.slice(0, 20), null, 1), raw.length); process.exit(0); }
+if (only) { console.log(JSON.stringify(only === "events" ? ev : raw.slice(0, 20), null, 1), raw.length); process.exit(0); }
+Object.assign(status, Object.fromEntries(Object.entries(ev.status).map(([k, v]) => ["ev:" + k, v])));
 
-// 2. One-off screenings from extras.json.
-for (const s of extras.screenings) if (s.date >= today) raw.push({ ...s, tags: s.tag ? [s.tag] : [], fixed: true });
+// 2. Screenings outside cinemas: the hand-entered ones in extras.json, then everything the event sources found.
+const { rows: eventRows, venues } = buildEvents(extras.screenings.filter(s => s.date >= today), ev.events, overrides.hide || []);
+raw.push(...eventRows);
 
 // 3. Tidy titles and merge duplicates.
 const VENUE_HOME = {
@@ -124,7 +139,71 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
 saveCache();
 
 status.tmdb = tmdbStats;
-const out = { updated: new Date().toISOString(), status, shows, films };
+const out = { updated: new Date().toISOString(), status, venues, shows, films };
 fs.writeFileSync(OUT, JSON.stringify(out));
 log(`wrote ${shows.length} screenings of ${Object.keys(films).length} films`, JSON.stringify(status));
 if (Object.keys(SOURCES).every(k => !status[k]?.ok)) { log("every source failed"); process.exit(1); }
+
+// ---------- screenings outside cinemas ----------
+function buildEvents(fixed, found, hide) {
+  // Venues the page already knows about (see V in site/index.html); others are added from the listing.
+  const KNOWN = [[/magdalen/i, "mag"], [/divinity school/i, "bod"], [/tap social/i, "tap"], [/maison fran/i, "mfo"],
+    [/oxford castle|^the castle$/i, "cas"], [/schwarzman/i, "swz"], [/rewley house/i, "rew"], [/human genetics/i, "chg"],
+    [/^the nest\b/i, "nest"], [/florence park/i, "fpc"], [/common ground/i, "cg"]];
+  const venues = {};
+  const slug = n => n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/^the\s+/, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+  const venueKey = e => {
+    const name = (e.venueName || "").replace(/\s+-\s+.*$/, "").replace(/,.*$/, "").trim() || "Venue TBC";
+    const k = (KNOWN.find(([re]) => re.test(e.venueName || "")) || [])[1];
+    if (k) return k;
+    const key = "x-" + slug(name);
+    venues[key] ||= { n: name.length > 24 ? name.slice(0, 22) + "…" : name, f: name, u: e.url, w: e.venueAddr || "" };
+    return key;
+  };
+  const eventTitle = n => n.replace(/\s*\[[^\]]*\]/g, "")
+    .replace(/^(?:halloween\s+)?(?:film\s+)?screening(?:\s+of)?\s*[:–-]\s*/i, "")
+    .replace(/^(?:daytime cinema presents|outdoor cinema night|magdalen monday movies|film club|movie night|film night|cinema club)\s*[:–-]\s*/i, "")
+    .replace(/\s*[:–-]\s*(?:documentary\s+|community\s+|free\s+)?screening\b.*$/i, "")
+    .replace(/\s+(?:film\s+)?screening\s*(?:&|and|\+|with|in|at)\b.*$/i, "")
+    .replace(/\s+film screening\b.*$/i, "")
+    .replace(/\s*\+\s*q\s*&\s*a.*$/i, "")
+    .replace(/\s*[–-]\s*independent film.*$/i, "")
+    .replace(/\s*\((?:19|20)\d\d\)/, "")
+    .replace(/^['"‘“](.+?)['"’”]$/, "$1").replace(/\s+/g, " ").trim() || n;
+  const words = t => new Set(t.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(" ").filter(w => w.length >= 4 && !/^(film|screening|with|from|the|and|night|oxford|documentary)$/.test(w)));
+  const mins = t => /^\d\d:\d\d$/.test(t) ? +t.slice(0, 2) * 60 + +t.slice(3) : null;
+  const same = (a, b) => {
+    if (a.date !== b.date) return false;
+    const ta = mins(a.time), tb = mins(b.time);
+    if (ta != null && tb != null && Math.abs(ta - tb) > 60) return false;
+    if (a.key === b.key && a.venue === b.venue) return true;
+    const wa = words(a.raw), wb = words(b.raw);
+    return [...wa].some(w => wb.has(w));
+  };
+  const hideRes = hide.map(h => new RegExp(h, "i"));
+  const kept = [];
+  // Hand-entered first, then the sources, best links first.
+  const ORDER = { magdalen: 1, oxevents: 2, dailyinfo: 3, eventbrite: 4, wegottickets: 5 };
+  const cands = [
+    ...fixed.map(s => ({ date: s.date, time: s.time, title: s.title, raw: s.title, venue: s.venue, tags: s.tag ? [s.tag] : [], url: s.url || "", fixed: true })),
+    ...found.slice().sort((a, b) => (ORDER[a.src] || 9) - (ORDER[b.src] || 9)).map(e => {
+      const title = eventTitle(e.name);
+      const tags = [];
+      if (/q\s*&\s*a/i.test(e.name)) tags.push("Q&A");
+      if (e.tag) tags.push(e.tag);
+      return { date: e.date, time: e.time || "TBC", title, raw: e.name, venue: venueKey(e), tags, url: e.url, src: e.src, name: e.name };
+    }),
+  ];
+  for (const c of cands) {
+    if (hideRes.some(re => re.test(c.raw) || re.test(c.title))) continue;
+    c.key = c.title.toLowerCase();
+    const dup = kept.find(k => same(k, c));
+    if (dup) { if (!dup.url && c.url) dup.url = c.url; if (dup.time === "TBC" && c.time !== "TBC") dup.time = c.time; continue; }
+    kept.push(c);
+  }
+  // Only list venues that ended up with a screening.
+  const used = new Set(kept.map(k => k.venue));
+  for (const k of Object.keys(venues)) if (!used.has(k)) delete venues[k];
+  log("events:", kept.length, "screenings outside cinemas,", Object.keys(venues).length, "new venues");
+  return { rows: kept.map(k => ({ date: k.date, time: k.time, title: k.title, venue: k.venue, tags: k.tags, url: k.url, fixed: true })), venues };
+}

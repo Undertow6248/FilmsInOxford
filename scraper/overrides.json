@@ -1,5 +1,5 @@
 {
- "_readme": "aliases: cinema title -> the title to show. films: per-title fixes. cat = W (wide new release), L (limited new release), T (throwback), E (event: theatre, concert, kids' TV). year helps TMDB pick the right film; tmdb pins an exact TMDB id; skip:true stops TMDB lookups.",
+ "_readme": "aliases: cinema title -> the title to show. films: per-title fixes. cat = W (wide new release), L (limited new release), T (throwback), E (event: theatre, concert, kids' TV). year helps TMDB pick the right film; tmdb pins an exact TMDB id; skip:true stops TMDB lookups. hide: patterns (case-insensitive) for listings that were picked up as film screenings but aren't.",
  "aliases": {
   "Jailer 2 (Tamil)": "Jailer 2",
   "Drishyam: The Conclusion (Hindi)": "Drishyam: The Conclusion",
@@ -503,5 +503,8 @@
    "cat": "K",
    "note": "TV specials"
   }
- }
+ },
+ "hide": [
+  "Megalith"
+ ]
 }
