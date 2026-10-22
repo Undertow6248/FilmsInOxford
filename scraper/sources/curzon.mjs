@@ -18,7 +18,8 @@ export async function scrape(page, { today }) {
     const label = (await tab.innerText()).replace(/\s+/g, " ").trim();
     if (i > 0) {
       const before = JSON.stringify(await read());
-      await tab.click();
+      // Click in-page, so a cookie banner over the tabs (fresh browser profile) doesn't block it.
+      await tab.evaluate(el => el.click());
       for (let k = 0; k < 30; k++) { await page.waitForTimeout(500); if (JSON.stringify(await read()) !== before) break; }
       await page.waitForTimeout(1200); // let the rest of the list render
     }

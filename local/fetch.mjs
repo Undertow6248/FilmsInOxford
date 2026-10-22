@@ -16,6 +16,14 @@ const LOG = path.join(HERE, "fetch.log");
 const SOURCES = { vue: "sources/vue.mjs", cur: "sources/curzon.mjs" };
 const EVENTS = "sources/events.mjs"; // University events calendar + Eventbrite
 
+// GitHub calls, retried a few times (networks sometimes drop a connection).
+async function gh(url, opts = {}) {
+  let err;
+  for (let i = 0; i < 4; i++) {
+    try { return await fetch(url, opts); } catch (e) { err = e; await new Promise(r => setTimeout(r, 3000 * (i + 1))); }
+  }
+  throw err;
+}
 const log = (...a) => { const line = `${new Date().toISOString()} ${a.join(" ")}`; console.log(line); fs.appendFileSync(LOG, line + "\n"); };
 
 async function main() {
@@ -23,6 +31,11 @@ async function main() {
   try {
     const last = JSON.parse(fs.readFileSync(STATE, "utf8").replace(/^\uFEFF/, ""));
     if (!force && Date.now() - Date.parse(last.ok) < 12 * 3600e3) return log("already ran today, skipping");
+  } catch {}
+  // Keep this script up to date too (takes effect from the next run).
+  try {
+    const r = await gh(`https://raw.githubusercontent.com/${REPO}/main/local/fetch.mjs`, { cache: "no-store" });
+    if (r.ok) { const t = await r.text(); if (t.includes("films-in-oxford-local") && t !== fs.readFileSync(fileURLToPath(import.meta.url), "utf8")) fs.writeFileSync(fileURLToPath(import.meta.url), t); }
   } catch {}
   const { token } = JSON.parse(fs.readFileSync(CONFIG, "utf8").replace(/^\uFEFF/, "")); // Windows may add a BOM
 
@@ -79,7 +92,7 @@ async function main() {
   // Send to the repo (scraper/local/listings.json). That commit starts the site update on GitHub.
   const api = `https://api.github.com/repos/${REPO}/contents/scraper/local/listings.json`;
   const headers = { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "films-in-oxford-local" };
-  const cur = await fetch(api, { headers });
+  const cur = await gh(api, { headers });
   const sha = cur.ok ? (await cur.json()).sha : undefined;
   if (cur.ok && sha) {
     // Keep a source from the previous upload if it failed this time.
@@ -93,10 +106,10 @@ async function main() {
     content: Buffer.from(JSON.stringify(out)).toString("base64"),
     ...(sha ? { sha } : {}),
   };
-  const put = await fetch(api, { method: "PUT", headers, body: JSON.stringify(body) });
+  const put = await gh(api, { method: "PUT", headers, body: JSON.stringify(body) });
   if (!put.ok) throw new Error(`GitHub said ${put.status}: ${(await put.text()).slice(0, 200)}`);
   fs.writeFileSync(STATE, JSON.stringify({ ok: new Date().toISOString() }));
   log("sent to GitHub");
 }
 
-main().catch(e => { log("ERROR:", e.message); process.exitCode = 1; });
+main().catch(e => { log("ERROR:", e.message, e.cause ? `(${e.cause.code || ""} ${e.cause.message || e.cause})` : ""); process.exitCode = 1; });
