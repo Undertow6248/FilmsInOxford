@@ -8,6 +8,7 @@ const CACHE = new URL("../data/tmdb-cache.json", import.meta.url);
 const API = "https://api.themoviedb.org/3";
 const COUNTRY = { "United States of America": "USA", "United Kingdom": "UK", "Korea, Republic of": "South Korea", "Russian Federation": "Russia", "Iran, Islamic Republic of": "Iran", "Czech Republic": "Czechia" };
 
+export const stats = { token: !!process.env.TMDB_TOKEN, lookups: 0, found: 0, errors: [] };
 let cache = {};
 try { cache = JSON.parse(fs.readFileSync(CACHE, "utf8")); } catch {}
 
@@ -50,10 +51,11 @@ async function find(title, hint) {
 
 /** Returns {id, year, genres[], countries[], poster, release} or null. */
 export async function enrich(title, hint = {}) {
-  if (!process.env.TMDB_TOKEN || hint.skip) return cache[title] || null;
   const key = title + (hint.tmdb ? "#" + hint.tmdb : hint.year ? "#" + hint.year : "");
+  if (!process.env.TMDB_TOKEN || hint.skip) return cache[key] || null;
   if (cache[key] !== undefined) return cache[key];
   try {
+    stats.lookups++;
     const id = await find(title, hint);
     let out = null;
     if (id) {
@@ -67,10 +69,11 @@ export async function enrich(title, hint = {}) {
         poster: d.poster_path || "",
       };
     }
-    if (out) cache[key] = out; // misses are retried next run, in case TMDB adds the film
+    if (out) { cache[key] = out; stats.found++; } // misses are retried next run, in case TMDB adds the film
     return out;
   } catch (e) {
     log("tmdb error", title, e.message);
+    if (stats.errors.length < 5) stats.errors.push(`${title}: ${e.message}`);
     return null;
   }
 }

@@ -44,6 +44,8 @@ export function cleanTitle(t) {
     .replace(/\s*\((?:\d{4}|re-?release|\d+(?:st|nd|rd|th) anniversary[^)]*|tamil|hindi|telugu|subtitled|4k[^)]*)\)\s*/gi, " ")
     .replace(/\s*-\s*preview$/i, "")
     .replace(/\s*(\.{3}|…)\s*$/, "")
+    .replace(/^NTLive:\s*/i, "NT Live: ")
+    .replace(/\s*\((?:\d{1,2}\+|PG|12A?|15|18|U)\)\s*$/i, "")
     .replace(/^(ken russell's|evolution of horror presents:|film club:[^:]*:)\s*/i, "")
     .replace(/\s+/g, " ")
     .trim();

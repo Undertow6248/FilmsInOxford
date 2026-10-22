@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import { chromium } from "playwright";
 import { londonToday, addDays, cleanTitle, log } from "./lib.mjs";
-import { enrich, saveCache } from "./tmdb.mjs";
+import { enrich, saveCache, stats as tmdbStats } from "./tmdb.mjs";
 import * as vue from "./sources/vue.mjs";
 import * as phx from "./sources/phoenix.mjs";
 import * as cur from "./sources/curzon.mjs";
@@ -43,6 +43,12 @@ for (const [key, src] of Object.entries(SOURCES)) {
     const old = previous.shows.filter(s => s[3] === key && s[0] >= today);
     raw.push(...old.map(s => ({ date: s[0], time: s[1], title: s[2], venue: key, tags: s[4] ? [s[4]] : [], url: s[5], kept: true })));
     status[key] = { ok: false, error: e.message.split("\n")[0], kept: old.length };
+    // Save what the page looked like, so a failure can be diagnosed from the repo (data/debug/).
+    try {
+      fs.mkdirSync(new URL("../data/debug/", import.meta.url), { recursive: true });
+      await page.screenshot({ path: new URL(`../data/debug/${key}.png`, import.meta.url).pathname });
+      status[key].page = { url: page.url(), title: await page.title(), text: (await page.evaluate(() => document.body?.innerText || "")).replace(/\s+/g, " ").slice(0, 400) };
+    } catch {}
   }
   await page.close();
 }
@@ -68,6 +74,21 @@ for (const r of raw) {
   const tag = (r.tags || []).join(" · ");
   shows.push([r.date, r.time, t, r.venue, tag, r.url && r.url !== VENUE_HOME[r.venue] ? r.url : ""]);
 }
+// Same film spelt differently by two cinemas ("NAZA"/"Naza"), or cut short ("Shaun the Sheep: The Beast Of Mo"):
+// map each to the most-used full spelling.
+{
+  const key = t => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, "and").replace(/[^a-z0-9]+/g, " ").trim();
+  const count = {}; for (const s of shows) count[s[2]] = (count[s[2]] || 0) + 1;
+  const names = Object.keys(count), canon = {};
+  for (const n of names) {
+    const k = key(n);
+    const same = names.filter(m => key(m) === k || (k.length >= 20 && key(m).startsWith(k) && key(m).length > k.length));
+    canon[n] = same.sort((a, b) => (overrides.films[b] ? 1 : 0) - (overrides.films[a] ? 1 : 0) || key(b).length - key(a).length || count[b] - count[a])[0];
+  }
+  for (const s of shows) s[2] = canon[s[2]];
+  const seen2 = new Set();
+  for (let i = shows.length - 1; i >= 0; i--) { const k = shows[i].slice(0, 4).join("|"); if (seen2.has(k)) shows.splice(i, 1); else seen2.add(k); }
+}
 shows.sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1]));
 
 // 4. Look each film up on TMDB and pick a section for it.
@@ -91,7 +112,8 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
 }
 saveCache();
 
+status.tmdb = tmdbStats;
 const out = { updated: new Date().toISOString(), status, shows, films };
 fs.writeFileSync(OUT, JSON.stringify(out));
 log(`wrote ${shows.length} screenings of ${Object.keys(films).length} films`, JSON.stringify(status));
-if (Object.values(status).every(s => !s.ok)) { log("every source failed"); process.exit(1); }
+if (Object.keys(SOURCES).every(k => !status[k]?.ok)) { log("every source failed"); process.exit(1); }

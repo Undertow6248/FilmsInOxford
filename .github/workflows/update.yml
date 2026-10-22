@@ -46,8 +46,9 @@ jobs:
         run: |
           git config user.name "listings-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/data.json data/tmdb-cache.json
+          git add -A site/data.json data/
           git diff --cached --quiet || git commit -m "Update listings $(date -u +%F)"
+          git pull --rebase -X theirs origin main
           git push
 
       - uses: actions/configure-pages@v5
