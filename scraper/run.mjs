@@ -144,7 +144,7 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
     else cat = "L";
   }
   const p = previous.films[t] || [];
-  films[t] = [cat, o.note || "", m?.id || p[2] || "", String(o.year || m?.year || p[3] || ""), m?.genres || p[4] || [], m?.countries || p[5] || [], m?.poster || p[6] || ""];
+  films[t] = [cat, o.note || "", m?.id || p[2] || "", String(o.year || m?.year || p[3] || ""), m?.genres || p[4] || [], m?.countries || p[5] || [], m?.poster || p[6] || "", m?.lang || p[7] || ""];
 }
 saveCache();
 

@@ -58,10 +58,11 @@ async function find(title, hint) {
 export async function enrich(title, hint = {}) {
   const key = title + (hint.tmdb ? "#" + hint.tmdb : hint.year ? "#" + hint.year : "");
   if (!process.env.TMDB_TOKEN || hint.skip) return cache[key] || null;
-  if (cache[key] !== undefined) return cache[key];
+  // Cached entries from before languages were recorded get their details fetched again.
+  if (cache[key] && cache[key].lang !== undefined) return cache[key];
   try {
     stats.lookups++;
-    const id = await find(title, hint);
+    const id = cache[key]?.id || await find(title, hint);
     let out = null;
     if (id) {
       const d = await get(`/movie/${id}`, { language: "en-GB" });
@@ -72,6 +73,9 @@ export async function enrich(title, hint = {}) {
         genres: (d.genres || []).map(g => g.name.replace("Science Fiction", "Sci-fi")).slice(0, 3),
         countries: (d.production_countries || []).map(c => COUNTRY[c.name] || c.name).slice(0, 3),
         poster: d.poster_path || "",
+        // The film's original (main spoken) language, by its English name.
+        lang: ((d.spoken_languages || []).find(l => l.iso_639_1 === d.original_language)?.english_name)
+          || (d.original_language ? new Intl.DisplayNames(["en"], { type: "language" }).of(d.original_language) : "") || "",
       };
     }
     if (out) { cache[key] = out; stats.found++; } // misses are retried next run, in case TMDB adds the film
