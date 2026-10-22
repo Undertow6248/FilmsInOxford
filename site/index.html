@@ -75,8 +75,11 @@ details.film>summary::-webkit-details-marker{display:none}
 .vname:hover{text-decoration:underline}
 .t{font-size:var(--s-s);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:4px;padding:2px 6px;text-decoration:none;white-space:nowrap}
 a.t:hover{border-color:var(--fg)}
-.lb{font-size:var(--s-s);color:var(--muted);text-decoration:underline;white-space:nowrap;align-self:start}
-.lb:hover{color:var(--fg)}
+/* Letterboxd link: a pill with Letterboxd's three dots (the one bit of colour besides the venues). */
+.lb{font-size:var(--s-s);color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:2px 9px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;align-self:start;line-height:1.4}
+.lb:hover{color:var(--fg);border-color:var(--fg)}
+.lb .dots{display:inline-flex;gap:2px}.lb .dots i{width:6px;height:6px;border-radius:50%;display:block}
+.lb .dots i:nth-child(1){background:#ff8000}.lb .dots i:nth-child(2){background:#00e054}.lb .dots i:nth-child(3){background:#40bcf4}
 /* Dates: one line per screening, in time order. */
 .day{margin-top:18px}
 .srow{display:grid;grid-template-columns:3.6rem 1fr auto;gap:2px 10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line)}
@@ -172,7 +175,7 @@ const FM=f=>{const m=DATA.films[f]||["L","","","",[],[],"",""];return {cat:m[0],
 // New releases don't need a year.
 const yr=f=>{const m=FM(f);return m.yr&&m.cat!=="W"&&m.cat!=="L"?`<span class="yr">${m.yr}</span>`:""};
 const gcTxt=f=>{const m=FM(f);return [m.g.join(", "),m.lang].filter(Boolean).join(" · ")};
-const lbLink=f=>{const m=FM(f);if(m.cat==="E"&&!m.id)return "";const u=m.id?`https://letterboxd.com/tmdb/${m.id}/`:`https://letterboxd.com/search/films/${encodeURIComponent(f)}/`;return `<a class="lb" href="${u}" target="_blank" rel="noopener" aria-label="${esc(f)} on Letterboxd">Letterboxd</a>`};
+const lbLink=f=>{const m=FM(f);if(m.cat==="E"&&!m.id)return "";const u=m.id?`https://letterboxd.com/tmdb/${m.id}/`:`https://letterboxd.com/search/films/${encodeURIComponent(f)}/`;return `<a class="lb" href="${u}" target="_blank" rel="noopener" aria-label="${esc(f)} on Letterboxd"><span class="dots"><i></i><i></i><i></i></span>Letterboxd</a>`};
 const posterImg=f=>{const p=FM(f).p;return p?`<img class="poster" src="https://image.tmdb.org/t/p/w342${p}" alt="Poster for ${esc(f)}" loading="lazy">`:`<div class="ph">${esc(f)}</div>`};
 const titleLine=f=>`<div class="ft">${esc(f)}${yr(f)}</div>`;
 
