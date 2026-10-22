@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Every film showing in Oxford in the next two weeks: cinemas, colleges, pubs and one-off screenings.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8E%9E%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<title>Oxford Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: marquee header, sticky tab bar, one narrow column of film rows built for thumbing on a phone. */
+:root{
+  --bg:#f4f5f8; --surface:#ffffff; --fg:#15171e; --muted:#5d6273; --line:#dfe2ea;
+  --accent:#a4470b; --accent-soft:#fbeadb; --bulb:#e9a227;
+  --upp:#b8325a; --phx:#1d6fa5; --cur:#4b4f5c; --vue:#6b3fb0; --ocf:#2f7d4f; --oth:#8a6a12;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1117; --surface:#181b24; --fg:#e9eaf0; --muted:#9aa0b2; --line:#2a2e3b;
+  --accent:#f2b544; --accent-soft:#2c2414; --bulb:#f2b544;
+  --upp:#f07a9b; --phx:#6bb4e6; --cur:#b3b8c6; --vue:#b79af0; --ocf:#73c795; --oth:#e0b54a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1117; --surface:#181b24; --fg:#e9eaf0; --muted:#9aa0b2; --line:#2a2e3b;
+  --accent:#f2b544; --accent-soft:#2c2414; --bulb:#f2b544;
+  --upp:#f07a9b; --phx:#6bb4e6; --cur:#b3b8c6; --vue:#b79af0; --ocf:#73c795; --oth:#e0b54a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:780px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 56px}
+header.marquee{border-bottom:2px solid var(--fg);padding-bottom:12px;display:grid;gap:6px}
+.bulbs{height:6px;background:radial-gradient(circle,var(--bulb) 2px,transparent 2.5px) 0 0/12px 6px repeat-x}
+h1{font:900 clamp(2.5rem,11vw,4rem)/.9 var(--display);letter-spacing:.01em;text-transform:uppercase;margin:4px 0 0}
+.sub{color:var(--muted);margin:0;font-size:.9rem}
+.sticky{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px 8px;display:grid;gap:8px}
+.tabs{display:flex;gap:4px;overflow-x:auto}
+.tab{font:700 1.05rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;border:0;background:none;color:var(--muted);padding:8px 10px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted);cursor:pointer;user-select:none}
+.toggle input{appearance:none;width:34px;height:20px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;flex:none;transition:background .15s}
+.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--surface);transition:left .15s}
+.toggle input:checked{background:var(--accent)}
+.toggle input:checked::after{left:16px}
+button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar{display:flex;gap:6px;overflow-x:auto;padding-block:10px 2px;scrollbar-width:none}
+.bar::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 11px;font:500 .82rem/1.2 var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.group{margin-top:26px}
+.group>h2{font:900 1.7rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.group>h2 small{font:500 .82rem var(--body);color:var(--muted);text-transform:none;letter-spacing:0}
+.group>p{margin:4px 0 6px;color:var(--muted);font-size:.86rem}
+details.film{border-top:1px solid var(--line)}
+details.film>summary{list-style:none;cursor:pointer;padding:11px 0;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start}
+details.film>summary::-webkit-details-marker{display:none}
+.ft{font-weight:600;font-size:1.02rem;line-height:1.3;min-width:0}
+.cert{display:inline-block;font:500 .7rem/1 var(--mono);border:1px solid var(--muted);color:var(--muted);border-radius:3px;padding:2px 4px;margin-left:6px;vertical-align:2px}
+.note{color:var(--muted);font-weight:400;font-size:.84rem}
+.next{font:500 .78rem/1.3 var(--mono);color:var(--muted);text-align:right;white-space:nowrap}
+.vlist{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.82rem;color:var(--muted)}
+.vtag{display:inline-flex;align-items:center;gap:5px;color:var(--fg)}
+.vtag::before,.vname::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c);flex:none}
+.vtag span{color:var(--muted)}
+.detail{padding:0 0 14px;display:grid;gap:10px}
+.drow{display:grid;grid-template-columns:5.6rem 1fr;gap:10px;font-size:.88rem}
+.dday{color:var(--muted);font-weight:500}
+.slots{display:flex;flex-direction:column;gap:4px}
+.vline{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.vname{display:inline-flex;align-items:center;gap:5px;font-weight:500;text-decoration:none;min-width:6.5rem}
+.vname:hover{text-decoration:underline}
+.t{font:500 .82rem/1 var(--mono);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:4px;padding:4px 6px;background:var(--surface);text-decoration:none}
+a.t:hover{border-color:var(--fg)}
+.t i{font-style:normal;font-family:var(--body);color:var(--accent);margin-left:4px;font-size:.74rem}
+.day{margin-top:22px}
+.day>h2{font:900 1.6rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:0 0 6px;display:flex;align-items:baseline;gap:10px}
+.day>h2 small{font:500 .8rem var(--body);color:var(--muted);text-transform:none;letter-spacing:0}
+.dfilm{display:grid;gap:5px;padding:10px 0;border-top:1px solid var(--line)}
+.vcard{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.vcard[aria-pressed="true"]{outline:2px solid var(--fg)}
+.vcard h3{margin:0;font:700 1.2rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.vcard p{margin:3px 0 0;font-size:.85rem;color:var(--muted)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:14px}
+.empty{color:var(--muted);padding:22px 0;text-align:center}
+.yr{color:var(--muted);font-weight:400;margin-left:4px}
+.gc{grid-column:1/-1;font-size:.82rem;color:var(--muted)}
+.lb{font:500 .78rem/1 var(--body);color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 9px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;align-self:start}
+.lb:hover{color:var(--fg);border-color:var(--fg)}
+.lb .dots{display:inline-flex;gap:2px}.lb .dots i{width:6px;height:6px;border-radius:50%;display:block}
+.lb .dots i:nth-child(1){background:#ff8000}.lb .dots i:nth-child(2){background:#00e054}.lb .dots i:nth-child(3){background:#40bcf4}
+.modebar{display:flex;gap:6px;margin-top:16px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:14px 10px;margin-top:10px}
+.pcard{border:0;background:none;padding:0;text-align:left;cursor:pointer;color:inherit;font:inherit;display:grid;gap:5px;min-width:0}
+.poster{aspect-ratio:2/3;width:100%;max-width:100%;border-radius:4px;object-fit:cover;background:var(--line);display:block;box-shadow:0 1px 0 var(--line)}
+.ph{aspect-ratio:2/3;width:100%;border-radius:4px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:flex-end;padding:8px;font:700 1rem/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em;overflow:hidden;word-break:break-word}
+.pcard .pt{font-size:.82rem;font-weight:600;line-height:1.25}
+.pcard .pv{font-size:.74rem;color:var(--muted);line-height:1.3}
+.pcard:hover .poster{outline:2px solid var(--fg);outline-offset:1px}
+dialog#sheet{border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 40px)}
+dialog#sheet::backdrop{background:rgb(0 0 0 / .55)}
+.sh{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 16px 6px}
+.sh .poster,.sh .ph{width:96px}
+.sh h3{margin:0;font:900 1.5rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.sh p{margin:4px 0;font-size:.85rem;color:var(--muted)}
+.sbody{padding:4px 16px 16px;display:grid;gap:10px}
+.close{position:absolute;top:8px;right:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;width:32px;height:32px;cursor:pointer;font-size:1rem}
+.foot{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:12px;display:grid;gap:6px}
+.foot p{margin:0}
+@media (max-width:480px){.drow{grid-template-columns:1fr}.vname{min-width:0}}
+@media (prefers-reduced-motion: reduce){.toggle input,.toggle input::after{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="marquee">
+    <div class="bulbs" aria-hidden="true"></div>
+    <h1>Oxford Screens</h1>
+    <p class="sub" id="sub"></p>
+  </header>
+  <div class="sticky">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-view="films" aria-selected="true">Films</button>
+      <button class="tab" role="tab" data-view="dates" aria-selected="false">By date</button>
+      <button class="tab" role="tab" data-view="venues" aria-selected="false">By venue</button>
+    </div>
+    <label class="toggle" for="nonCinema"><input type="checkbox" id="nonCinema" checked> Include screenings outside cinemas (colleges, pubs, libraries)</label>
+  </div>
+
+  <section id="v-films-wrap"><div class="modebar"><button class="chip" data-mode="list">List</button><button class="chip" data-mode="posters">Posters</button></div><div id="v-films"></div></section>
+  <dialog id="sheet"><button class="close" aria-label="Close" data-close="1">✕</button><div id="sheetBody"></div></dialog>
+  <section id="v-dates" hidden><div class="bar" id="dayBar"></div><div id="dayList"></div></section>
+  <section id="v-venues" hidden><div class="vgrid" id="vgrid"></div><div id="venueList"></div></section>
+
+  <div class="foot">
+    <p id="updated"></p>
+    <p>Times come from each cinema's own website, checked every night. Vue, Curzon and Phoenix only publish about a week ahead, so later days fill in as they announce them. Screenings outside cinemas are added by hand.</p>
+    <p>Know of a screening that's missing? <a href="https://github.com/__REPO__/issues/new" target="_blank" rel="noopener">Tell us</a>.</p>
+    <p class="tmdb"><a href="https://www.themoviedb.org/" target="_blank" rel="noopener">Film details and posters from TMDB.</a> This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+  </div>
+</div>
+
+<script>
+let DATA = {shows:[],films:{}};
+const V = {
+  vue:{n:"Vue",f:"Vue Oxford",c:"--vue",cin:1,u:"https://www.myvue.com/cinema/oxford/whats-on",w:"Ozone Leisure Park, Grenoble Road"},
+  cur:{n:"Curzon",f:"Curzon Oxford",c:"--cur",cin:1,u:"https://www.curzon.com/venues/oxford/",w:"Westgate Centre"},
+  phx:{n:"Phoenix",f:"Phoenix Picturehouse",c:"--phx",cin:1,u:"https://www.picturehouses.com/cinema/phoenix-picturehouse",w:"Walton Street, Jericho"},
+  ocf:{n:"Oxford Cinema",f:"The Oxford Cinema & Cafe",c:"--ocf",cin:1,u:"https://www.oxfordcinema.co.uk/en/buy-tickets",w:"Magdalen Street"},
+  upp:{n:"UPP",f:"Ultimate Picture Palace",c:"--upp",cin:1,u:"https://uppcinema.com/whats-on/",w:"Jeune Street, Cowley Road"},
+  mag:{n:"Magdalen",f:"Magdalen Monday Movies",c:"--oth",u:"https://www.magd.ox.ac.uk/magdalen-monday-movies/",w:"Magdalen College · free, 18+, book on Eventbrite"},
+  bod:{n:"Bodleian",f:"Bodleian Halloween Screenings",c:"--oth",u:"https://visit.bodleian.ox.ac.uk/event/2026/oct/halloween-film-screenings",w:"Divinity School · £25 online, £30 door"},
+  tap:{n:"Tap Social",f:"Tap Social, Botley",c:"--oth",u:"https://www.tapsocialmovement.com/pages/events",w:"Curtis Industrial Estate, Botley"},
+  mfo:{n:"Maison Française",f:"Maison Française d'Oxford",c:"--oth",u:"https://www.mfo.ac.uk/events/rediscovery-charlotte-sohy-evening-film-music-conversation",w:"Norham Road"},
+  cas:{n:"Oxford Castle",f:"Oxford Castle & Prison",c:"--oth",u:"https://www.oxfordcastleandprison.co.uk/",w:"New Road"},
+  swz:{n:"Schwarzman Centre",f:"Schwarzman Centre",c:"--oth",u:"https://www.schwarzmancentre.ox.ac.uk/",w:"Radcliffe Observatory Quarter"},
+  rew:{n:"Rewley House",f:"Rewley House",c:"--oth",u:"https://www.politics.ox.ac.uk/event/peoples-emergency-climate-briefing-community-screening-rewley-house",w:"Wellington Square · free, register"},
+  chg:{n:"Human Genetics",f:"Centre for Human Genetics",c:"--oth",u:"https://www.eventbrite.co.uk/d/united-kingdom--oxford/burkitt/",w:"Old Road Campus · free"},
+  peb:{n:"Marston",f:"Marston community screenings",c:"--oth",u:"https://www.eventbrite.co.uk/d/united-kingdom--oxford/peoples-emergency-briefing/",w:"St Nicholas Church Hall / 10th Oxford Scouts · free"},
+  nest:{n:"The Nest",f:"The Nest",c:"--oth",u:"https://wegottickets.com/f/27457",w:"No. 80 Festival, 6–8 Nov · screening times TBC"},
+  fpc:{n:"Florence Park",f:"Florence Park Community Centre",c:"--oth",u:"https://wegottickets.com/f/30765",w:"Florence Park, East Oxford"},
+  cg:{n:"Common Ground",f:"Common Ground",c:"--oth",u:"https://www.instagram.com/commongroundoxford/",w:"Community café and events · no films listed right now"}
+};
+const CATS=[["W","New releases","Wide release: the big films showing at multiplexes across the country"],["L","New releases","Limited release: smaller new films mostly showing at independents, clubs and one-off screenings"],["T","Throwbacks","Older films back on the big screen, for an anniversary, a season or a one-off night"],["E","Also on screen","Theatre, ballet, concerts and kids' TV broadcast to cinemas"]];
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iso=d=>d.toISOString().slice(0,10);
+const now=new Date();
+const today=iso(new Date(now.getTime()-now.getTimezoneOffset()*6e4));
+const nowHM=now.toTimeString().slice(0,5);
+const addDays=(d,n)=>{const x=new Date(d+"T12:00");x.setDate(x.getDate()+n);return iso(x)};
+const horizon=addDays(today,13);
+const dayName=d=>d===today?"Today":d===addDays(today,1)?"Tomorrow":new Date(d+"T12:00").toLocaleDateString("en-GB",{weekday:"long"});
+const dayShort=d=>d===today?"Today":d===addDays(today,1)?"Tomorrow":new Date(d+"T12:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+const dateLbl=d=>new Date(d+"T12:00").toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+const col=k=>`--c:var(${V[k].c})`;
+const urlFor=(v,s)=>(s&&s[5])||V[v].u;
+// films[f] = [category, note, tmdbId, year, genres[], countries[], posterPath]
+const FM=f=>{const m=DATA.films[f]||["L","","","",[],[],""];return {cat:m[0],note:m[1],id:m[2],yr:m[3],g:m[4]||[],c:m[5]||[],p:m[6]}};
+const yr=f=>{const y=FM(f).yr;return y?`<span class="yr">${y}</span>`:""};
+const noteTxt=f=>{const n=FM(f).note;return n?` <span class="note">· ${esc(n)}</span>`:""};
+const gcTxt=f=>{const m=FM(f);return [m.g.join(", "),m.c.join(", ")].filter(Boolean).join(" · ")};
+const lbLink=f=>{const id=FM(f).id;const u=id?`https://letterboxd.com/tmdb/${id}/`:`https://letterboxd.com/search/films/${encodeURIComponent(f)}/`;return FM(f).cat==="E"&&!id?"":`<a class="lb" href="${u}" target="_blank" rel="noopener" aria-label="${esc(f)} on Letterboxd"><span class="dots"><i></i><i></i><i></i></span>Letterboxd</a>`};
+const posterImg=(f,cls="poster")=>{const p=FM(f).p;return p?`<img class="${cls}" src="https://image.tmdb.org/t/p/w342${p}" alt="Poster for ${esc(f)}" loading="lazy">`:`<div class="ph">${esc(f)}</div>`};
+const titleLine=f=>`<div class="ft">${esc(f)}${yr(f)}${noteTxt(f)}</div>`;
+
+let st={view:"films",mode:"list",nonCin:true,day:today,venue:"upp"};
+try{const s=JSON.parse(localStorage.getItem("oxs2")||"{}");if(typeof s.nonCin==="boolean")st.nonCin=s.nonCin;if(s.mode)st.mode=s.mode}catch(e){}
+const save=()=>{try{localStorage.setItem("oxs2",JSON.stringify({nonCin:st.nonCin,mode:st.mode}))}catch(e){}};
+
+function live(){return DATA.shows.filter(s=>V[s[3]]&&(s[0]>today||(s[0]===today&&s[1]>=nowHM))&&(st.nonCin||V[s[3]].cin))}
+
+function timesByVenue(rows){const by={};rows.forEach(s=>(by[s[3]]=by[s[3]]||[]).push(s));return Object.entries(by)}
+function tchip(s){return `<a class="t" href="${urlFor(s[3],s)}" target="_blank" rel="noopener">${s[1]}${s[4]?`<i>${esc(s[4].split(" · ")[0])}</i>`:""}</a>`}
+function vline(v,rows,f){return `<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a>${rows.map(tchip).join("")}</div>`}
+
+function renderFilms(){
+  const rows=live().filter(s=>s[0]<=horizon);
+  const by={};rows.forEach(s=>(by[s[2]]=by[s[2]]||[]).push(s));
+  let html="";
+  CATS.forEach(([k,h,desc])=>{
+    const films=Object.entries(by).filter(([f])=>{const c=FM(f).cat;return k==="E"?(c==="E"||c==="K"):c===k});
+    if(!films.length)return;
+    films.sort((a,b)=>k==="W"?b[1].length-a[1].length:(a[1][0][0]+a[1][0][1]).localeCompare(b[1][0][0]+b[1][0][1]));
+    const sub=k==="W"?"Wide release":k==="L"?"Limited release":"";
+    html+=`<div class="group"><h2>${h}${sub?` <small>${sub}</small>`:""}<small>${films.length} film${films.length>1?"s":""}</small></h2><p>${desc}</p>`;
+    if(st.mode==="posters"){
+      html+=`<div class="pgrid">${films.map(([f,ss])=>{const vs=[...new Set(ss.map(s=>V[s[3]].n))];return `<button class="pcard" data-film="${esc(f)}">${posterImg(f)}<span class="pt">${esc(f)}${yr(f)}</span><span class="pv">${vs.join(", ")}</span></button>`}).join("")}</div>`;
+    }else films.forEach(([f,ss])=>{
+      const vs={};ss.forEach(s=>vs[s[3]]=(vs[s[3]]||0)+1);
+      const gc=gcTxt(f);
+      html+=`<details class="film"><summary>${titleLine(f)}${lbLink(f)}${gc?`<div class="gc">${esc(gc)}</div>`:""}<div class="vlist">${Object.entries(vs).map(([v,n])=>`<span class="vtag" style="${col(v)}">${V[v].n} <span>${n}</span></span>`).join("")}</div></summary><div class="detail">${timesBlock(ss,f)}</div></details>`;
+    });
+    html+=`</div>`;
+  });
+  $("#v-films").innerHTML=html||`<p class="empty">Nothing found for the next two weeks.</p>`;
+  document.querySelectorAll(".modebar .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===st.mode));
+}
+function timesBlock(ss,f){const days={};ss.forEach(s=>(days[s[0]]=days[s[0]]||[]).push(s));return Object.entries(days).map(([d,r])=>`<div class="drow"><div class="dday">${dayShort(d)}</div><div class="slots">${timesByVenue(r).map(([v,rr])=>vline(v,rr,f)).join("")}</div></div>`).join("")}
+function openSheet(f){
+  const ss=live().filter(s=>s[0]<=horizon&&s[2]===f);const gc=gcTxt(f);
+  $("#sheetBody").innerHTML=`<div class="sh">${posterImg(f)}<div><h3>${esc(f)}</h3><p>${[FM(f).yr,FM(f).note].filter(Boolean).map(esc).join(" · ")}</p>${gc?`<p>${esc(gc)}</p>`:""}<p>${lbLink(f)}</p></div></div><div class="sbody">${timesBlock(ss,f)}</div>`;
+  const d=$("#sheet");try{d.showModal()}catch(e){d.setAttribute("open","")}
+}
+
+function renderDates(){
+  const rows=live();
+  const days=[...new Set(rows.map(s=>s[0]))].sort();
+  if(!days.includes(st.day))st.day=days[0];
+  $("#dayBar").innerHTML=days.map(d=>`<button class="chip" data-day="${d}" aria-pressed="${d===st.day}">${dayShort(d)}</button>`).join("");
+  const r=rows.filter(s=>s[0]===st.day);
+  const by={};r.forEach(s=>(by[s[2]]=by[s[2]]||[]).push(s));
+  const films=Object.entries(by).sort((a,b)=>a[1][0][1].localeCompare(b[1][0][1]));
+  $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}<small>${dateLbl(st.day)} · ${r.length} screening${r.length===1?"":"s"} · ${films.length} film${films.length===1?"":"s"}</small></h2>${films.map(([f,ss])=>{return `<div class="dfilm">${titleLine(f)}${timesByVenue(ss).map(([v,rr])=>vline(v,rr,f)).join("")}</div>`}).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
+}
+
+function renderVenues(){
+  const rows=live();
+  const ks=Object.keys(V).filter(k=>st.nonCin||V[k].cin);
+  if(!ks.includes(st.venue))st.venue=ks[0];
+  $("#vgrid").innerHTML=ks.map(k=>{const n=rows.filter(s=>s[3]===k).length;return `<button class="vcard" style="${col(k)};border-left-color:var(${V[k].c})" data-venue="${k}" aria-pressed="${k===st.venue}"><h3>${V[k].f}</h3><p>${V[k].w}</p><p>${n?n+" screening"+(n>1?"s":"")+" listed":"Nothing listed right now"}</p></button>`}).join("");
+  const r=rows.filter(s=>s[3]===st.venue);
+  const days={};r.forEach(s=>(days[s[0]]=days[s[0]]||[]).push(s));
+  const v=V[st.venue];
+  $("#venueList").innerHTML=`<div class="group"><h2>${v.f}</h2><p><a href="${v.u}" target="_blank" rel="noopener">Official listings and booking</a></p>${Object.entries(days).map(([d,rr])=>{const by={};rr.forEach(s=>(by[s[2]]=by[s[2]]||[]).push(s));return `<div class="day"><h2>${dayName(d)}<small>${dateLbl(d)}</small></h2>${Object.entries(by).sort((a,b)=>a[1][0][1].localeCompare(b[1][0][1])).map(([f,ss])=>`<div class="dfilm">${titleLine(f)}<div class="vline">${ss.map(tchip).join("")}</div></div>`).join("")}</div>`}).join("")||`<p class="empty">Nothing listed at this venue right now.</p>`}</div>`;
+}
+
+function render(){
+  const n=live().filter(s=>s[0]<=horizon);
+  $("#sub").textContent=`${new Set(n.map(s=>s[2])).size} films and ${n.length} screenings in the next two weeks, across cinemas${st.nonCin?", colleges, pubs and libraries":""}.`;
+  ({films:renderFilms,dates:renderDates,venues:renderVenues})[st.view]();
+}
+function show(view){st.view=view;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));$("#v-films-wrap").hidden=view!=="films";$("#v-dates").hidden=view!=="dates";$("#v-venues").hidden=view!=="venues";render();window.scrollTo({top:0})}
+document.addEventListener("click",e=>{
+  if(e.target===$("#sheet")){$("#sheet").close();return}
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.close)$("#sheet").close();
+  else if(b.dataset.mode){st.mode=b.dataset.mode;save();renderFilms()}
+  else if(b.dataset.film)openSheet(b.dataset.film);
+  else if(b.dataset.view)show(b.dataset.view);
+  else if(b.dataset.day){st.day=b.dataset.day;renderDates()}
+  else if(b.dataset.venue){st.venue=b.dataset.venue;renderVenues();$("#venueList").scrollIntoView({behavior:"smooth",block:"start"})}
+});
+$("#nonCinema").checked=st.nonCin;
+$("#nonCinema").addEventListener("change",e=>{st.nonCin=e.target.checked;save();render()});
+fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
+  DATA=d;
+  const up=new Date(d.updated);
+  const bad=Object.entries(d.status||{}).filter(([k,v])=>!v.ok).map(([k])=>V[k]?V[k].n:k);
+  $("#updated").textContent=`Last checked ${up.toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}.`+(bad.length?` ${bad.join(", ")} couldn't be reached last time, so ${bad.length>1?"their":"its"} times may be out of date.`:"");
+  const h=location.hash.slice(1);if(["films","dates","venues"].includes(h))show(h);else render();
+}).catch(()=>{$("#v-films").innerHTML='<p class="empty">Couldn\'t load the listings. Try refreshing.</p>'});
+</script>
+</body>
+</html>

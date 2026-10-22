@@ -1,0 +1,507 @@
+{
+ "_readme": "aliases: cinema title -> the title to show. films: per-title fixes. cat = W (wide new release), L (limited new release), T (throwback), E (event: theatre, concert, kids' TV). year helps TMDB pick the right film; tmdb pins an exact TMDB id; skip:true stops TMDB lookups.",
+ "aliases": {
+  "Jailer 2 (Tamil)": "Jailer 2",
+  "Drishyam: The Conclusion (Hindi)": "Drishyam: The Conclusion",
+  "The Others (25th Anniversary)": "The Others",
+  "Hocus Pocus (1993)": "Hocus Pocus",
+  "Scream (30th Anniversary)": "Scream",
+  "Pan's Labyrinth (20th Anniversary)": "Pan's Labyrinth",
+  "28 Days Later (Re-release)": "28 Days Later",
+  "Ken Russell's The Devils": "The Devils",
+  "Evolution of Horror Presents: The Shining": "The Shining",
+  "Film Club: Black Beyond: Sorry To Bother You": "Sorry to Bother You",
+  "Paw Patrol: The Dino Movie": "PAW Patrol: The Dino Movie",
+  "RBO: Manon (live)": "Royal Ballet & Opera: Manon",
+  "RBO Live: Manon": "Royal Ballet & Opera: Manon",
+  "RBO Encore: Manon": "Royal Ballet & Opera: Manon",
+  "National Theatre Live: The Misanthrope": "NT Live: The Misanthrope",
+  "BTS World Tour 'Arirang' in Buenos Aires: Live Viewing": "BTS World Tour 'Arirang': Live Viewing",
+  "BTS World Tour 'Arirang' in São Paulo: Live Viewing": "BTS World Tour 'Arirang': Live Viewing"
+ },
+ "films": {
+  "Forgotten Island": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Street Fighter": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Verity": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Other Mommy": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Resident Evil": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Heart of the Beast": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Whalefall": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Sense and Sensibility": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Pressure": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Insidious: Out of the Further": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Shaun the Sheep: The Beast of Mossy Bottom": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Spider-Man: Brand New Day": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Tad and the Magic Lamp": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Ghosts: The Possession of Button House": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Clayface": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Wildwood": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Ali G: Who Iz I?": {
+   "cat": "W",
+   "year": 2026
+  },
+  "The Uprising": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Klara and the Sun": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Monster Mia": {
+   "cat": "W",
+   "year": 2026
+  },
+  "PAW Patrol: The Dino Movie": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Kiri and Lou Go Raaa!": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Primetime": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Digger": {
+   "cat": "W",
+   "year": 2026
+  },
+  "The Social Reckoning": {
+   "cat": "W",
+   "year": 2026
+  },
+  "Wicker": {
+   "cat": "W",
+   "note": "Preview 26 Oct",
+   "year": 2026
+  },
+  "Wild Horse Nine": {
+   "cat": "W",
+   "note": "Preview",
+   "year": 2026
+  },
+  "Jailer 2": {
+   "cat": "W",
+   "note": "Tamil",
+   "year": 2026
+  },
+  "Drishyam: The Conclusion": {
+   "cat": "W",
+   "note": "Hindi",
+   "year": 2026
+  },
+  "Fatherland": {
+   "cat": "L",
+   "note": "German",
+   "year": 2026
+  },
+  "NAZA": {
+   "cat": "L",
+   "note": "Arabic & Hebrew",
+   "year": 2026
+  },
+  "Tenzing": {
+   "cat": "L",
+   "year": 2026
+  },
+  "The Lost Children of Tuam": {
+   "cat": "L",
+   "year": 2026
+  },
+  "Green Screen: Derek vs Derek": {
+   "cat": "L",
+   "note": "Documentary",
+   "year": 2026
+  },
+  "La Bola Negra": {
+   "cat": "L",
+   "note": "Spanish",
+   "year": 2026
+  },
+  "Nightborn": {
+   "cat": "L",
+   "year": 2026
+  },
+  "Digital Detention": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "Queen at Sea": {
+   "cat": "L",
+   "year": 2026
+  },
+  "Extra Geography": {
+   "cat": "L",
+   "year": 2026
+  },
+  "De Gaulle: Liberté": {
+   "cat": "L",
+   "note": "French",
+   "year": 2026
+  },
+  "Hope": {
+   "cat": "L",
+   "note": "Korean",
+   "year": 2026
+  },
+  "Anyone Can Play Guitar": {
+   "cat": "T",
+   "note": "Director in conversation",
+   "year": 2009
+  },
+  "Case 137": {
+   "cat": "L",
+   "note": "French",
+   "year": 2025
+  },
+  "By Design": {
+   "cat": "L",
+   "year": 2025
+  },
+  "We the Hated": {
+   "cat": "L",
+   "note": "Documentary",
+   "year": 2026
+  },
+  "Dead Souls": {
+   "cat": "L",
+   "year": 2025
+  },
+  "The HorMones: The Women Are Here": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "Bradford Forwards and Backwards": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "Burkitt": {
+   "cat": "L",
+   "note": "Documentary",
+   "year": 2024
+  },
+  "It Was Just an Accident": {
+   "cat": "L",
+   "note": "Persian",
+   "year": 2025
+  },
+  "The People's Emergency Climate Briefing": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "People's Emergency Briefing (Old Marston)": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "People's Emergency Briefing (New Marston)": {
+   "cat": "L",
+   "note": "Documentary"
+  },
+  "Becoming American: Philadelphia's Story": {
+   "cat": "L",
+   "note": "Documentary",
+   "year": 2026
+  },
+  "The Rediscovery of Charlotte Sohy": {
+   "cat": "L"
+  },
+  "Japanese Ghosts and Demons on Film": {
+   "cat": "L"
+  },
+  "Sing Sing": {
+   "cat": "T",
+   "year": 2023
+  },
+  "Mystery Screening": {
+   "cat": "L",
+   "note": "Secret film"
+  },
+  "Ukrainian Film Evening": {
+   "cat": "L"
+  },
+  "28 Days Later": {
+   "cat": "T",
+   "year": 2002
+  },
+  "28 Years Later": {
+   "cat": "T",
+   "year": 2025
+  },
+  "The Shining": {
+   "cat": "T",
+   "year": 1980
+  },
+  "The Devils": {
+   "cat": "T",
+   "year": 1971
+  },
+  "Radiohead X Nosferatu: A Symphony of Horror": {
+   "cat": "T",
+   "year": 1922
+  },
+  "They Live": {
+   "cat": "T",
+   "year": 1988
+  },
+  "The Others": {
+   "cat": "T",
+   "note": "25th anniversary",
+   "year": 2001
+  },
+  "Hocus Pocus": {
+   "cat": "T",
+   "year": 1993
+  },
+  "Scream": {
+   "cat": "T",
+   "note": "30th anniversary",
+   "year": 1996
+  },
+  "Pan's Labyrinth": {
+   "cat": "T",
+   "note": "20th anniversary",
+   "year": 2006
+  },
+  "Sorry to Bother You": {
+   "cat": "T",
+   "year": 2018
+  },
+  "Who's Afraid of Virginia Woolf?": {
+   "cat": "T",
+   "year": 1966
+  },
+  "Hereditary": {
+   "cat": "T",
+   "year": 2018
+  },
+  "Possession": {
+   "cat": "T",
+   "year": 1981
+  },
+  "Carrie": {
+   "cat": "T",
+   "note": "50th anniversary",
+   "year": 1976
+  },
+  "The Jungle Book": {
+   "cat": "T",
+   "year": 1967
+  },
+  "Harakiri": {
+   "cat": "T",
+   "year": 1962
+  },
+  "The Bride of Frankenstein": {
+   "cat": "T",
+   "year": 1935
+  },
+  "Monsters, Inc.": {
+   "cat": "T",
+   "year": 2001
+  },
+  "Beetlejuice": {
+   "cat": "T",
+   "year": 1988
+  },
+  "Bram Stoker's Dracula": {
+   "cat": "T",
+   "year": 1992
+  },
+  "The Super Mario Galaxy Movie": {
+   "cat": "T",
+   "note": "Kids' Club",
+   "year": 2026
+  },
+  "Minions & Monsters": {
+   "cat": "T",
+   "note": "Kids' Club",
+   "year": 2026
+  },
+  "Ninotchka": {
+   "cat": "T",
+   "year": 1939
+  },
+  "Revenge": {
+   "cat": "T",
+   "year": 2017
+  },
+  "Room on the Broom": {
+   "cat": "T",
+   "year": 2012
+  },
+  "The Rocky Horror Picture Show": {
+   "cat": "T",
+   "year": 1975
+  },
+  "The Big Heat": {
+   "cat": "T",
+   "note": "35mm",
+   "year": 1953
+  },
+  "PlayTime": {
+   "cat": "T",
+   "year": 1967
+  },
+  "Mifune's Last Song": {
+   "cat": "T",
+   "year": 1999
+  },
+  "The Peanuts Movie": {
+   "cat": "T",
+   "year": 2015
+  },
+  "Mauvais Sang": {
+   "cat": "T",
+   "year": 1986
+  },
+  "Babe": {
+   "cat": "T",
+   "year": 1995
+  },
+  "The Five Obstructions": {
+   "cat": "T",
+   "year": 2003
+  },
+  "Arthur Christmas": {
+   "cat": "T",
+   "year": 2011
+  },
+  "The Goonies": {
+   "cat": "T",
+   "year": 1985
+  },
+  "Network": {
+   "cat": "T",
+   "year": 1976
+  },
+  "The Third Man": {
+   "cat": "T",
+   "year": 1949
+  },
+  "Tampopo": {
+   "cat": "T",
+   "year": 1985
+  },
+  "The League of Gentlemen": {
+   "cat": "T",
+   "year": 1960
+  },
+  "One Flew Over the Cuckoo's Nest": {
+   "cat": "T",
+   "year": 1975
+  },
+  "The Lego Batman Movie": {
+   "cat": "T",
+   "year": 2017
+  },
+  "Hadestown: The Musical": {
+   "cat": "E",
+   "note": "Musical",
+   "year": 2026
+  },
+  "Fallen Angels by Noël Coward": {
+   "cat": "E",
+   "note": "Theatre"
+  },
+  "NT Live: The Misanthrope": {
+   "cat": "E",
+   "note": "Theatre",
+   "year": 2026
+  },
+  "NT Live: Golden Boy": {
+   "cat": "E",
+   "note": "Theatre",
+   "year": 2026
+  },
+  "Royal Ballet & Opera: Manon": {
+   "cat": "E",
+   "note": "Ballet"
+  },
+  "BTS World Tour 'Arirang': Live Viewing": {
+   "cat": "E",
+   "note": "Concert"
+  },
+  "Ozzy & Black Sabbath: Back to the Beginning": {
+   "cat": "E",
+   "note": "Concert",
+   "year": 2025
+  },
+  "Book Club: Audrey Niffenegger In Conversation (broadcast)": {
+   "cat": "E",
+   "note": "Talk"
+  },
+  "Foragers": {
+   "cat": "T",
+   "note": "Arabic",
+   "year": 2022
+  },
+  "Notes in Progress": {
+   "cat": "L"
+  },
+  "What's Left After the Wave Hits": {
+   "cat": "L"
+  },
+  "Drain Flies": {
+   "cat": "L",
+   "year": 2026
+  },
+  "Disney Junior Cinema Club 2026": {
+   "cat": "K",
+   "note": "TV episodes"
+  },
+  "We're Going on a Bear Hunt + The Tiger Who Came to Tea": {
+   "cat": "K",
+   "note": "TV specials"
+  }
+ }
+}

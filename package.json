@@ -1,0 +1,12 @@
+{
+  "name": "oxford-screens",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "node scraper/run.mjs",
+    "serve": "npx --yes http-server site -p 8080 -c-1"
+  },
+  "dependencies": {
+    "playwright": "1.56.1"
+  }
+}

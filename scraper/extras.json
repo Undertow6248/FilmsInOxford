@@ -1,0 +1,224 @@
+{
+ "_readme": "One-off screenings the scrapers can't find. Add a line per screening; past dates are dropped automatically. venue must be a key in VENUES in site/index.html; time can be TBC.",
+ "screenings": [
+  {
+   "venue": "cas",
+   "title": "Japanese Ghosts and Demons on Film",
+   "date": "2026-10-22",
+   "time": "19:00",
+   "tag": "Talk with clips · drinks"
+  },
+  {
+   "venue": "mfo",
+   "title": "The Rediscovery of Charlotte Sohy",
+   "date": "2026-10-23",
+   "time": "18:00",
+   "tag": "Free · film + music + talk"
+  },
+  {
+   "venue": "mag",
+   "title": "Harakiri",
+   "date": "2026-10-26",
+   "time": "19:30",
+   "tag": "Free"
+  },
+  {
+   "venue": "swz",
+   "title": "Bradford Forwards and Backwards",
+   "date": "2026-10-29",
+   "time": "17:30",
+   "tag": "Free · Q&A"
+  },
+  {
+   "venue": "bod",
+   "title": "Monsters, Inc.",
+   "date": "2026-10-30",
+   "time": "15:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Beetlejuice",
+   "date": "2026-10-30",
+   "time": "18:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Bram Stoker's Dracula",
+   "date": "2026-10-30",
+   "time": "21:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Monsters, Inc.",
+   "date": "2026-10-31",
+   "time": "15:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Beetlejuice",
+   "date": "2026-10-31",
+   "time": "18:00"
+  },
+  {
+   "venue": "mag",
+   "title": "The Bride of Frankenstein",
+   "date": "2026-10-31",
+   "time": "19:00",
+   "tag": "Free · Hallowe'en special"
+  },
+  {
+   "venue": "bod",
+   "title": "Bram Stoker's Dracula",
+   "date": "2026-10-31",
+   "time": "21:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Monsters, Inc.",
+   "date": "2026-11-01",
+   "time": "15:00"
+  },
+  {
+   "venue": "bod",
+   "title": "Beetlejuice",
+   "date": "2026-11-01",
+   "time": "18:00"
+  },
+  {
+   "venue": "mag",
+   "title": "Ukrainian Film Evening",
+   "date": "2026-11-01",
+   "time": "19:00",
+   "tag": "Free · film TBA"
+  },
+  {
+   "venue": "bod",
+   "title": "Bram Stoker's Dracula",
+   "date": "2026-11-01",
+   "time": "21:00"
+  },
+  {
+   "venue": "mag",
+   "title": "Ninotchka",
+   "date": "2026-11-02",
+   "time": "19:00",
+   "tag": "Free"
+  },
+  {
+   "venue": "rew",
+   "title": "The People's Emergency Climate Briefing",
+   "date": "2026-11-02",
+   "time": "19:00",
+   "tag": "Free · 16+"
+  },
+  {
+   "venue": "nest",
+   "title": "What's Left After the Wave Hits",
+   "date": "2026-11-06",
+   "time": "TBC",
+   "tag": "No. 80 Festival · free · intro by the director",
+   "url": "https://wegottickets.com/f/25652"
+  },
+  {
+   "venue": "nest",
+   "title": "Notes in Progress",
+   "date": "2026-11-06",
+   "time": "TBC",
+   "tag": "No. 80 Festival · free · in conversation",
+   "url": "https://wegottickets.com/f/25652"
+  },
+  {
+   "venue": "tap",
+   "title": "The Lego Batman Movie",
+   "date": "2026-11-08",
+   "time": "15:00",
+   "tag": "Lego buildalong · doors 2pm",
+   "url": "https://wegottickets.com/f/29534"
+  },
+  {
+   "venue": "peb",
+   "title": "People's Emergency Briefing (Old Marston)",
+   "date": "2026-11-08",
+   "time": "18:45",
+   "tag": "Free"
+  },
+  {
+   "venue": "nest",
+   "title": "Foragers",
+   "date": "2026-11-08",
+   "time": "TBC",
+   "tag": "No. 80 Festival"
+  },
+  {
+   "venue": "mag",
+   "title": "Network",
+   "date": "2026-11-09",
+   "time": "19:00",
+   "tag": "Free"
+  },
+  {
+   "venue": "chg",
+   "title": "Burkitt",
+   "date": "2026-11-10",
+   "time": "16:00",
+   "tag": "Free · filmmaker Q&A"
+  },
+  {
+   "venue": "tap",
+   "title": "Sing Sing",
+   "date": "2026-11-12",
+   "time": "18:00",
+   "tag": "Screening & conversation",
+   "url": "https://www.eventbrite.co.uk/e/sing-sing-screening-conversation-tickets-2002134217340"
+  },
+  {
+   "venue": "mag",
+   "title": "The Third Man",
+   "date": "2026-11-15",
+   "time": "19:00",
+   "tag": "Free · live zither score"
+  },
+  {
+   "venue": "mag",
+   "title": "Tampopo",
+   "date": "2026-11-16",
+   "time": "19:00",
+   "tag": "Free"
+  },
+  {
+   "venue": "mag",
+   "title": "Becoming American: Philadelphia's Story",
+   "date": "2026-11-21",
+   "time": "19:00",
+   "tag": "Free · filmmaker conversation"
+  },
+  {
+   "venue": "fpc",
+   "title": "Drain Flies",
+   "date": "2026-11-21",
+   "time": "19:30",
+   "tag": "Independent film · doors 7pm"
+  },
+  {
+   "venue": "peb",
+   "title": "People's Emergency Briefing (New Marston)",
+   "date": "2026-11-24",
+   "time": "18:45",
+   "tag": "Free"
+  },
+  {
+   "venue": "mag",
+   "title": "The League of Gentlemen",
+   "date": "2026-11-30",
+   "time": "19:00",
+   "tag": "Free"
+  },
+  {
+   "venue": "mag",
+   "title": "One Flew Over the Cuckoo's Nest",
+   "date": "2026-12-07",
+   "time": "19:00",
+   "tag": "Free"
+  }
+ ]
+}

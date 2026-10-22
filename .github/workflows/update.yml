@@ -1,0 +1,58 @@
+name: Update listings
+
+on:
+  schedule:
+    - cron: "17 4 * * *"   # every night, about 5am in Oxford
+    - cron: "17 13 * * 2"  # Tuesday lunchtime too, when Vue and others publish the next week
+  workflow_dispatch: {}     # "Run workflow" button in the Actions tab
+  push:
+    branches: [main]
+    paths: ["scraper/**", "site/index.html", ".github/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install scraper
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Scrape cinemas and look films up on TMDB
+        env:
+          TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
+        run: node scraper/run.mjs
+
+      - name: Save the new listings to the repo
+        run: |
+          git config user.name "listings-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data.json data/tmdb-cache.json
+          git diff --cached --quiet || git commit -m "Update listings $(date -u +%F)"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
