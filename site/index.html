@@ -70,8 +70,11 @@ details.film>summary::-webkit-details-marker{display:none}
 .drow{display:grid;grid-template-columns:6rem 1fr;gap:10px;font-size:var(--s-s)}
 .dday{color:var(--muted)}
 .slots{display:grid;gap:4px}
-.vline{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
-.vname{text-decoration:none;min-width:7rem}
+/* Venue name in its own column, so wrapped times line up under the first time. */
+.vline{display:grid;grid-template-columns:7.5rem 1fr;align-items:start;gap:4px 8px}
+.times{display:flex;flex-wrap:wrap;gap:4px}
+.vname{text-decoration:none;white-space:normal;align-items:baseline;padding-top:2px}
+.vname::before{transform:translateY(-1px)}
 .vname:hover{text-decoration:underline}
 .t{font-size:var(--s-s);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:4px;padding:2px 6px;text-decoration:none;white-space:nowrap}
 a.t:hover{border-color:var(--fg)}
@@ -102,7 +105,7 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .5)}
 .empty{color:var(--muted);padding:22px 0;text-align:center}
 .foot{font-size:var(--s-s);color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:12px;display:grid;gap:6px}
 .foot p{margin:0}
-@media (max-width:480px){.drow{grid-template-columns:1fr;gap:2px}.vname{min-width:0}}
+@media (max-width:480px){.drow{grid-template-columns:1fr;gap:2px}.vline{grid-template-columns:6.5rem 1fr}}
 </style>
 </head>
 <body>
@@ -186,7 +189,7 @@ const save=()=>{try{localStorage.setItem("oxs3",JSON.stringify({nonCin:st.nonCin
 function live(){return DATA.shows.filter(s=>V[s[3]]&&(s[0]>today||(s[0]===today&&s[1]>=nowHM))&&(st.nonCin||V[s[3]].cin))}
 function timesByVenue(rows){const by={};rows.forEach(s=>(by[s[3]]=by[s[3]]||[]).push(s));return Object.entries(by)}
 const tchip=s=>`<a class="t" href="${urlFor(s)}" target="_blank" rel="noopener">${s[1]}</a>`;
-const vline=(v,rows)=>`<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a>${rows.map(tchip).join("")}</div>`;
+const vline=(v,rows)=>`<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a><div class="times">${rows.map(tchip).join("")}</div></div>`;
 const timesBlock=ss=>{const days={};ss.forEach(s=>(days[s[0]]=days[s[0]]||[]).push(s));return Object.entries(days).map(([d,r])=>`<div class="drow"><div class="dday">${dayShort(d)}</div><div class="slots">${timesByVenue(r).map(([v,rr])=>vline(v,rr)).join("")}</div></div>`).join("")};
 
 function renderFilms(){
