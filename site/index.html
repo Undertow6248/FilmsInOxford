@@ -196,7 +196,8 @@ function renderFilms(){
   CATS.forEach(([k,h,sub])=>{
     const films=Object.entries(by).filter(([f])=>{const c=FM(f).cat;return k==="E"?(c==="E"||c==="K"):c===k});
     if(!films.length)return;
-    films.sort((a,b)=>k==="W"?b[1].length-a[1].length:(a[1][0][0]+a[1][0][1]).localeCompare(b[1][0][0]+b[1][0][1]));
+    // Most screenings first in every section; ties go to whichever is showing soonest.
+    films.sort((a,b)=>b[1].length-a[1].length||(a[1][0][0]+a[1][0][1]).localeCompare(b[1][0][0]+b[1][0][1]));
     html+=`<div class="group"><h2>${h}${sub?`, ${sub}`:""}<span class="muted">${films.length}</span></h2>`;
     if(st.mode==="posters"){
       html+=`<div class="pgrid">${films.map(([f])=>`<button class="pcard" data-film="${esc(f)}">${posterImg(f)}<span class="pt">${esc(f)}${yr(f)}</span></button>`).join("")}</div>`;
