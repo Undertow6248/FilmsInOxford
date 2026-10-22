@@ -125,7 +125,6 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .55)}
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" data-view="films" aria-selected="true">Films</button>
       <button class="tab" role="tab" data-view="dates" aria-selected="false">By date</button>
-      <button class="tab" role="tab" data-view="venues" aria-selected="false">By venue</button>
     </div>
     <label class="toggle" for="nonCinema"><input type="checkbox" id="nonCinema" checked> Include screenings outside cinemas (colleges, pubs, libraries)</label>
   </div>
@@ -133,7 +132,6 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .55)}
   <section id="v-films-wrap"><div class="modebar"><button class="chip" data-mode="list">List</button><button class="chip" data-mode="posters">Posters</button></div><div id="v-films"></div></section>
   <dialog id="sheet"><button class="close" aria-label="Close" data-close="1">✕</button><div id="sheetBody"></div></dialog>
   <section id="v-dates" hidden><div class="bar" id="dayBar"></div><div id="dayList"></div></section>
-  <section id="v-venues" hidden><div class="vgrid" id="vgrid"></div><div id="venueList"></div></section>
 
   <div class="foot">
     <p id="updated"></p>
@@ -181,9 +179,9 @@ const col=k=>`--c:var(${V[k].c})`;
 const urlFor=(v,s)=>(s&&s[5])||V[v].u;
 // films[f] = [category, note, tmdbId, year, genres[], countries[], posterPath]
 const FM=f=>{const m=DATA.films[f]||["L","","","",[],[],""];return {cat:m[0],note:m[1],id:m[2],yr:m[3],g:m[4]||[],c:m[5]||[],p:m[6]}};
-const yr=f=>{const y=FM(f).yr;return y?`<span class="yr">${y}</span>`:""};
+const yr=f=>{const m=FM(f);return m.yr&&m.cat!=="W"&&m.cat!=="L"?`<span class="yr">${m.yr}</span>`:""};
 const noteTxt=f=>{const n=FM(f).note;return n?` <span class="note">· ${esc(n)}</span>`:""};
-const gcTxt=f=>{const m=FM(f);return [m.g.join(", "),m.c.join(", ")].filter(Boolean).join(" · ")};
+const gcTxt=f=>{const m=FM(f);return [m.g.join(", "),m.c[0]||""].filter(Boolean).join(" · ")};
 const lbLink=f=>{const id=FM(f).id;const u=id?`https://letterboxd.com/tmdb/${id}/`:`https://letterboxd.com/search/films/${encodeURIComponent(f)}/`;return FM(f).cat==="E"&&!id?"":`<a class="lb" href="${u}" target="_blank" rel="noopener" aria-label="${esc(f)} on Letterboxd"><span class="dots"><i></i><i></i><i></i></span>Letterboxd</a>`};
 const posterImg=(f,cls="poster")=>{const p=FM(f).p;return p?`<img class="${cls}" src="https://image.tmdb.org/t/p/w342${p}" alt="Poster for ${esc(f)}" loading="lazy">`:`<div class="ph">${esc(f)}</div>`};
 const titleLine=f=>`<div class="ft">${esc(f)}${yr(f)}${noteTxt(f)}</div>`;
@@ -209,7 +207,7 @@ function renderFilms(){
     const sub=k==="W"?"Wide release":k==="L"?"Limited release":"";
     html+=`<div class="group"><h2>${h}${sub?` <small>${sub}</small>`:""}<small>${films.length} film${films.length>1?"s":""}</small></h2><p>${desc}</p>`;
     if(st.mode==="posters"){
-      html+=`<div class="pgrid">${films.map(([f,ss])=>{const vs=[...new Set(ss.map(s=>V[s[3]].n))];return `<button class="pcard" data-film="${esc(f)}">${posterImg(f)}<span class="pt">${esc(f)}${yr(f)}</span><span class="pv">${vs.join(", ")}</span></button>`}).join("")}</div>`;
+      html+=`<div class="pgrid">${films.map(([f,ss])=>{return `<button class="pcard" data-film="${esc(f)}">${posterImg(f)}<span class="pt">${esc(f)}${yr(f)}</span></button>`}).join("")}</div>`;
     }else films.forEach(([f,ss])=>{
       const vs={};ss.forEach(s=>vs[s[3]]=(vs[s[3]]||0)+1);
       const gc=gcTxt(f);
@@ -238,23 +236,12 @@ function renderDates(){
   $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}<small>${dateLbl(st.day)} · ${r.length} screening${r.length===1?"":"s"} · ${films.length} film${films.length===1?"":"s"}</small></h2>${films.map(([f,ss])=>{return `<div class="dfilm">${titleLine(f)}${timesByVenue(ss).map(([v,rr])=>vline(v,rr,f)).join("")}</div>`}).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
 }
 
-function renderVenues(){
-  const rows=live();
-  const ks=Object.keys(V).filter(k=>st.nonCin||V[k].cin);
-  if(!ks.includes(st.venue))st.venue=ks[0];
-  $("#vgrid").innerHTML=ks.map(k=>{const n=rows.filter(s=>s[3]===k).length;return `<button class="vcard" style="${col(k)};border-left-color:var(${V[k].c})" data-venue="${k}" aria-pressed="${k===st.venue}"><h3>${V[k].f}</h3><p>${V[k].w}</p><p>${n?n+" screening"+(n>1?"s":"")+" listed":"Nothing listed right now"}</p></button>`}).join("");
-  const r=rows.filter(s=>s[3]===st.venue);
-  const days={};r.forEach(s=>(days[s[0]]=days[s[0]]||[]).push(s));
-  const v=V[st.venue];
-  $("#venueList").innerHTML=`<div class="group"><h2>${v.f}</h2><p><a href="${v.u}" target="_blank" rel="noopener">Official listings and booking</a></p>${Object.entries(days).map(([d,rr])=>{const by={};rr.forEach(s=>(by[s[2]]=by[s[2]]||[]).push(s));return `<div class="day"><h2>${dayName(d)}<small>${dateLbl(d)}</small></h2>${Object.entries(by).sort((a,b)=>a[1][0][1].localeCompare(b[1][0][1])).map(([f,ss])=>`<div class="dfilm">${titleLine(f)}<div class="vline">${ss.map(tchip).join("")}</div></div>`).join("")}</div>`}).join("")||`<p class="empty">Nothing listed at this venue right now.</p>`}</div>`;
-}
-
 function render(){
   const n=live().filter(s=>s[0]<=horizon);
   $("#sub").textContent=`${new Set(n.map(s=>s[2])).size} films and ${n.length} screenings in the next two weeks, across cinemas${st.nonCin?", colleges, pubs and libraries":""}.`;
-  ({films:renderFilms,dates:renderDates,venues:renderVenues})[st.view]();
+  ({films:renderFilms,dates:renderDates})[st.view]();
 }
-function show(view){st.view=view;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));$("#v-films-wrap").hidden=view!=="films";$("#v-dates").hidden=view!=="dates";$("#v-venues").hidden=view!=="venues";render();window.scrollTo({top:0})}
+function show(view){st.view=view;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));$("#v-films-wrap").hidden=view!=="films";$("#v-dates").hidden=view!=="dates";render();window.scrollTo({top:0})}
 document.addEventListener("click",e=>{
   if(e.target===$("#sheet")){$("#sheet").close();return}
   const b=e.target.closest("button");if(!b)return;
@@ -263,7 +250,6 @@ document.addEventListener("click",e=>{
   else if(b.dataset.film)openSheet(b.dataset.film);
   else if(b.dataset.view)show(b.dataset.view);
   else if(b.dataset.day){st.day=b.dataset.day;renderDates()}
-  else if(b.dataset.venue){st.venue=b.dataset.venue;renderVenues();$("#venueList").scrollIntoView({behavior:"smooth",block:"start"})}
 });
 $("#nonCinema").checked=st.nonCin;
 $("#nonCinema").addEventListener("change",e=>{st.nonCin=e.target.checked;save();render()});
@@ -273,7 +259,7 @@ fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
   const up=new Date(d.updated);
   const bad=Object.entries(d.status||{}).filter(([k,v])=>!v.ok).map(([k])=>V[k]?V[k].n:k);
   $("#updated").textContent=`Last checked ${up.toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}.`+(bad.length?` ${bad.join(", ")} couldn't be reached last time, so ${bad.length>1?"their":"its"} times may be out of date.`:"");
-  const h=location.hash.slice(1);if(["films","dates","venues"].includes(h))show(h);else render();
+  const h=location.hash.slice(1);if(["films","dates"].includes(h))show(h);else render();
 }).catch(()=>{$("#v-films").innerHTML='<p class="empty">Couldn\'t load the listings. Try refreshing.</p>'});
 </script>
 </body>
