@@ -10,7 +10,8 @@
   "countries": [
    "New Zealand"
   ],
-  "poster": "/fhYkJ7wzvcpmwItfVFfi8W3cnYc.jpg"
+  "poster": "/fhYkJ7wzvcpmwItfVFfi8W3cnYc.jpg",
+  "lang": "English"
  },
  "We're Going on a Bear Hunt + The Tiger Who Came To Tea": {
   "id": 431591,
@@ -39,7 +40,8 @@
    "UK",
    "France"
   ],
-  "poster": "/mMOptSPBVGUA9GHgnpsC35GzZ7e.jpg"
+  "poster": "/mMOptSPBVGUA9GHgnpsC35GzZ7e.jpg",
+  "lang": "English"
  },
  "Forgotten Island#2026": {
   "id": 1465063,
@@ -53,7 +55,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/myd1K3gefdNAWFsGNRDdMeiK9Qg.jpg"
+  "poster": "/myd1K3gefdNAWFsGNRDdMeiK9Qg.jpg",
+  "lang": "English"
  },
  "Verity#2026": {
   "id": 1283515,
@@ -66,7 +69,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/zPHfsaiMZT1HNz1ZS55iyLKZkFG.jpg"
+  "poster": "/zPHfsaiMZT1HNz1ZS55iyLKZkFG.jpg",
+  "lang": "English"
  },
  "Heart of the Beast#2026": {
   "id": 1263337,
@@ -79,7 +83,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/1ApfSA8JTqeha3GTFEY8syV4auq.jpg"
+  "poster": "/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
+  "lang": "English"
  },
  "Pressure#2026": {
   "id": 1318413,
@@ -94,7 +99,8 @@
    "UK",
    "France"
   ],
-  "poster": "/gFjEggtrejCN79r6SXRjM269OtG.jpg"
+  "poster": "/gFjEggtrejCN79r6SXRjM269OtG.jpg",
+  "lang": "English"
  },
  "Other Mommy#2026": {
   "id": 1400837,
@@ -106,7 +112,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg"
+  "poster": "/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
+  "lang": "English"
  },
  "Whalefall#2026": {
   "id": 1255833,
@@ -118,7 +125,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/vjTYUTgh9nO88i6HZ4YPRhiFL05.jpg"
+  "poster": "/vjTYUTgh9nO88i6HZ4YPRhiFL05.jpg",
+  "lang": "English"
  },
  "Sense and Sensibility#2026": {
   "id": 1503762,
@@ -132,7 +140,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/czsyPHosFNbh4PPqXfqWu1aBXnA.jpg"
+  "poster": "/czsyPHosFNbh4PPqXfqWu1aBXnA.jpg",
+  "lang": "English"
  },
  "The Uprising#2026": {
   "id": 977942,
@@ -148,7 +157,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/7TUl15TOsIvndKlgMWTtLgtEzZP.jpg"
+  "poster": "/7TUl15TOsIvndKlgMWTtLgtEzZP.jpg",
+  "lang": "English"
  },
  "Tad and the Magic Lamp#2026": {
   "id": 1187326,
@@ -162,7 +172,8 @@
   "countries": [
    "Spain"
   ],
-  "poster": "/AdDxZgNmRYgDuweY8899buyVqlr.jpg"
+  "poster": "/AdDxZgNmRYgDuweY8899buyVqlr.jpg",
+  "lang": "Spanish"
  },
  "Digger#2026": {
   "id": 1248832,
@@ -175,7 +186,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg"
+  "poster": "/1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg",
+  "lang": "English"
  },
  "The Social Reckoning#2026": {
   "id": 1281331,
@@ -188,7 +200,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/7jK6NuxVg1XuEV7UdNa6KO03IgZ.jpg"
+  "poster": "/7jK6NuxVg1XuEV7UdNa6KO03IgZ.jpg",
+  "lang": "English"
  },
  "Resident Evil#2026": {
   "id": 1423191,
@@ -204,7 +217,8 @@
    "Germany",
    "France"
   ],
-  "poster": "/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg"
+  "poster": "/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+  "lang": "English"
  },
  "Spider-Man: Brand New Day#2026": {
   "id": 969681,
@@ -218,7 +232,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg"
+  "poster": "/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+  "lang": "English"
  },
  "De Gaulle: Liberté#2026": {
   "id": 1165369,
@@ -233,7 +248,8 @@
    "Belgium",
    "USA"
   ],
-  "poster": "/tcypmwT43pt5jWiUyy2BomyPD1Y.jpg"
+  "poster": "/tcypmwT43pt5jWiUyy2BomyPD1Y.jpg",
+  "lang": "French"
  },
  "The Others#2001": {
   "id": 1933,
@@ -249,7 +265,8 @@
    "USA",
    "France"
   ],
-  "poster": "/p8g1vlTvpM6nr2hMMiZ1fUlKF0D.jpg"
+  "poster": "/p8g1vlTvpM6nr2hMMiZ1fUlKF0D.jpg",
+  "lang": "English"
  },
  "Jailer 2#2026": {
   "id": 1234139,
@@ -262,7 +279,8 @@
   "countries": [
    "India"
   ],
-  "poster": "/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg"
+  "poster": "/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
+  "lang": "Tamil"
  },
  "Monster Mia#2026": {
   "id": 1572116,
@@ -278,7 +296,8 @@
    "Germany",
    "Spain"
   ],
-  "poster": "/yQAczp5MMJs9neodhcm3spv9xtv.jpg"
+  "poster": "/yQAczp5MMJs9neodhcm3spv9xtv.jpg",
+  "lang": "German"
  },
  "Fatherland#2026": {
   "id": 1437696,
@@ -293,7 +312,8 @@
    "Germany",
    "France"
   ],
-  "poster": "/oNejN1l69nBF8LdQwy5FkAQZT44.jpg"
+  "poster": "/oNejN1l69nBF8LdQwy5FkAQZT44.jpg",
+  "lang": "Polish"
  },
  "Ghosts: The Possession of Button House#2026": {
   "id": 1643567,
@@ -306,7 +326,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/vdRbC8masrQDyhFHLOGECEMllPV.jpg"
+  "poster": "/vdRbC8masrQDyhFHLOGECEMllPV.jpg",
+  "lang": "English"
  },
  "Klara and the Sun#2026": {
   "id": 858035,
@@ -321,7 +342,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/xqovj2p6HRsgHxN81qYAYF4StgM.jpg"
+  "poster": "/xqovj2p6HRsgHxN81qYAYF4StgM.jpg",
+  "lang": "English"
  },
  "Wildwood#2026": {
   "id": 791523,
@@ -335,7 +357,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/snFM00mpNAfUzUtkdEW0uDEvXA0.jpg"
+  "poster": "/snFM00mpNAfUzUtkdEW0uDEvXA0.jpg",
+  "lang": "English"
  },
  "Tenzing#2026": {
   "id": 1288069,
@@ -350,7 +373,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/a3G0yDUDoEJwzmHeIIrZmUCx8bW.jpg"
+  "poster": "/a3G0yDUDoEJwzmHeIIrZmUCx8bW.jpg",
+  "lang": "English"
  },
  "Clayface#2026": {
   "id": 1400940,
@@ -364,7 +388,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg"
+  "poster": "/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg",
+  "lang": "English"
  },
  "The Lost Children of Tuam#2026": {
   "id": 1522690,
@@ -379,7 +404,8 @@
    "Ireland",
    "France"
   ],
-  "poster": "/fP4wT6s88p2rQNaO7GQO1kJ9ySR.jpg"
+  "poster": "/fP4wT6s88p2rQNaO7GQO1kJ9ySR.jpg",
+  "lang": "English"
  },
  "NAZA#2026": {
   "id": 1755291,
@@ -393,7 +419,8 @@
    "USA",
    "UK"
   ],
-  "poster": "/b4Gyj8VRoJAeU13jfKPuOTMr5GL.jpg"
+  "poster": "/b4Gyj8VRoJAeU13jfKPuOTMr5GL.jpg",
+  "lang": "English"
  },
  "Ali G: Who Iz I?#2026": {
   "id": 1727734,
@@ -405,7 +432,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/uTyVxPeWX8Ai30IQoyDDQONNcq.jpg"
+  "poster": "/uTyVxPeWX8Ai30IQoyDDQONNcq.jpg",
+  "lang": "English"
  },
  "Possession#1981": {
   "id": 21484,
@@ -418,7 +446,8 @@
    "France",
    "Germany"
   ],
-  "poster": "/A9bnRn05riOKWftvQlLKa2gl51n.jpg"
+  "poster": "/A9bnRn05riOKWftvQlLKa2gl51n.jpg",
+  "lang": "English"
  },
  "PAW Patrol: The Dino Movie#2026": {
   "id": 1185806,
@@ -433,7 +462,8 @@
    "Canada",
    "USA"
   ],
-  "poster": "/cxXSF4aY5N2cOGwaga5OnpPFHzk.jpg"
+  "poster": "/cxXSF4aY5N2cOGwaga5OnpPFHzk.jpg",
+  "lang": "English"
  },
  "The Super Mario Galaxy Movie#2026": {
   "id": 1226863,
@@ -448,7 +478,8 @@
    "Japan",
    "USA"
   ],
-  "poster": "/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg"
+  "poster": "/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
+  "lang": "English"
  },
  "Hope#2026": {
   "id": 1058424,
@@ -462,7 +493,8 @@
   "countries": [
    "South Korea"
   ],
-  "poster": "/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+  "poster": "/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg",
+  "lang": "Korean"
  },
  "Anyone Can Play Guitar#2009": {
   "id": 87848,
@@ -472,7 +504,8 @@
    "Documentary"
   ],
   "countries": [],
-  "poster": ""
+  "poster": "",
+  "lang": "English"
  },
  "28 Days Later#2002": {
   "id": 170,
@@ -486,7 +519,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/sQckQRt17VaWbo39GIu0TMOiszq.jpg"
+  "poster": "/sQckQRt17VaWbo39GIu0TMOiszq.jpg",
+  "lang": "English"
  },
  "Extra Geography#2026": {
   "id": 1528830,
@@ -498,7 +532,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/yhHRpLhtaFXGYMsE5LuaRvZYs77.jpg"
+  "poster": "/yhHRpLhtaFXGYMsE5LuaRvZYs77.jpg",
+  "lang": "English"
  },
  "Sorry To Bother You": {
   "id": 424781,
@@ -526,7 +561,8 @@
   "countries": [
    "Japan"
   ],
-  "poster": "/5konZnIbcAxZjP616Cz5o9bKEfW.jpg"
+  "poster": "/5konZnIbcAxZjP616Cz5o9bKEfW.jpg",
+  "lang": "Japanese"
  },
  "Wicker#2026": {
   "id": 1195803,
@@ -541,7 +577,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/6FcBZOKvyrLCKGCyBG0ySCR4okt.jpg"
+  "poster": "/6FcBZOKvyrLCKGCyBG0ySCR4okt.jpg",
+  "lang": "English"
  },
  "Nightborn#2026": {
   "id": 964849,
@@ -555,7 +592,8 @@
    "Lithuania",
    "France"
   ],
-  "poster": "/e9ALgOANOJbcFpw84MbafK3xvD2.jpg"
+  "poster": "/cF1g9qtuRyATaZ75O6zRop2zmfZ.jpg",
+  "lang": "Finnish"
  },
  "Primetime#2026": {
   "id": 1375441,
@@ -568,7 +606,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/lmrulvLbmaejTix1YaMxo1oGhH1.jpg"
+  "poster": "/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+  "lang": "English"
  },
  "Radiohead X Nosferatu: A Symphony of Horror#1922": {
   "id": 1489665,
@@ -581,7 +620,8 @@
    "Germany",
    "USA"
   ],
-  "poster": "/w981zbjFihnpLMWmWrE8kokJe4z.jpg"
+  "poster": "/w981zbjFihnpLMWmWrE8kokJe4z.jpg",
+  "lang": "English"
  },
  "Monsters, Inc.#2001": {
   "id": 585,
@@ -595,7 +635,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/wFSpyMsp7H0ttERbxY7Trlv8xry.jpg"
+  "poster": "/wFSpyMsp7H0ttERbxY7Trlv8xry.jpg",
+  "lang": "English"
  },
  "The Devils#1971": {
   "id": 31767,
@@ -609,7 +650,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/y1k7eiOFc6fzm8XeTa1kNGx6JIs.jpg"
+  "poster": "/y1k7eiOFc6fzm8XeTa1kNGx6JIs.jpg",
+  "lang": "English"
  },
  "Beetlejuice#1988": {
   "id": 4011,
@@ -622,7 +664,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg"
+  "poster": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg",
+  "lang": "English"
  },
  "They Live#1988": {
   "id": 8337,
@@ -636,7 +679,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/ngnybFTuopfbfmmEeX9jjBQQmF6.jpg"
+  "poster": "/ngnybFTuopfbfmmEeX9jjBQQmF6.jpg",
+  "lang": "English"
  },
  "Bram Stoker's Dracula#1992": {
   "id": 6114,
@@ -649,7 +693,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/wpRrdm6g8zWtJnzVqME5QwSKkn7.jpg"
+  "poster": "/wpRrdm6g8zWtJnzVqME5QwSKkn7.jpg",
+  "lang": "English"
  },
  "Minions & Monsters#2026": {
   "id": 1315772,
@@ -663,7 +708,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/4LwvU9SZc8QQzW1X1FAPhNbXnEU.jpg"
+  "poster": "/4LwvU9SZc8QQzW1X1FAPhNbXnEU.jpg",
+  "lang": "English"
  },
  "Case 137#2025": {
   "id": 1294698,
@@ -676,7 +722,8 @@
   "countries": [
    "France"
   ],
-  "poster": "/4QL4LcsYX8mdNktst0CnyHQDRLg.jpg"
+  "poster": "/4QL4LcsYX8mdNktst0CnyHQDRLg.jpg",
+  "lang": "French"
  },
  "The Bride of Frankenstein#1935": {
   "id": 229,
@@ -689,7 +736,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/5241zUwe7rC17MNc2QpCBKKdp1N.jpg"
+  "poster": "/5241zUwe7rC17MNc2QpCBKKdp1N.jpg",
+  "lang": "English"
  },
  "Carrie#1976": {
   "id": 7340,
@@ -702,7 +750,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/8tT1rqlsTguyfUBMrbHR9cv1rxM.jpg"
+  "poster": "/8tT1rqlsTguyfUBMrbHR9cv1rxM.jpg",
+  "lang": "English"
  },
  "Us": {
   "id": 458723,
@@ -729,7 +778,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/yN1kuupnPTLUprgfvC5WapgrxG4.jpg"
+  "poster": "/yN1kuupnPTLUprgfvC5WapgrxG4.jpg",
+  "lang": "English"
  },
  "Wild Horse Nine#2026": {
   "id": 891621,
@@ -744,7 +794,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/dNJFRtVg3xLQ7dbNIQ55cmmIniD.jpg"
+  "poster": "/dNJFRtVg3xLQ7dbNIQ55cmmIniD.jpg",
+  "lang": "English"
  },
  "28 Years Later#2025": {
   "id": 1100988,
@@ -759,7 +810,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/n5FygjEppOvac6yEaowi26nTyw3.jpg"
+  "poster": "/n5FygjEppOvac6yEaowi26nTyw3.jpg",
+  "lang": "English"
  },
  "The Shining#1980": {
   "id": 694,
@@ -773,7 +825,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg"
+  "poster": "/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg",
+  "lang": "English"
  },
  "Revenge#2017": {
   "id": 467938,
@@ -788,7 +841,8 @@
    "Belgium",
    "France"
   ],
-  "poster": "/dWXjUGwpwGWWevcnpPuf5QGpKMw.jpg"
+  "poster": "/dWXjUGwpwGWWevcnpPuf5QGpKMw.jpg",
+  "lang": "French"
  },
  "Ninotchka#1939": {
   "id": 1859,
@@ -801,7 +855,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/v4MkgNqZyodYwBDNbZ64MF9tVEL.jpg"
+  "poster": "/v4MkgNqZyodYwBDNbZ64MF9tVEL.jpg",
+  "lang": "English"
  },
  "La Bola Negra#2026": {
   "id": 1422041,
@@ -815,7 +870,8 @@
    "Spain",
    "France"
   ],
-  "poster": "/jT5SR5qc9KvVg7HUEmjMWEUYMce.jpg"
+  "poster": "/jT5SR5qc9KvVg7HUEmjMWEUYMce.jpg",
+  "lang": "Spanish"
  },
  "The Scarecrows' Wedding": {
   "id": 1488459,
@@ -829,7 +885,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/dlLlAINgInFzHC10JV44oOSw5gG.jpg"
+  "poster": "/dlLlAINgInFzHC10JV44oOSw5gG.jpg",
+  "lang": "English"
  },
  "We the Hated#2026": {
   "id": 1684408,
@@ -841,7 +898,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/sPLmoztG18o7pH0VrGS7RrdLmSK.jpg"
+  "poster": "/sPLmoztG18o7pH0VrGS7RrdLmSK.jpg",
+  "lang": "English"
  },
  "By Design#2025": {
   "id": 1492666,
@@ -851,7 +909,8 @@
    "Documentary"
   ],
   "countries": [],
-  "poster": "/coQu9VzxITnlRsOy0zn4oXT2Upy.jpg"
+  "poster": "/coQu9VzxITnlRsOy0zn4oXT2Upy.jpg",
+  "lang": "English"
  },
  "The Rocky Horror Picture Show#1975": {
   "id": 36685,
@@ -867,7 +926,8 @@
    "USA",
    "Netherlands Antilles"
   ],
-  "poster": "/3pyE6ZqDbuJi7zrNzzQzcKTWdmN.jpg"
+  "poster": "/3pyE6ZqDbuJi7zrNzzQzcKTWdmN.jpg",
+  "lang": "English"
  },
  "Coyote vs. Acme": {
   "id": 1204680,
@@ -881,7 +941,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg"
+  "poster": "/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg",
+  "lang": "English"
  },
  "The Big Heat#1953": {
   "id": 14580,
@@ -894,7 +955,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/ezt6fb4JbghGKmaMzzuMtxpz0Kb.jpg"
+  "poster": "/ezt6fb4JbghGKmaMzzuMtxpz0Kb.jpg",
+  "lang": "English"
  },
  "The Lego Batman Movie#2017": {
   "id": 324849,
@@ -909,7 +971,8 @@
    "USA",
    "Australia"
   ],
-  "poster": "/e1TliRWOdXQ73pRunbpFiGst6Kd.jpg"
+  "poster": "/e1TliRWOdXQ73pRunbpFiGst6Kd.jpg",
+  "lang": "English"
  },
  "28 Years Later: The Bone Temple": {
   "id": 1272837,
@@ -924,7 +987,8 @@
    "UK",
    "USA"
   ],
-  "poster": "/kK1BGkG3KAvWB0WMV1DfOx9yTMZ.jpg"
+  "poster": "/kK1BGkG3KAvWB0WMV1DfOx9yTMZ.jpg",
+  "lang": "English"
  },
  "Foragers#2022": {
   "id": 951184,
@@ -936,7 +1000,8 @@
   "countries": [
    "Palestinian Territory"
   ],
-  "poster": "/1Yz87soyyHZlYDIUksgFobHnUFE.jpg"
+  "poster": "/1Yz87soyyHZlYDIUksgFobHnUFE.jpg",
+  "lang": "Arabic"
  },
  "Network#1976": {
   "id": 10774,
@@ -948,7 +1013,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg"
+  "poster": "/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg",
+  "lang": "English"
  },
  "Dead Souls#2025": {
   "id": 1495629,
@@ -962,7 +1028,8 @@
    "Spain",
    "USA"
   ],
-  "poster": "/j6LwYijBpK23UQzRqFMrlLPeFac.jpg"
+  "poster": "/j6LwYijBpK23UQzRqFMrlLPeFac.jpg",
+  "lang": "English"
  },
  "Burkitt#2024": {
   "id": 1371960,
@@ -976,7 +1043,8 @@
    "Ireland",
    "UK"
   ],
-  "poster": "/hxF784vgC6L235srj06oA0xj1di.jpg"
+  "poster": "/hxF784vgC6L235srj06oA0xj1di.jpg",
+  "lang": "English"
  },
  "PlayTime#1967": {
   "id": 10227,
@@ -989,7 +1057,8 @@
    "France",
    "Italy"
   ],
-  "poster": "/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg"
+  "poster": "/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg",
+  "lang": "French"
  },
  "Fjord": {
   "id": 1401459,
@@ -1003,7 +1072,8 @@
    "Norway",
    "France"
   ],
-  "poster": "/rhKlzjAJCEKUjxEk1qwr4bgbXlG.jpg"
+  "poster": "/rhKlzjAJCEKUjxEk1qwr4bgbXlG.jpg",
+  "lang": "Romanian"
  },
  "Sing Sing#2023": {
   "id": 930779,
@@ -1017,7 +1087,8 @@
   "countries": [
    "Mexico"
   ],
-  "poster": "/oZp8M5hY8aXzsbrGlVGC3qg82w3.jpg"
+  "poster": "/oZp8M5hY8aXzsbrGlVGC3qg82w3.jpg",
+  "lang": "Spanish"
  },
  "The Third Man#1949": {
   "id": 1092,
@@ -1030,7 +1101,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/vqnFHTx1phgTAsLfxZoejSbMVHA.jpg"
+  "poster": "/vqnFHTx1phgTAsLfxZoejSbMVHA.jpg",
+  "lang": "English"
  },
  "Tampopo#1985": {
   "id": 11830,
@@ -1042,7 +1114,8 @@
   "countries": [
    "Japan"
   ],
-  "poster": "/ArYdSuX3zY9fMsE4LqmBl7xJq5R.jpg"
+  "poster": "/ArYdSuX3zY9fMsE4LqmBl7xJq5R.jpg",
+  "lang": "Japanese"
  },
  "Becoming American: Philadelphia's Story#2026": {
   "id": 1723385,
@@ -1052,7 +1125,8 @@
    "Documentary"
   ],
   "countries": [],
-  "poster": "/kNqC2xkr3UGn8x7c6eiUNuyZ7HL.jpg"
+  "poster": "/kNqC2xkr3UGn8x7c6eiUNuyZ7HL.jpg",
+  "lang": "English"
  },
  "Drain Flies#2026": {
   "id": 1743005,
@@ -1066,7 +1140,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/12mcPZ5ChvfkJvhGG77Pi62uocy.jpg"
+  "poster": "/12mcPZ5ChvfkJvhGG77Pi62uocy.jpg",
+  "lang": "English"
  },
  "The League of Gentlemen#1960": {
   "id": 46724,
@@ -1079,7 +1154,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/6lJvpL5Z3qZxegmJHUpjGsWROtW.jpg"
+  "poster": "/6lJvpL5Z3qZxegmJHUpjGsWROtW.jpg",
+  "lang": "English"
  },
  "One Flew Over the Cuckoo's Nest#1975": {
   "id": 510,
@@ -1091,7 +1167,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/kjWsMh72V6d8KRLV4EOoSJLT1H7.jpg"
+  "poster": "/kjWsMh72V6d8KRLV4EOoSJLT1H7.jpg",
+  "lang": "English"
  },
  "Who's Afraid Of Virginia Woolf": {
   "id": 396,
@@ -1117,7 +1194,8 @@
    "Japan",
    "USA"
   ],
-  "poster": "/ccxdepKqORLwccbzvO4eAGkN0IC.jpg"
+  "poster": "/ccxdepKqORLwccbzvO4eAGkN0IC.jpg",
+  "lang": "English"
  },
  "Sorry to Bother You#2018": {
   "id": 424781,
@@ -1131,7 +1209,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/peTl1V04E9ppvhgvNmSX0r2ALqO.jpg"
+  "poster": "/peTl1V04E9ppvhgvNmSX0r2ALqO.jpg",
+  "lang": "English"
  },
  "Who's Afraid of Virginia Woolf?#1966": {
   "id": 396,
@@ -1143,7 +1222,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg"
+  "poster": "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg",
+  "lang": "English"
  },
  "Hocus Pocus#1993": {
   "id": 10439,
@@ -1157,7 +1237,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/by4D4Q9NlUjFSEUA1yrxq6ksXmk.jpg"
+  "poster": "/by4D4Q9NlUjFSEUA1yrxq6ksXmk.jpg",
+  "lang": "English"
  },
  "Pan's Labyrinth#2006": {
   "id": 1417,
@@ -1173,7 +1254,8 @@
    "Spain",
    "USA"
   ],
-  "poster": "/khBQ6nN5FLfg9XgPXIZDkABJjqo.jpg"
+  "poster": "/khBQ6nN5FLfg9XgPXIZDkABJjqo.jpg",
+  "lang": "Spanish"
  },
  "Scream#1996": {
   "id": 4232,
@@ -1187,7 +1269,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/lr9ZIrmuwVmZhpZuTCW8D9g0ZJe.jpg"
+  "poster": "/lr9ZIrmuwVmZhpZuTCW8D9g0ZJe.jpg",
+  "lang": "English"
  },
  "COUP 53": {
   "id": 626979,
@@ -1200,7 +1283,8 @@
   "countries": [
    "UK"
   ],
-  "poster": "/Ar7iq23QZNh0ZX57uPc8e2IasvD.jpg"
+  "poster": "/Ar7iq23QZNh0ZX57uPc8e2IasvD.jpg",
+  "lang": "English"
  },
  "Godzilla Minus Zero": {
   "id": 1381071,
@@ -1214,7 +1298,8 @@
   "countries": [
    "Japan"
   ],
-  "poster": "/hSmIJluOJmTWvJs4d7kHRxjc8s8.jpg"
+  "poster": "/hSmIJluOJmTWvJs4d7kHRxjc8s8.jpg",
+  "lang": "Japanese"
  },
  "Ramayana: Rise Of A Legend": {
   "id": 656908,
@@ -1229,7 +1314,8 @@
    "India",
    "UK"
   ],
-  "poster": "/hX94xNPYwazKOVGGqL1GiwMSNuY.jpg"
+  "poster": "/hX94xNPYwazKOVGGqL1GiwMSNuY.jpg",
+  "lang": "Hindi"
  },
  "George Michael: The Faith Tour": {
   "id": 1649403,
@@ -1242,6 +1328,7 @@
   "countries": [
    "UK"
   ],
-  "poster": "/LXqHnaJ4ffkcx5YCuJN1noxkhr.jpg"
+  "poster": "/LXqHnaJ4ffkcx5YCuJN1noxkhr.jpg",
+  "lang": "English"
  }
 }
