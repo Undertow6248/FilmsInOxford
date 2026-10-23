@@ -138,6 +138,14 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .5)}
 </div>
 
 <script>
+// Each published version of this page is stamped with a build id. If the browser shows an older
+// cached copy, it sees a newer id in version.json and reloads itself, so nobody needs to clear anything.
+const BUILD="__BUILD__";
+fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(j=>{
+  if(BUILD==="__BUILD__"||!j.v||j.v===BUILD)return;
+  const u=new URL(location.href);if(u.searchParams.get("v")===j.v)return; // already tried: don't loop
+  u.searchParams.set("v",j.v);location.replace(u.toString());
+}).catch(()=>{});
 let DATA = {shows:[],films:{}};
 const V = {
   vue:{n:"Vue",f:"Vue Oxford",c:"--vue",cin:1,u:"https://www.myvue.com/cinema/oxford/whats-on",w:"Ozone Leisure Park, Grenoble Road"},
@@ -260,7 +268,7 @@ document.addEventListener("click",e=>{
 });
 $("#nonCinema").checked=st.nonCin;
 $("#nonCinema").addEventListener("change",e=>{st.nonCin=e.target.checked;save();render()});
-fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
+fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
   DATA=d;
   Object.entries(d.venues||{}).forEach(([k,v])=>{if(!V[k])V[k]={c:"--oth",...v}});
   const up=new Date(d.updated);

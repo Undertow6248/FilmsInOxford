@@ -59,6 +59,13 @@ jobs:
             sleep $((i * 5))
           done
 
+      # Stamp the page with a build id (a hash of the page itself), so browsers holding an old copy reload.
+      - name: Stamp page version
+        run: |
+          v=$(sha1sum site/index.html | cut -c1-10)
+          sed -i "0,/__BUILD__/s//$v/" site/index.html   # first occurrence only (the BUILD constant)
+          echo "{\"v\":\"$v\"}" > site/version.json
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
