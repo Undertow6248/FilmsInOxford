@@ -1468,5 +1468,47 @@
   ],
   "poster": "/Ar7iq23QZNh0ZX57uPc8e2IasvD.jpg",
   "lang": "English"
+ },
+ "exact:iranian documentary coup 53 attended": {
+  "title": "",
+  "at": 1792745242479
+ },
+ "exact:sing sing": {
+  "title": "Sing Sing",
+  "at": 1792745242481
+ },
+ "exact:of times there were before": {
+  "title": "Of Times There Were Before",
+  "at": 1792745242480
+ },
+ "exact:the people s emergency briefing": {
+  "title": "",
+  "at": 1792745242481
+ },
+ "Of Times There Were Before": {
+  "id": 1792337,
+  "year": "2026",
+  "release": "2026-11-03",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [],
+  "poster": "/2lrYHR0eNOT254kWvzSPvnSiiiv.jpg",
+  "lang": "English"
+ },
+ "Superworm": {
+  "id": 912802,
+  "year": "2021",
+  "release": "2021-12-25",
+  "genres": [
+   "Animation",
+   "Family",
+   "Comedy"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/hzvZDTb9r9Yceomz2GCHn2eneiD.jpg",
+  "lang": "English"
  }
 }
