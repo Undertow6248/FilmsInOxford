@@ -1510,5 +1510,35 @@
   ],
   "poster": "/hzvZDTb9r9Yceomz2GCHn2eneiD.jpg",
   "lang": "English"
+ },
+ "Obsession": {
+  "id": 1339713,
+  "year": "2026",
+  "release": "2026-05-13",
+  "genres": [
+   "Horror",
+   "Thriller"
+  ],
+  "countries": [
+   "USA",
+   "UK"
+  ],
+  "poster": "/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
+  "lang": "English"
+ },
+ "Ebenezer": {
+  "id": 1567605,
+  "year": "2026",
+  "release": "2026-11-11",
+  "genres": [
+   "Fantasy",
+   "Comedy"
+  ],
+  "countries": [
+   "USA",
+   "UK"
+  ],
+  "poster": "/6H2N59jJW1hZEzn2ZdrMvJw5vNI.jpg",
+  "lang": "English"
  }
 }
