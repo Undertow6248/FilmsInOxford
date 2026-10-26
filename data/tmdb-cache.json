@@ -1589,5 +1589,51 @@
   ],
   "poster": "/aiwdwnl7RFs1vcBanOKr13ye3wE.jpg",
   "lang": "English"
+ },
+ "Hotel Transylvania": {
+  "id": 76492,
+  "year": "2012",
+  "release": "2012-09-20",
+  "genres": [
+   "Animation",
+   "Comedy",
+   "Family"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/eJGvzGrsfe2sqTUPv5IwLWXjVuR.jpg",
+  "lang": "English"
+ },
+ "The Cycle of Love": {
+  "id": 1537518,
+  "year": "2026",
+  "release": "2026-08-28",
+  "genres": [
+   "Documentary",
+   "Romance"
+  ],
+  "countries": [
+   "UK",
+   "USA",
+   "India"
+  ],
+  "poster": "/3mUMZQ7mTBtCtnrWA7GhWNIHh7o.jpg",
+  "lang": "English"
+ },
+ "The Yellow Tie": {
+  "id": 1245119,
+  "year": "2025",
+  "release": "2025-11-14",
+  "genres": [
+   "Music",
+   "Drama",
+   "Adventure"
+  ],
+  "countries": [
+   "Romania"
+  ],
+  "poster": "/tkCQjcvLKG5HhvVyqkNriifLgLW.jpg",
+  "lang": "Romanian"
  }
 }
