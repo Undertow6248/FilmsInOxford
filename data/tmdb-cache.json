@@ -1643,5 +1643,80 @@
  "exact:tampopo": {
   "title": "Tampopo",
   "at": 1793094898312
+ },
+ "Practical Magic 2": {
+  "id": 1302904,
+  "year": "2026",
+  "release": "2026-09-09",
+  "genres": [
+   "Romance",
+   "Fantasy",
+   "Comedy"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
+  "lang": "English"
+ },
+ "Arnie & Barney": {
+  "id": 1365598,
+  "year": "2026",
+  "release": "2026-04-16",
+  "genres": [
+   "Animation",
+   "Family",
+   "Fantasy"
+  ],
+  "countries": [
+   "Germany",
+   "Ireland",
+   "Spain"
+  ],
+  "poster": "/5fZTa32wRIMFOpiZHiareZDjUIo.jpg",
+  "lang": "English"
+ },
+ "I Love Boosters": {
+  "id": 1227877,
+  "year": "2026",
+  "release": "2026-05-21",
+  "genres": [
+   "Comedy",
+   "Sci-fi",
+   "Crime"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/4pNKIUFy7tkZiBx0rnSmG9ysRy.jpg",
+  "lang": "English"
+ },
+ "Bad Day at the Office": {
+  "id": 1217928,
+  "year": "2026",
+  "release": "2026-10-30",
+  "genres": [
+   "Action",
+   "Thriller"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/fK5Wt1TPZvP1AyYtFRleIpiEW7E.jpg",
+  "lang": "English"
+ },
+ "Double Indemnity": {
+  "id": 996,
+  "year": "1944",
+  "release": "1944-07-06",
+  "genres": [
+   "Crime",
+   "Thriller"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg",
+  "lang": "English"
  }
 }
