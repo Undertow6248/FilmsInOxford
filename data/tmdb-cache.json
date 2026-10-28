@@ -764,7 +764,8 @@
   "countries": [
    "USA"
   ],
-  "poster": "/ux2dU1jQ2ACIMShzB3yP93Udpzc.jpg"
+  "poster": "/ux2dU1jQ2ACIMShzB3yP93Udpzc.jpg",
+  "lang": "English"
  },
  "The Jungle Book#1967": {
   "id": 9325,
@@ -1717,6 +1718,23 @@
    "USA"
   ],
   "poster": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg",
+  "lang": "English"
+ },
+ "A Talent for Murder": {
+  "id": 1084409,
+  "year": "2026",
+  "release": "2026-10-23",
+  "genres": [
+   "Drama",
+   "Crime",
+   "Thriller"
+  ],
+  "countries": [
+   "Australia",
+   "Ireland",
+   "UK"
+  ],
+  "poster": "/mstDPKNKgSGFvVFVdfzeMNkcyw2.jpg",
   "lang": "English"
  }
 }
