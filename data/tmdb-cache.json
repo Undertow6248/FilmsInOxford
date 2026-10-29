@@ -1736,5 +1736,38 @@
   ],
   "poster": "/mstDPKNKgSGFvVFVdfzeMNkcyw2.jpg",
   "lang": "English"
+ },
+ "exact:the rocky horror picture show": {
+  "title": "The Rocky Horror Picture Show",
+  "at": 1793262366449
+ },
+ "The Hunger Games: Sunrise On The Reaping": {
+  "id": 1300968,
+  "year": "2026",
+  "release": "2026-11-18",
+  "genres": [
+   "Sci-fi",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "USA",
+   "Germany"
+  ],
+  "poster": "/jNcZH8yplxttRlf0wwqfGGMKHxX.jpg",
+  "lang": "English"
+ },
+ "Kamikaze Girls": {
+  "id": 26275,
+  "year": "2004",
+  "release": "2004-05-29",
+  "genres": [
+   "Comedy"
+  ],
+  "countries": [
+   "Japan"
+  ],
+  "poster": "/7CJTjqJW2Dd5frfogRBYI1fxCDN.jpg",
+  "lang": "Japanese"
  }
 }
