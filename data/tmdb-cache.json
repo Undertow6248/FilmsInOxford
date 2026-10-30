@@ -1338,7 +1338,7 @@
  },
  "exact:bram stokerandrsquo": {
   "title": "",
-  "at": 1792701423724
+  "at": 1793353370102
  },
  "exact:evidence trust and the climate and nature crisis": {
   "title": "",
@@ -1362,7 +1362,7 @@
  },
  "exact:community screening at rewley house": {
   "title": "",
-  "at": 1792701423748
+  "at": 1793353370112
  },
  "exact:beetlejuice": {
   "title": "Beetlejuice",
@@ -1370,7 +1370,7 @@
  },
  "exact:ukrainian film evening": {
   "title": "",
-  "at": 1792701423748
+  "at": 1793353370088
  },
  "exact:the bride of frankenstein": {
   "title": "The Bride of Frankenstein",
@@ -1394,7 +1394,7 @@
  },
  "exact:the lego batman movie screening and buildalong": {
   "title": "",
-  "at": 1792701423754
+  "at": 1793353370105
  },
  "exact:people s emergency briefing": {
   "title": "People's Emergency Briefing",
@@ -1406,11 +1406,11 @@
  },
  "exact:screening and buildalong": {
   "title": "",
-  "at": 1792701423786
+  "at": 1793353370091
  },
  "exact:lego batman": {
   "title": "",
-  "at": 1792701423852
+  "at": 1793353370106
  },
  "exact:the rediscovery of charlotte sohy": {
   "title": "",
@@ -1422,7 +1422,7 @@
  },
  "exact:the people s emergency climate briefing": {
   "title": "",
-  "at": 1792701424471
+  "at": 1793353370136
  },
  "exact:screening": {
   "title": "Screening",
@@ -1472,7 +1472,7 @@
  },
  "exact:iranian documentary coup 53 attended": {
   "title": "",
-  "at": 1792745242479
+  "at": 1793353370102
  },
  "exact:sing sing": {
   "title": "Sing Sing",
@@ -1484,7 +1484,7 @@
  },
  "exact:the people s emergency briefing": {
   "title": "",
-  "at": 1792745242481
+  "at": 1793353370089
  },
  "Of Times There Were Before": {
   "id": 1792337,
@@ -1769,5 +1769,59 @@
   ],
   "poster": "/7CJTjqJW2Dd5frfogRBYI1fxCDN.jpg",
   "lang": "Japanese"
+ },
+ "exact:sing sing and conversation with ambassadors the ppt": {
+  "title": "",
+  "at": 1793353370101
+ },
+ "Rocky": {
+  "id": 1366,
+  "year": "1976",
+  "release": "1976-12-03",
+  "genres": [
+   "Drama"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/raayaQ9WTUGolsYHPWc2bGonu58.jpg",
+  "lang": "English"
+ },
+ "Pip and Posy: Sandpit Friends": {
+  "id": 1500283,
+  "year": "2025",
+  "release": "2025-06-20",
+  "genres": [],
+  "countries": [],
+  "poster": "/fnAQsauDPWajvntFw8gPK83pfdS.jpg",
+  "lang": "English"
+ },
+ "Mauvais Sang#1986": {
+  "id": 64131,
+  "year": "1986",
+  "release": "1986-11-26",
+  "genres": [
+   "Drama",
+   "Romance",
+   "Crime"
+  ],
+  "countries": [
+   "France"
+  ],
+  "poster": "/yjUmAFx8Z3E0K1IUpQSyUilL5P9.jpg",
+  "lang": "French"
+ },
+ "The Play": {
+  "id": 987953,
+  "year": "2022",
+  "release": "2022-05-24",
+  "genres": [
+   "Drama"
+  ],
+  "countries": [
+   "Philippines"
+  ],
+  "poster": "/8bhqVFgLD6pQqrXfXoNOsNJtwIC.jpg",
+  "lang": "Tagalog"
  }
 }
