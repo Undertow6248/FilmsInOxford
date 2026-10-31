@@ -1823,5 +1823,37 @@
   ],
   "poster": "/8bhqVFgLD6pQqrXfXoNOsNJtwIC.jpg",
   "lang": "Tagalog"
+ },
+ "exact:return": {
+  "title": "Slayers Return",
+  "at": 1793442569728
+ },
+ "Slayers Return": {
+  "id": 125521,
+  "year": "1996",
+  "release": "1996-08-03",
+  "genres": [
+   "Animation",
+   "Comedy",
+   "Fantasy"
+  ],
+  "countries": [
+   "Japan"
+  ],
+  "poster": "/fNQx9YD4nxpcWvriVm1paIxbMwB.jpg",
+  "lang": "Japanese"
+ },
+ "You Can See Everything": {
+  "id": 1765072,
+  "year": "2026",
+  "release": "2026-10-16",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/Ap8QwmKfSjYbWC4XIP8w9pdn72O.jpg",
+  "lang": "English"
  }
 }
