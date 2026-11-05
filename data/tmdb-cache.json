@@ -1984,5 +1984,66 @@
   ],
   "poster": "/cybXGmv8Rjd5Os8Xml6YxMBQ0Zt.jpg",
   "lang": "English"
+ },
+ "Flow": {
+  "id": 823219,
+  "year": "2024",
+  "release": "2024-08-29",
+  "genres": [
+   "Adventure",
+   "Animation",
+   "Family"
+  ],
+  "countries": [
+   "Latvia",
+   "Belgium",
+   "France"
+  ],
+  "poster": "/z2sG41PxfL1hnL1mHbxzSREUtOf.jpg",
+  "lang": "Latvian"
+ },
+ "Wonka": {
+  "id": 787699,
+  "year": "2023",
+  "release": "2023-12-06",
+  "genres": [
+   "Comedy",
+   "Family",
+   "Fantasy"
+  ],
+  "countries": [
+   "UK",
+   "USA"
+  ],
+  "poster": "/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+  "lang": "English"
+ },
+ "Blade": {
+  "id": 36647,
+  "year": "1998",
+  "release": "1998-08-21",
+  "genres": [
+   "Horror",
+   "Action"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/oWT70TvbsmQaqyphCZpsnQR7R32.jpg",
+  "lang": "English"
+ },
+ "Phenomena": {
+  "id": 29161,
+  "year": "1985",
+  "release": "1985-01-25",
+  "genres": [
+   "Horror",
+   "Thriller"
+  ],
+  "countries": [
+   "Italy"
+  ],
+  "poster": "/dhk14s8ogQkbf6re3HLKV2UBHjx.jpg",
+  "lang": "English"
  }
 }
