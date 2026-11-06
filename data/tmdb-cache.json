@@ -1407,11 +1407,11 @@
  },
  "exact:screening and buildalong": {
   "title": "",
-  "at": 1793353370091
+  "at": 1793967381596
  },
  "exact:lego batman": {
   "title": "",
-  "at": 1793353370106
+  "at": 1793967381638
  },
  "exact:the rediscovery of charlotte sohy": {
   "title": "",
@@ -1773,7 +1773,7 @@
  },
  "exact:sing sing and conversation with ambassadors the ppt": {
   "title": "",
-  "at": 1793353370101
+  "at": 1793967381585
  },
  "Rocky": {
   "id": 1366,
@@ -2044,6 +2044,22 @@
    "Italy"
   ],
   "poster": "/dhk14s8ogQkbf6re3HLKV2UBHjx.jpg",
+  "lang": "English"
+ },
+ "The Hunger Games: Sunrise on the Reaping": {
+  "id": 1300968,
+  "year": "2026",
+  "release": "2026-11-18",
+  "genres": [
+   "Sci-fi",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "USA",
+   "Germany"
+  ],
+  "poster": "/jNcZH8yplxttRlf0wwqfGGMKHxX.jpg",
   "lang": "English"
  }
 }
