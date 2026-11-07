@@ -2076,5 +2076,50 @@
   ],
   "poster": "/aRxbYOYHS8T73nzR8hsLousoplR.jpg",
   "lang": "English"
+ },
+ "exact:calligraphic journeys": {
+  "title": "",
+  "at": 1794055295643
+ },
+ "exact:callfront calligraphic journeys": {
+  "title": "",
+  "at": 1794055295685
+ },
+ "exact:screening of callfront": {
+  "title": "",
+  "at": 1794055295726
+ },
+ "exact:screening of callfront calligraphic journeys": {
+  "title": "",
+  "at": 1794055295769
+ },
+ "Arthur Christmas#2011": {
+  "id": 51052,
+  "year": "2011",
+  "release": "2011-11-10",
+  "genres": [
+   "Drama",
+   "Animation",
+   "Family"
+  ],
+  "countries": [
+   "UK",
+   "USA"
+  ],
+  "poster": "/brELZkSbkLrcCXJ0xt5hQUMXhut.jpg",
+  "lang": "English"
+ },
+ "Andrew Lloyd Webber's Starlight Express - Live On Stage": {
+  "id": 1748001,
+  "year": "2026",
+  "release": "2026-11-26",
+  "genres": [
+   "Music"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/aE8fTHv9lKYmKBM6eqzvCfki8Bw.jpg",
+  "lang": "English"
  }
 }
