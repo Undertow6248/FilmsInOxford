@@ -1859,11 +1859,11 @@
  },
  "exact:30pm this": {
   "title": "",
-  "at": 1793532269344
+  "at": 1794137118620
  },
  "exact:philadelphia s story": {
   "title": "",
-  "at": 1793532269347
+  "at": 1794137118623
  },
  "exact:independent": {
   "title": "Independent",
@@ -2120,6 +2120,34 @@
    "UK"
   ],
   "poster": "/aE8fTHv9lKYmKBM6eqzvCfki8Bw.jpg",
+  "lang": "English"
+ },
+ "Samurai Cop": {
+  "id": 65374,
+  "year": "1991",
+  "release": "1991-11-30",
+  "genres": [
+   "Action",
+   "Crime",
+   "Comedy"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/4M2FSwfTvhmP4ubF47UKS86BKYO.jpg",
+  "lang": "English"
+ },
+ "TOITŪ: Visual Sovereignty": {
+  "id": 1501333,
+  "year": "2025",
+  "release": "2025-08-06",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "New Zealand"
+  ],
+  "poster": "/29vToeV7GFrQnlyhWu49JsBbnT1.jpg",
   "lang": "English"
  }
 }
