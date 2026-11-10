@@ -2222,5 +2222,37 @@
   ],
   "poster": "/sOSrlaXvItVdwU1P5Qpttcl12sd.jpg",
   "lang": "English"
+ },
+ "exact:the league of gentlemen": {
+  "title": "The League of Gentlemen",
+  "at": 1794307129176
+ },
+ "How to Rob a Bank": {
+  "id": 1437511,
+  "year": "2026",
+  "release": "2026-11-10",
+  "genres": [
+   "Action",
+   "Crime",
+   "Thriller"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/ifYDZkr2qkHFz87TNVvlxajOxl5.jpg",
+  "lang": "English"
+ },
+ "The Color of Money": {
+  "id": 11873,
+  "year": "1986",
+  "release": "1986-10-17",
+  "genres": [
+   "Drama"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/dVdnHmdQu3JtLAAksjTmTEF76gD.jpg",
+  "lang": "English"
  }
 }
