@@ -2254,5 +2254,71 @@
   ],
   "poster": "/dVdnHmdQu3JtLAAksjTmTEF76gD.jpg",
   "lang": "English"
+ },
+ "exact:the holiday film with live orchestra": {
+  "title": "",
+  "at": 1794398384486
+ },
+ "Elf": {
+  "id": 10719,
+  "year": "2003",
+  "release": "2003-11-07",
+  "genres": [
+   "Comedy",
+   "Family",
+   "Fantasy"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/oOleziEempUPu96jkGs0Pj6tKxj.jpg",
+  "lang": "English"
+ },
+ "How the Grinch Stole Christmas": {
+  "id": 8871,
+  "year": "2000",
+  "release": "2000-11-17",
+  "genres": [
+   "Family",
+   "Comedy",
+   "Fantasy"
+  ],
+  "countries": [
+   "USA",
+   "Germany"
+  ],
+  "poster": "/1WZbbPApEivA421gCOluuzMMKCk.jpg",
+  "lang": "English"
+ },
+ "It Was Just an Accident#2025": {
+  "id": 1456349,
+  "year": "2025",
+  "release": "2025-10-01",
+  "genres": [
+   "Drama",
+   "Thriller",
+   "Crime"
+  ],
+  "countries": [
+   "Iran",
+   "France",
+   "Luxembourg"
+  ],
+  "poster": "/eNYGj2DG3n8OrVPTfYunpPW9uas.jpg",
+  "lang": "French"
+ },
+ "I See Buildings Fall Like Lightning": {
+  "id": 1455247,
+  "year": "2026",
+  "release": "2026-12-04",
+  "genres": [
+   "Drama"
+  ],
+  "countries": [
+   "UK",
+   "USA"
+  ],
+  "poster": "/qoHvMUCuSwdtSZZQpLrZebjVXHg.jpg",
+  "lang": "English"
  }
 }
