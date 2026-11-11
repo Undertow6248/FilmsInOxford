@@ -60,8 +60,15 @@ $daily = New-ScheduledTaskTrigger -Daily -At 10:15
 $logon = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
 $logon.Delay = "PT15M"
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 20) -MultipleInstances IgnoreNew
-Register-ScheduledTask -TaskName "Films in Oxford" -Action $action -Trigger $daily, $logon -Settings $settings -Description "Fetches Vue and Curzon times for the Films in Oxford site" -Force | Out-Null
-Write-Host "Scheduled task 'Films in Oxford' added." -ForegroundColor Green
+try {
+  Register-ScheduledTask -TaskName "Films in Oxford" -Action $action -Trigger $daily, $logon -Settings $settings -Description "Fetches listings for the Films in Oxford site" -Force -ErrorAction Stop | Out-Null
+  Write-Host "Scheduled task 'Films in Oxford' added." -ForegroundColor Green
+} catch {
+  # Usually: the task already exists from an earlier setup run as administrator. That task still works,
+  # because it runs the same files, which have just been updated.
+  if (Get-ScheduledTask -TaskName "Films in Oxford" -ErrorAction SilentlyContinue) { Write-Host "Scheduled task 'Films in Oxford' already exists; keeping it." -ForegroundColor Yellow }
+  else { Write-Host "Couldn't add the scheduled task: $($_.Exception.Message)" -ForegroundColor Red }
+}
 
 # 6. First run now, so you can see it work.
 Write-Host "Running it once now (a browser window opens off-screen for a minute or two)..."
