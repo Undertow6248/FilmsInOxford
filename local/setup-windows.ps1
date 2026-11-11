@@ -66,5 +66,5 @@ Write-Host "Scheduled task 'Films in Oxford' added." -ForegroundColor Green
 # 6. First run now, so you can see it work.
 Write-Host "Running it once now (a browser window opens off-screen for a minute or two)..."
 & $Node (Join-Path $Dir "fetch.mjs") --force
-if ($LASTEXITCODE -eq 0) { Write-Host "Done. Vue and Curzon times are on their way to the site." -ForegroundColor Green }
+if ($LASTEXITCODE -eq 0) { Write-Host "Done. Listings are on their way to the site." -ForegroundColor Green }
 else { Write-Host "The first run had a problem; see $Dir\fetch.log" -ForegroundColor Red }

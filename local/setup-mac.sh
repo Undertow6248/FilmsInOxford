@@ -44,4 +44,4 @@ launchctl unload "$PLIST" 2>/dev/null || true
 launchctl load "$PLIST"
 echo "Daily job added (10:15, and at login; catches up after sleep)."
 echo "Running it once now..."
-"$NODE" fetch.mjs --force && echo "Done. Vue and Curzon times are on their way to the site." || echo "Problem on first run; see $DIR/fetch.log"
+"$NODE" fetch.mjs --force && echo "Done. Listings are on their way to the site." || echo "Problem on first run; see $DIR/fetch.log"

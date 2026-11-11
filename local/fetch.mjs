@@ -13,7 +13,8 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CONFIG = path.join(HERE, "config.json");   // { "token": "github_pat_..." }
 const STATE = path.join(HERE, "last-run.json");
 const LOG = path.join(HERE, "fetch.log");
-const SOURCES = { vue: "sources/vue.mjs", cur: "sources/curzon.mjs" };
+// Curzon is not here: it blocks automated browsers (a Cloudflare security check), so its times come from Daily Info.
+const SOURCES = { vue: "sources/vue.mjs" };
 const EVENTS = "sources/events.mjs"; // University events calendar + Eventbrite
 
 // GitHub calls, retried a few times (networks sometimes drop a connection).
@@ -103,7 +104,9 @@ async function main() {
     // Keep a source from the previous upload if it failed this time.
     try {
       const prev = await (await fetch(`https://raw.githubusercontent.com/${REPO}/main/scraper/local/listings.json`, { cache: "no-store" })).json();
-      for (const [k, v] of Object.entries(prev.sources || {})) if (!out.sources[k]) out.sources[k] = v;
+      // Keep a source from the last upload if it failed this time, but only sources this job still fetches.
+      const mine = new Set([...Object.keys(SOURCES), ...((await import(pathToFileURL(path.join(code, EVENTS)) + "").catch(() => ({}))).LOCAL_EVENT_SOURCES || []).map(k => "ev:" + k)]);
+      for (const [k, v] of Object.entries(prev.sources || {})) if (!out.sources[k] && mine.has(k)) out.sources[k] = v;
     } catch {}
   }
   const body = {
