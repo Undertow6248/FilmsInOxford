@@ -164,7 +164,9 @@ status.tmdb = tmdbStats;
 {
   const times = Object.values(local.sources || {}).map(v => Date.parse(v.at)).filter(Boolean);
   const last = times.length ? Math.max(...times) : 0;
-  status.localJob = { last: last ? new Date(last).toISOString() : null, hoursAgo: last ? Math.round((Date.now() - last) / 36e5) : null };
+  status.localJob = { last: last ? new Date(last).toISOString() : null, hoursAgo: last ? Math.round((Date.now() - last) / 36e5) : null,
+    // How old each source from the computer is: one can keep failing while the others still arrive.
+    sources: Object.fromEntries(Object.entries(local.sources || {}).map(([k, v]) => [k, Math.round((Date.now() - Date.parse(v.at)) / 36e5)])) };
 }
 const out = { updated: new Date().toISOString(), status, venues, shows, films };
 fs.writeFileSync(OUT, JSON.stringify(out));

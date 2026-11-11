@@ -25,6 +25,12 @@ if (s.tmdb?.errors?.length) problems.push(`TMDB: ${s.tmdb.errors.length}+ lookup
 const j = s.localJob || {};
 if (j.hoursAgo == null || j.hoursAgo > 96) problems.push(`The job on your computer last sent listings ${j.last ? `${j.hoursAgo} hours ago (${j.last})` : "never"}. Check fetch.log in %LOCALAPPDATA%\\FilmsInOxford, or re-run the setup command.`);
 
+// One source on the computer failing while the job still runs (e.g. Curzon blocking it): the site falls back to
+// Daily Info, which only lists a couple of days ahead, so flag it after two days.
+for (const [k, h] of Object.entries(j.sources || {})) {
+  if (j.hoursAgo != null && j.hoursAgo <= 48 && h > 48)
+    problems.push(`${NAMES[k] || k}: the job on your computer hasn't managed to read it for ${Math.round(h / 24)} days (it still runs, but this part fails). Check fetch.log in %LOCALAPPDATA%\\FilmsInOxford.`);
+}
 const lines = problems.length ? ["Problems in this update:", ...problems.map(p => "- " + p)] : ["Everything worked."];
 console.log(lines.join("\n"));
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
