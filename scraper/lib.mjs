@@ -44,6 +44,7 @@ export function cleanTitle(t) {
     .replace(/[‘’]/g, "'")
     .replace(/\s*\((?:\d{4}|re-?release|\d+(?:st|nd|rd|th) anniversary[^)]*|tamil|hindi|telugu|subtitled|4k[^)]*)\)\s*/gi, " ")
     .replace(/\s*-\s*preview$/i, "")
+    .replace(/\s+PREVIEW$/, "") // "Fjord PREVIEW"
     .replace(/\s*(\.{3}|…)\s*$/, "")
     .replace(/\s*\[(?:U|PG|12A?|15|18|R18|TBC)\]/gi, "")
     .replace(/^[A-Z][A-Z0-9&' ]{2,25}\s+[-–]\s+(?=\S)/, "") // Daily Info's "RELAXED - Wildwood", "SILVER SCREEN - …"

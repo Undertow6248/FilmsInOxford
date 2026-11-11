@@ -130,6 +130,17 @@ shows.sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1]));
 // 4. Look each film up on TMDB and pick a section for it.
 const EVENT = /^(NT Live|National Theatre Live|RBO|Royal Ballet|Met Opera|Bolshoi|Book Club)|Live Viewing|in Concert|: Live$|\bConcert\b|The Musical$|Cinema Club/i;
 const films = {};
+// A new film counts as a wide release (the big films at multiplexes nationwide) if any of:
+//  - Vue Oxford, the city's multiplex, lists it now, or has listed it on any earlier run (remembered in data/wide.json,
+//    since Vue only publishes a week ahead);
+//  - it comes from a major studio (TMDB's production companies);
+//  - its budget is $40m or more.
+// Anything else new is a limited release. Overrides in overrides.json still win.
+const MAJOR = /^(Walt Disney|Disney|Pixar|Marvel Studios|Lucasfilm|20th Century|Universal Pictures|Illumination|DreamWorks Animation|Warner Bros|New Line Cinema|DC Studios|Paramount|Columbia Pictures|Sony Pictures|Lionsgate|Legendary|Metro-Goldwyn-Mayer|Amazon MGM|Blumhouse|Working Title|StudioCanal|Aardman|Skydance|Lucasfilm)/i;
+const WIDE_FILE = new URL("../data/wide.json", import.meta.url);
+let wideSeen = {}; try { wideSeen = JSON.parse(fs.readFileSync(WIDE_FILE, "utf8")); } catch {}
+for (const s of shows) if (s[3] === "vue") wideSeen[s[2]] ||= today;
+fs.writeFileSync(WIDE_FILE, JSON.stringify(wideSeen, null, 1));
 for (const t of [...new Set(shows.map(s => s[2]))]) {
   const o = overrides.films[t] || {};
   const venues = new Set(shows.filter(s => s[2] === t).map(s => s[3]));
@@ -140,7 +151,7 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
     const rel = m?.release || "";
     if (isEvent) cat = "E";
     else if (rel && rel < addDays(today, -540)) cat = "T"; // out for more than ~18 months
-    else if (venues.has("vue")) cat = "W";
+    else if (venues.has("vue") || wideSeen[t] || (m?.companies || []).some(c => MAJOR.test(c)) || (m?.budget || 0) >= 40e6) cat = "W";
     else cat = "L";
   }
   const p = previous.films[t] || [];
@@ -163,7 +174,8 @@ if (Object.keys(SOURCES).every(k => !status[k]?.ok)) { log("every source failed"
 // ---------- screenings outside cinemas ----------
 async function buildEvents(fixed, found, hide) {
   // Venues the page already knows about (see V in site/index.html); others are added from the listing.
-  const KNOWN = [[/magdalen/i, "mag"], [/divinity school/i, "bod"], [/tap social/i, "tap"], [/maison fran/i, "mfo"],
+  const KNOWN = [[/ultimate picture palace|^upp\b/i, "upp"], [/phoenix picturehouse/i, "phx"], [/^curzon/i, "cur"], [/^vue\b/i, "vue"],
+    [/oxford cinema/i, "ocf"], [/magdalen/i, "mag"], [/divinity school/i, "bod"], [/tap social/i, "tap"], [/maison fran/i, "mfo"],
     [/oxford castle|^the castle$/i, "cas"], [/schwarzman/i, "swz"], [/rewley house/i, "rew"], [/human genetics/i, "chg"],
     [/^the nest\b/i, "nest"], [/florence park/i, "fpc"], [/common ground/i, "cg"]];
   const venues = {};

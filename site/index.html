@@ -37,11 +37,19 @@ h1{font-size:var(--s-xl);line-height:1.1;margin:0}
 .tabs{display:flex;gap:18px}
 .tab{border:0;background:none;padding:4px 0;cursor:pointer;font-size:var(--s-l);color:var(--muted);border-bottom:2px solid transparent}
 .tab[aria-selected="true"]{color:var(--fg);font-weight:700;border-bottom-color:var(--fg)}
-.toggle{display:flex;align-items:center;gap:8px;font-size:var(--s-s);color:var(--muted);cursor:pointer;user-select:none}
-.toggle input{appearance:none;width:32px;height:18px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;flex:none}
-.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--bg)}
-.toggle input:checked{background:var(--fg)}
-.toggle input:checked::after{left:16px}
+/* Venue filter: a button that opens a panel of tickboxes. */
+.vf{position:relative;justify-self:start}
+.vf>summary{list-style:none;cursor:pointer;font-size:var(--s-s);border:1px solid var(--line);border-radius:999px;padding:4px 12px;user-select:none}
+.vf>summary::-webkit-details-marker{display:none}
+.vf>summary::after{content:" ▾";color:var(--muted)}
+.vf[open]>summary{border-color:var(--fg)}
+.vpanel{position:absolute;top:calc(100% + 6px);left:0;z-index:20;background:var(--bg);border:1px solid var(--fg);border-radius:6px;padding:10px 12px;min-width:250px;display:grid;gap:6px;font-size:var(--s-s);box-shadow:0 6px 18px rgb(0 0 0 / .15)}
+.vpanel label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.vpanel input{accent-color:var(--fg);width:16px;height:16px;margin:0}
+.vpanel .sw{width:8px;height:8px;border-radius:2px;background:var(--c);flex:none}
+.vpanel hr{border:0;border-top:1px solid var(--line);margin:2px 0}
+.vpanel .row{display:flex;gap:12px}
+.vpanel .row button{border:0;background:none;padding:0;text-decoration:underline;cursor:pointer;color:var(--muted);font-size:var(--s-s)}
 :focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 .chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:var(--s-s);cursor:pointer;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
@@ -119,7 +127,7 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .5)}
       <button class="tab" role="tab" data-view="films" aria-selected="true">Films</button>
       <button class="tab" role="tab" data-view="dates" aria-selected="false">Dates</button>
     </div>
-    <label class="toggle" for="nonCinema"><input type="checkbox" id="nonCinema" checked> Include screenings outside cinemas (colleges, pubs, libraries)</label>
+    <details class="vf" id="vf"><summary id="vfSum">Venues: all</summary><div class="vpanel" id="vpanel"></div></details>
   </div>
 
   <section id="v-films-wrap"><div class="modebar"><button class="chip" data-mode="posters">Posters</button><button class="chip" data-mode="list">List</button></div><div id="v-films"></div></section>
@@ -190,11 +198,23 @@ const lbLink=f=>{const m=FM(f);if(m.cat==="E"&&!m.id)return "";const u=m.id?`htt
 const posterImg=f=>{const p=FM(f).p;return p?`<img class="poster" src="https://image.tmdb.org/t/p/w342${p}" alt="Poster for ${esc(f)}" loading="lazy">`:`<div class="ph">${esc(f)}</div>`};
 const titleLine=f=>`<div class="ft">${esc(f)}${yr(f)}</div>`;
 
-let st={view:"films",mode:"posters",nonCin:true,day:today};
-try{const s=JSON.parse(localStorage.getItem("oxs3")||"{}");if(typeof s.nonCin==="boolean")st.nonCin=s.nonCin;if(s.mode)st.mode=s.mode}catch(e){}
-const save=()=>{try{localStorage.setItem("oxs3",JSON.stringify({nonCin:st.nonCin,mode:st.mode}))}catch(e){}};
+// hidden: cinemas the viewer has unticked; nonCin: whether to show screenings outside cinemas.
+let st={view:"films",mode:"posters",nonCin:true,hidden:[],day:today};
+try{const s=JSON.parse(localStorage.getItem("oxs3")||"{}");if(typeof s.nonCin==="boolean")st.nonCin=s.nonCin;if(s.mode)st.mode=s.mode;if(Array.isArray(s.hidden))st.hidden=s.hidden}catch(e){}
+const save=()=>{try{localStorage.setItem("oxs3",JSON.stringify({nonCin:st.nonCin,mode:st.mode,hidden:st.hidden}))}catch(e){}};
 
-function live(){return DATA.shows.filter(s=>V[s[3]]&&(s[0]>today||(s[0]===today&&s[1]>=nowHM))&&(st.nonCin||V[s[3]].cin))}
+const shown=k=>V[k]&&(V[k].cin?!st.hidden.includes(k):st.nonCin);
+function live(){return DATA.shows.filter(s=>shown(s[3])&&(s[0]>today||(s[0]===today&&s[1]>=nowHM)))}
+// Venue filter panel: one tickbox per cinema, plus one for everywhere else.
+const CINEMAS=["vue","cur","phx","ocf","upp"];
+function renderFilter(){
+  const box=(k,label,on,c)=>`<label><input type="checkbox" data-vf="${k}" ${on?"checked":""}>${c?`<span class="sw" style="--c:var(${c})"></span>`:""}${label}</label>`;
+  $("#vpanel").innerHTML=CINEMAS.map(k=>box(k,V[k].f||V[k].n,!st.hidden.includes(k),V[k].c)).join("")
+    +`<hr>`+box("other","Everywhere else (colleges, pubs, libraries, one-offs)",st.nonCin,"")
+    +`<hr><div class="row"><button data-vfall="1">Show all</button><button data-vfall="0">Clear all</button></div>`;
+  const on=CINEMAS.filter(k=>!st.hidden.includes(k)).length+(st.nonCin?1:0);
+  $("#vfSum").textContent=on===CINEMAS.length+1?"Venues: all":`Venues: ${on} of ${CINEMAS.length+1}`;
+}
 function timesByVenue(rows){const by={};rows.forEach(s=>(by[s[3]]=by[s[3]]||[]).push(s));return Object.entries(by)}
 const tchip=s=>`<a class="t" href="${urlFor(s)}" target="_blank" rel="noopener">${s[1]}</a>`;
 const vline=(v,rows)=>`<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a><div class="times">${rows.map(tchip).join("")}</div></div>`;
@@ -250,9 +270,11 @@ function renderDates(){
   bar.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){bar.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
 })();
 
+const on6=()=>!st.hidden.length&&st.nonCin;
 function render(){
+  renderFilter();
   const n=live().filter(s=>s[0]<=horizon);
-  $("#sub").textContent=`${new Set(n.map(s=>s[2])).size} films and ${n.length} screenings in the next two weeks, across cinemas${st.nonCin?", colleges, pubs and libraries":""}.`;
+  $("#sub").textContent=`${new Set(n.map(s=>s[2])).size} films and ${n.length} screenings in the next two weeks, ${on6()?"across Oxford":"at the venues you've picked"}.`;
   ({films:renderFilms,dates:renderDates})[st.view]();
 }
 function show(view){st.view=view;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));$("#v-films-wrap").hidden=view!=="films";$("#v-dates").hidden=view!=="dates";render();window.scrollTo({top:0})}
@@ -266,8 +288,13 @@ document.addEventListener("click",e=>{
   else if(b.dataset.day){st.day=b.dataset.day;renderDates()}
   else if(b.dataset.scroll){const bar=$("#dayBar");bar.scrollBy({left:+b.dataset.scroll*bar.clientWidth*.8,behavior:"smooth"})}
 });
-$("#nonCinema").checked=st.nonCin;
-$("#nonCinema").addEventListener("change",e=>{st.nonCin=e.target.checked;save();render()});
+// Tick or untick a venue; the panel stays open. It closes on a click outside it.
+$("#vpanel").addEventListener("change",e=>{const k=e.target.dataset.vf;if(!k)return;
+  if(k==="other")st.nonCin=e.target.checked;else st.hidden=e.target.checked?st.hidden.filter(x=>x!==k):[...new Set([...st.hidden,k])];
+  save();render()});
+$("#vpanel").addEventListener("click",e=>{const b=e.target.closest("[data-vfall]");if(!b)return;e.preventDefault();e.stopPropagation();
+  const all=b.dataset.vfall==="1";st.hidden=all?[]:[...CINEMAS];st.nonCin=all;save();render()});
+document.addEventListener("click",e=>{const d=$("#vf");if(d.open&&!d.contains(e.target))d.open=false});
 fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
   DATA=d;
   Object.entries(d.venues||{}).forEach(([k,v])=>{if(!V[k])V[k]={c:"--oth",...v}});
