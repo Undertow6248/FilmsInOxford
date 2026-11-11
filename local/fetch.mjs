@@ -72,6 +72,8 @@ async function main() {
       log(key, rows.length, "screenings");
     } catch (e) {
       log(key, "FAILED:", e.message.split("\n")[0]);
+      // Record what the page showed, e.g. a "Just a moment..." security check.
+      try { log(key, "page was:", JSON.stringify(await page.title()), (await page.evaluate(() => document.body?.innerText || "")).replace(/\s+/g, " ").slice(0, 160)); } catch {}
     }
     await page.close();
   }
