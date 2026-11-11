@@ -36,12 +36,25 @@ fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: 
 const raw = [], status = {};
 // Vue and Curzon block GitHub's servers, so a job on the owner's computer (local/fetch.mjs) sends their times here.
 const local = read("./local/listings.json", { sources: {} });
+// Curzon blocks automated browsers, so a scheduled Claude task reads it in the owner's own Chrome a few times a
+// week and saves scraper/local/curzon.json. Its times cover ~9 days ahead, so they're used for up to a week.
+const chromeCur = read("./local/curzon.json", null);
+const chromeCurOk = chromeCur?.rows?.length && Date.now() - Date.parse(chromeCur.at) < 7 * 864e5;
 // Screenings outside cinemas (and Daily Info's copy of the cinema times, used as a back-up below).
 let ev = { events: [], cinemas: [], status: {} };
 if (!only || only === "events") ev = await scrapeEvents(ctx, { today, days: DAYS, local: local.sources });
 const diCinema = dailyInfoCinemaRows(ev.cinemas);
 for (const [key, src] of Object.entries(SOURCES)) {
   if (only && key !== only) continue;
+  if (!only && key === "cur" && chromeCurOk) {
+    const rows = chromeCur.rows.filter(r => r.date >= today && r.date <= last);
+    const have = new Set(rows.map(r => r.date));
+    // Days the Chrome read doesn't cover (e.g. today, if it ran yesterday) come from Daily Info.
+    rows.push(...diCinema.filter(r => r.venue === "cur" && r.date >= today && r.date <= last && !have.has(r.date)));
+    raw.push(...rows);
+    status.cur = { ok: true, count: rows.length, via: "chrome", at: chromeCur.at };
+    continue;
+  }
   const l = local.sources[key];
   if (!only && l && Date.now() - Date.parse(l.at) < 36 * 3600e3 && l.rows.length) {
     raw.push(...l.rows.filter(r => r.date >= today && r.date <= last));
@@ -160,6 +173,7 @@ for (const t of [...new Set(shows.map(s => s[2]))]) {
 saveCache();
 
 status.tmdb = tmdbStats;
+status.chromeCurzon = { last: chromeCur?.at || null, hoursAgo: chromeCur?.at ? Math.round((Date.now() - Date.parse(chromeCur.at)) / 36e5) : null, rows: chromeCur?.rows?.length || 0 };
 // When did the job on the owner's computer last send listings? (Checked by the workflow's last step.)
 {
   const times = Object.values(local.sources || {}).map(v => Date.parse(v.at)).filter(Boolean);
