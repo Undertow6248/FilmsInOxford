@@ -35,7 +35,11 @@ jobs:
       - name: Install scraper
         run: |
           npm install --no-audit --no-fund
-          npx playwright install --with-deps chrome
+          # GitHub's runners already have Google Chrome and a virtual display, so use those. Only install
+          # (which needs Ubuntu's package mirrors, sometimes down) if they're missing.
+          if ! command -v google-chrome >/dev/null; then npx playwright install --with-deps chrome; fi
+          if ! command -v xvfb-run >/dev/null; then sudo apt-get install -y xvfb || true; fi
+          google-chrome --version
 
       - name: Scrape cinemas and look films up on TMDB
         env:
