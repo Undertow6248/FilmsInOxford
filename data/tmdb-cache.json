@@ -2855,5 +2855,55 @@
   ],
   "runtime": 103,
   "lang": "English"
+ },
+ "exact:conscious talk from prof anil seth": {
+  "title": "",
+  "at": 1794409625119
+ },
+ "exact:oxdocs co lab": {
+  "title": "",
+  "at": 1794409625119
+ },
+ "exact:daughters of the forest": {
+  "title": "Daughters of the Forest",
+  "at": 1794409625122
+ },
+ "exact:oxdocs co lab screening presentation": {
+  "title": "",
+  "at": 1794409625167
+ },
+ "Daughters of the Forest": {
+  "id": 1599180,
+  "year": "2026",
+  "release": "2026-03-13",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "Mexico"
+  ],
+  "poster": "/zVz7KDiqA3mdOVYWC9vse7c56dw.jpg",
+  "budget": 0,
+  "companies": [
+   "Sandbox Films"
+  ],
+  "runtime": 95,
+  "lang": "Spanish"
+ },
+ "Conscious + talk from Prof. Anil Seth": {
+  "id": 1619652,
+  "year": "2026",
+  "release": "2026-01-22",
+  "genres": [
+   "Thriller"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/vcCcuAwSIWDM6RXDSigMiREYkpT.jpg",
+  "budget": 0,
+  "companies": [],
+  "runtime": 11,
+  "lang": "English"
  }
 }
