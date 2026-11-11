@@ -4,6 +4,7 @@
 // Usage: node fetch.mjs          (skips if it already ran in the last 12 hours)
 //        node fetch.mjs --force  (run now regardless)
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { chromium } from "playwright-core";
@@ -29,10 +30,6 @@ const log = (...a) => { const line = `${new Date().toISOString()} ${a.join(" ")}
 
 async function main() {
   const force = process.argv.includes("--force");
-  try {
-    const last = JSON.parse(fs.readFileSync(STATE, "utf8").replace(/^\uFEFF/, ""));
-    if (!force && Date.now() - Date.parse(last.ok) < 12 * 3600e3) return log("already ran today, skipping");
-  } catch {}
   // Keep this script up to date too (takes effect from the next run).
   try {
     const r = await gh(`https://raw.githubusercontent.com/${REPO}/main/local/fetch.mjs`, { cache: "no-store" });
@@ -42,6 +39,15 @@ async function main() {
   // Pasting into a terminal can add invisible characters around the token; keep just the token itself.
   const token = (saved.match(/github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]+/) || [])[0];
   if (!token) throw new Error(`the saved GitHub token doesn't look right (${saved.length} characters, should start github_pat_). Delete config.json in ${HERE} and run setup again.`);
+
+  // Curzon times saved to Downloads by the "Curzon times" Claude task: upload them whenever there's a new file,
+  // even if the rest of this job has already run today.
+  try { await uploadCurzon(token); } catch (e) { log("curzon file FAILED:", e.message); }
+
+  try {
+    const last = JSON.parse(fs.readFileSync(STATE, "utf8").replace(/^\uFEFF/, ""));
+    if (!force && Date.now() - Date.parse(last.ok) < 12 * 3600e3) return log("already ran today, skipping");
+  } catch {}
 
   // Always use the latest scraper code from the repo, so fixes there apply here too.
   const code = path.join(HERE, "code", "scraper");
@@ -118,6 +124,44 @@ async function main() {
   if (!put.ok) throw new Error(`GitHub said ${put.status}: ${(await put.text()).slice(0, 200)}`);
   fs.writeFileSync(STATE, JSON.stringify({ ok: new Date().toISOString() }));
   log("sent to GitHub");
+}
+
+// Save a file to the repo through GitHub's API (creating or replacing it).
+async function putFile(token, repoPath, content, message) {
+  const api = `https://api.github.com/repos/${REPO}/contents/${repoPath}`;
+  const headers = { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "films-in-oxford-local" };
+  const cur = await gh(api, { headers });
+  const sha = cur.ok ? (await cur.json()).sha : undefined;
+  const put = await gh(api, { method: "PUT", headers, body: JSON.stringify({ message, content: Buffer.from(content).toString("base64"), ...(sha ? { sha } : {}) }) });
+  if (!put.ok) throw new Error(`GitHub said ${put.status}: ${(await put.text()).slice(0, 200)}`);
+}
+
+// films-in-oxford-curzon.txt (lines F|title|film-path, S|date|time|booking-number, END|count) -> scraper/local/curzon.json
+async function uploadCurzon(token) {
+  const dl = path.join(os.homedir(), "Downloads");
+  let files = [];
+  try {
+    files = fs.readdirSync(dl).filter(f => /^films-in-oxford-curzon.*\.txt$/i.test(f))
+      .map(f => ({ p: path.join(dl, f), t: fs.statSync(path.join(dl, f)).mtimeMs })).sort((a, b) => b.t - a.t);
+  } catch { return; }
+  if (!files.length) return;
+  const text = fs.readFileSync(files[0].p, "utf8");
+  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const end = lines.find(l => l.startsWith("END|"));
+  if (!end) throw new Error("the Curzon file is incomplete (no END line)");
+  const at = (lines.find(l => l.startsWith("AT|")) || "").slice(3) || new Date(files[0].t).toISOString();
+  const rows = []; let film = null;
+  for (const l of lines) {
+    const p = l.split("|");
+    if (p[0] === "F") film = { title: p[1], url: p[2] ? new URL(p[2], "https://www.curzon.com/").href : "" };
+    else if (p[0] === "S" && film && /^\d{4}-\d\d-\d\d$/.test(p[1]) && /^\d\d:\d\d$/.test(p[2]))
+      rows.push({ date: p[1], time: p[2], title: film.title, venue: "cur", tags: [], url: p[3] ? `https://www.curzon.com/ticketing/seats/OXF1-${p[3]}/` : film.url, filmUrl: film.url });
+  }
+  if (!rows.length || rows.length !== +end.split("|")[1]) throw new Error(`the Curzon file has ${rows.length} screenings but says ${end.split("|")[1]}`);
+  await putFile(token, "scraper/local/curzon.json", JSON.stringify({ at, rows }), `Curzon times via Chrome (${at.slice(0, 10)})`);
+  // Uploaded: tidy up the file(s) the task left in Downloads.
+  for (const f of files) try { fs.unlinkSync(f.p); } catch {}
+  log("curzon", rows.length, "screenings from Chrome, sent to GitHub");
 }
 
 main().catch(e => { log("ERROR:", e.message, e.cause ? `(${e.cause.code || ""} ${e.cause.message || e.cause})` : ""); process.exitCode = 1; });

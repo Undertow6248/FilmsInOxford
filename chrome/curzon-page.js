@@ -2,7 +2,8 @@
 // Clicks through every date tab and writes a compact list into the page, for get_page_text to read:
 //   F|Film title|film-path            (one per film)
 //   S|YYYY-MM-DD|HH:MM|booking-number (its screenings; booking page is /ticketing/seats/OXF1-<number>/)
-// It ends with "END|<number of S lines>". Nothing is sent anywhere by this script.
+// It ends with "END|<number of S lines>". It also saves the same text as films-in-oxford-curzon.txt in the
+// browser's Downloads folder, where the Films in Oxford job on the same computer picks it up and uploads it.
 (async () => {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   for (let i = 0; i < 40 && !document.querySelector(".v-date-picker [role=tab]"); i++) await sleep(500);
@@ -35,8 +36,15 @@
   }
   const lines = [];
   for (const [title, v] of films) lines.push(["F", title.replace(/\|/g, "/").replace(/TBC$/, "").trim(), v.film].join("|"), ...v.s);
+  lines.unshift("AT|" + new Date().toISOString());
   lines.push("END|" + seen.size);
   document.body.innerHTML = "<main><pre id='curzon-out'></pre></main>";
   document.getElementById("curzon-out").textContent = lines.join("\n");
+  if (seen.size) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/plain" }));
+    a.download = "films-in-oxford-curzon.txt";
+    document.body.appendChild(a); a.click();
+  }
   window.__curzonDone = seen.size;
 })();
