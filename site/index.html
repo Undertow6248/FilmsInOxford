@@ -299,7 +299,8 @@ function openTimeMenu(s,withTickets){
 }
 // Curzon blocks automated reading, so its times come from Daily Info, which only covers about two days ahead.
 const curLast=()=>DATA.shows.filter(s=>s[3]==="cur").map(s=>s[0]).sort().pop()||today;
-const curNote=()=>shown("cur")?`<p class="note">Curzon times are only listed here up to ${dayShort(curLast())}. <a href="${V.cur.u}" target="_blank" rel="noopener">See later Curzon times on its site</a>.</p>`:"";
+// Only worth saying when Curzon's listings stop short of the two weeks this site covers.
+const curNote=()=>shown("cur")&&curLast()<horizon?`<p class="note">Curzon times are only listed here up to ${dayShort(curLast())}. <a href="${V.cur.u}" target="_blank" rel="noopener">See later Curzon times on its site</a>.</p>`:"";
 function openSheet(f){
   const ss=live().filter(s=>s[0]<=horizon&&s[2]===f);const m=FM(f);const gc=gcTxt(f);
   $("#sheetBody").innerHTML=`<div class="sh">${posterImg(f)}<div><h3>${esc(f)}</h3>${m.yr?`<p>${esc(m.yr)}</p>`:""}${gc?`<p>${esc(gc)}</p>`:""}<p>${lbLink(f)}</p></div></div><div class="sbody">${timesBlock(ss)}${ss.some(s=>s[3]==="cur")?curNote():""}</div>`;
@@ -315,7 +316,7 @@ function renderDates(){
   bar.scrollLeft=keep;
   // Every screening that day, in time order.
   const r=rows.filter(s=>s[0]===st.day).sort((a,b)=>a[1].localeCompare(b[1])||a[2].localeCompare(b[2]));
-  $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}, ${dateLbl(st.day)}<span class="muted">${r.length} screening${r.length===1?"":"s"}</span></h2>${st.day>curLast()?curNote():""}${r.map(s=>`<div class="srow">${tchip(s)}<div>${titleLine(s[2])}<span class="vtag" style="${col(s[3])}">${esc(V[s[3]].f||V[s[3]].n)}</span></div><div class="acts2">${lbLink(s[2])}${calBtn(s)}</div></div>`).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
+  $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}, ${dateLbl(st.day)}<span class="muted">${r.length} screening${r.length===1?"":"s"}</span></h2>${st.day>curLast()&&st.day<=horizon?curNote():""}${r.map(s=>`<div class="srow">${tchip(s)}<div>${titleLine(s[2])}<span class="vtag" style="${col(s[3])}">${esc(V[s[3]].f||V[s[3]].n)}</span></div><div class="acts2">${lbLink(s[2])}${calBtn(s)}</div></div>`).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
 }
 
 // Drag the day strip sideways with the mouse (touch already scrolls natively); the wheel scrolls it too.
