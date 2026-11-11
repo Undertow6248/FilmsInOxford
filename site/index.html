@@ -102,6 +102,19 @@ a.t:hover{border-color:var(--fg)}
 .poster{aspect-ratio:2/3;width:100%;border-radius:3px;object-fit:cover;background:var(--line);display:block}
 .ph{aspect-ratio:2/3;width:100%;border-radius:3px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:700;font-size:var(--s-s);line-height:1.2;overflow:hidden;word-break:break-word}
 .pcard:hover .poster,.pcard:hover .ph{outline:2px solid var(--fg);outline-offset:1px}
+/* Time menu: buy tickets or add to calendar. */
+button.t{background:none;cursor:pointer;font-family:inherit;color:inherit}
+dialog#tmenu{border:1px solid var(--fg);border-radius:8px;background:var(--bg);color:var(--fg);padding:16px;width:min(340px,calc(100vw - 32px))}
+dialog#tmenu::backdrop{background:rgb(0 0 0 / .35)}
+#tmenu h3{font-size:var(--s-m);margin:0 30px 2px 0}
+#tmenu p{margin:0 0 12px;font-size:var(--s-s);color:var(--muted)}
+#tmenu .acts{display:grid;gap:8px}
+#tmenu .act{display:block;text-align:center;border:1px solid var(--line);border-radius:999px;padding:7px 12px;text-decoration:none;font-size:var(--s-s);background:none;cursor:pointer;font-family:inherit;color:inherit}
+#tmenu .act:hover{border-color:var(--fg)}
+#tmenu .act.main{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cal{font-size:var(--s-s);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:none;cursor:pointer;font-family:inherit;white-space:nowrap;line-height:1.4}
+.cal:hover{color:var(--fg);border-color:var(--fg)}
+.srow .acts2{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
 dialog#sheet{border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 40px)}
 dialog#sheet::backdrop{background:rgb(0 0 0 / .5)}
 .sh{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 44px 6px 16px}
@@ -131,6 +144,7 @@ dialog#sheet::backdrop{background:rgb(0 0 0 / .5)}
   </div>
 
   <section id="v-films-wrap"><div class="modebar"><button class="chip" data-mode="posters">Posters</button><button class="chip" data-mode="list">List</button></div><div id="v-films"></div></section>
+  <dialog id="tmenu"><button class="close" aria-label="Close" data-tclose="1">✕</button><div id="tmenuBody"></div></dialog>
   <dialog id="sheet"><button class="close" aria-label="Close" data-close="1">✕</button><div id="sheetBody"></div></dialog>
   <section id="v-dates" hidden>
     <div class="daynav"><button class="arrow" data-scroll="-1" aria-label="Earlier dates">‹</button><div class="bar" id="dayBar"></div><button class="arrow" data-scroll="1" aria-label="Later dates">›</button></div>
@@ -216,8 +230,11 @@ function renderFilter(){
   $("#vfSum").textContent=on===CINEMAS.length+1?"Venues: all":`Venues: ${on} of ${CINEMAS.length+1}`;
 }
 function timesByVenue(rows){const by={};rows.forEach(s=>(by[s[3]]=by[s[3]]||[]).push(s));return Object.entries(by)}
+// Dates page: the time links straight to tickets. Films page: the time opens the menu (tickets or calendar).
 const tchip=s=>`<a class="t" href="${urlFor(s)}" target="_blank" rel="noopener">${s[1]}</a>`;
-const vline=(v,rows)=>`<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a><div class="times">${rows.map(tchip).join("")}</div></div>`;
+const tbtn=s=>`<button class="t" data-show="${s.i}">${s[1]}</button>`;
+const calBtn=s=>`<button class="cal" data-cal="${s.i}" aria-label="Add ${esc(s[2])} at ${s[1]} to your calendar">+ Calendar</button>`;
+const vline=(v,rows)=>`<div class="vline"><a class="vname" style="${col(v)}" href="${V[v].u}" target="_blank" rel="noopener">${V[v].n}</a><div class="times">${rows.map(tbtn).join("")}</div></div>`;
 const timesBlock=ss=>{const days={};ss.forEach(s=>(days[s[0]]=days[s[0]]||[]).push(s));return Object.entries(days).map(([d,r])=>`<div class="drow"><div class="dday">${dayShort(d)}</div><div class="slots">${timesByVenue(r).map(([v,rr])=>vline(v,rr)).join("")}</div></div>`).join("")};
 
 function renderFilms(){
@@ -242,6 +259,43 @@ function renderFilms(){
   $("#v-films").innerHTML=html||`<p class="empty">Nothing found for the next two weeks.</p>`;
   document.querySelectorAll(".modebar .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===st.mode));
 }
+// ---- Add to calendar ----
+// Times are Oxford local time; calendars get UTC so they show correctly anywhere.
+function londonUTC(d,t){
+  const [Y,M,D]=d.split("-").map(Number),[h,m]=t.split(":").map(Number);
+  let u=Date.UTC(Y,M-1,D,h,m);
+  const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(new Date(u)).map(x=>[x.type,x.value]));
+  const off=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-u; // London's offset from UTC at that moment
+  return new Date(u-off);
+}
+const stamp=x=>x.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+function calEvent(s){
+  const v=V[s[3]],f=s[2],m=DATA.films[f]||[],run=+m[8]||0;
+  const timed=/^\d\d:\d\d$/.test(s[1]);
+  // Length: the film's running time (plus 20 minutes of trailers at a cinema), else two hours.
+  const mins=run?run+(v.cin?20:0):120;
+  const start=timed?londonUTC(s[0],s[1]):null,end=timed?new Date(start.getTime()+mins*6e4):null;
+  const where=[v.f||v.n,v.w].filter(Boolean).join(", ").replace(/\s*\r?\n\s*/g,", ");
+  return {title:f,where,timed,start,end,day:s[0],url:urlFor(s)};
+}
+function googleUrl(e){
+  const dates=e.timed?`${stamp(e.start)}/${stamp(e.end)}`:`${e.day.replace(/-/g,"")}/${addDays(e.day,1).replace(/-/g,"")}`;
+  return "https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:e.title,dates,location:e.where,details:"Tickets: "+e.url});
+}
+function downloadIcs(s){
+  const e=calEvent(s);const q=t=>String(t).replace(/([,;\\])/g,"\\$1").replace(/\n/g,"\\n");
+  const when=e.timed?[`DTSTART:${stamp(e.start)}`,`DTEND:${stamp(e.end)}`]:[`DTSTART;VALUE=DATE:${e.day.replace(/-/g,"")}`,`DTEND;VALUE=DATE:${addDays(e.day,1).replace(/-/g,"")}`];
+  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Films In Oxford//EN","BEGIN:VEVENT",`UID:${s[0]}-${s[1]}-${s[3]}-${encodeURIComponent(e.title).slice(0,40)}@filmsinoxford`,`DTSTAMP:${stamp(new Date())}`,...when,`SUMMARY:${q(e.title)}`,`LOCATION:${q(e.where)}`,`DESCRIPTION:${q("Tickets: "+e.url)}`,`URL:${e.url}`,"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));a.download=e.title.replace(/[^\w ]+/g,"").trim().slice(0,40)+".ics";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function openTimeMenu(s,withTickets){
+  const v=V[s[3]];
+  $("#tmenuBody").innerHTML=`<h3>${esc(s[2])}</h3><p>${dayName(s[0])} ${dateLbl(s[0])}, ${s[1]} · ${esc(v.f||v.n)}</p><div class="acts">`
+    +(withTickets?`<a class="act main" href="${urlFor(s)}" target="_blank" rel="noopener">Buy tickets</a>`:"")
+    +`<a class="act" href="${googleUrl(calEvent(s))}" target="_blank" rel="noopener">Add to Google Calendar</a>`
+    +`<button class="act" data-ics="${s.i}">Add to Apple / Outlook calendar (.ics)</button></div>`;
+  const d=$("#tmenu");try{d.showModal()}catch(e){d.setAttribute("open","")}
+}
 function openSheet(f){
   const ss=live().filter(s=>s[0]<=horizon&&s[2]===f);const m=FM(f);const gc=gcTxt(f);
   $("#sheetBody").innerHTML=`<div class="sh">${posterImg(f)}<div><h3>${esc(f)}</h3>${m.yr?`<p>${esc(m.yr)}</p>`:""}${gc?`<p>${esc(gc)}</p>`:""}<p>${lbLink(f)}</p></div></div><div class="sbody">${timesBlock(ss)}</div>`;
@@ -257,7 +311,7 @@ function renderDates(){
   bar.scrollLeft=keep;
   // Every screening that day, in time order.
   const r=rows.filter(s=>s[0]===st.day).sort((a,b)=>a[1].localeCompare(b[1])||a[2].localeCompare(b[2]));
-  $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}, ${dateLbl(st.day)}<span class="muted">${r.length} screening${r.length===1?"":"s"}</span></h2>${r.map(s=>`<div class="srow">${tchip(s)}<div>${titleLine(s[2])}<span class="vtag" style="${col(s[3])}">${esc(V[s[3]].f||V[s[3]].n)}</span></div>${lbLink(s[2])}</div>`).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
+  $("#dayList").innerHTML=st.day?`<div class="day"><h2>${dayName(st.day)}, ${dateLbl(st.day)}<span class="muted">${r.length} screening${r.length===1?"":"s"}</span></h2>${r.map(s=>`<div class="srow">${tchip(s)}<div>${titleLine(s[2])}<span class="vtag" style="${col(s[3])}">${esc(V[s[3]].f||V[s[3]].n)}</span></div><div class="acts2">${lbLink(s[2])}${calBtn(s)}</div></div>`).join("")}</div>`:`<p class="empty">No screenings listed.</p>`;
 }
 
 // Drag the day strip sideways with the mouse (touch already scrolls natively); the wheel scrolls it too.
@@ -280,10 +334,15 @@ function render(){
 function show(view){st.view=view;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));$("#v-films-wrap").hidden=view!=="films";$("#v-dates").hidden=view!=="dates";render();window.scrollTo({top:0})}
 document.addEventListener("click",e=>{
   if(e.target===$("#sheet")){$("#sheet").close();return}
+  if(e.target===$("#tmenu")){$("#tmenu").close();return}
   const b=e.target.closest("button");if(!b)return;
   if(b.dataset.close)$("#sheet").close();
   else if(b.dataset.mode){st.mode=b.dataset.mode;save();renderFilms()}
   else if(b.dataset.film)openSheet(b.dataset.film);
+  else if(b.dataset.show)openTimeMenu(DATA.shows[+b.dataset.show],true);
+  else if(b.dataset.cal)openTimeMenu(DATA.shows[+b.dataset.cal],false);
+  else if(b.dataset.tclose)$("#tmenu").close();
+  else if(b.dataset.ics)downloadIcs(DATA.shows[+b.dataset.ics]);
   else if(b.dataset.view)show(b.dataset.view);
   else if(b.dataset.day){st.day=b.dataset.day;renderDates()}
   else if(b.dataset.scroll){const bar=$("#dayBar");bar.scrollBy({left:+b.dataset.scroll*bar.clientWidth*.8,behavior:"smooth"})}
@@ -297,6 +356,7 @@ $("#vpanel").addEventListener("click",e=>{const b=e.target.closest("[data-vfall]
 document.addEventListener("click",e=>{const d=$("#vf");if(d.open&&!d.contains(e.target))d.open=false});
 fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
   DATA=d;
+  DATA.shows.forEach((s,i)=>s.i=i);
   Object.entries(d.venues||{}).forEach(([k,v])=>{if(!V[k])V[k]={c:"--oth",...v}});
   const up=new Date(d.updated);
   const bad=Object.entries(d.status||{}).filter(([k,v])=>!v.ok&&V[k]).map(([k])=>V[k].n);

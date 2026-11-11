@@ -75,7 +75,7 @@ export async function enrich(title, hint = {}) {
   const key = title + (hint.tmdb ? "#" + hint.tmdb : hint.year ? "#" + hint.year : "");
   if (!process.env.TMDB_TOKEN || hint.skip) return cache[key] || null;
   // Cached entries from before languages were recorded get their details fetched again.
-  if (cache[key] && cache[key].companies !== undefined) return cache[key];
+  if (cache[key] && cache[key].runtime !== undefined) return cache[key];
   try {
     stats.lookups++;
     const id = cache[key]?.id || await find(title, hint);
@@ -93,6 +93,7 @@ export async function enrich(title, hint = {}) {
         budget: d.budget || 0,
         companies: (d.production_companies || []).map(c => c.name),
         // The film's original (main spoken) language, by its English name.
+        runtime: d.runtime || 0,
         lang: ((d.spoken_languages || []).find(l => l.iso_639_1 === d.original_language)?.english_name)
           || (d.original_language ? new Intl.DisplayNames(["en"], { type: "language" }).of(d.original_language) : "") || "",
       };
