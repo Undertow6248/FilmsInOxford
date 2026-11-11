@@ -2905,5 +2905,29 @@
   "companies": [],
   "runtime": 11,
   "lang": "English"
+ },
+ "exact:docteur david medecin roi": {
+  "title": "Docteur David, médecin roi",
+  "at": 1794410414520
+ },
+ "Docteur David, médecin roi": {
+  "id": 1820616,
+  "year": "2021",
+  "release": "2021-11-14",
+  "genres": [
+   "Documentary",
+   "History"
+  ],
+  "countries": [
+   "France"
+  ],
+  "poster": "/3cc921YO0A6QAsstOr5z54JnaXh.jpg",
+  "budget": 0,
+  "companies": [
+   "Galaxie",
+   "France Télévisions"
+  ],
+  "runtime": 0,
+  "lang": "French"
  }
 }
