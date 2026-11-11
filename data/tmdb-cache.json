@@ -2929,5 +2929,124 @@
   ],
   "runtime": 0,
   "lang": "French"
+ },
+ "The Mosquito Bowl": {
+  "id": 1458300,
+  "year": "2026",
+  "release": "2026-10-29",
+  "genres": [
+   "History",
+   "Drama",
+   "War"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/zbT4sxoCEeFWlQG4SC5X9Q8v6PC.jpg",
+  "budget": 30000000,
+  "companies": [
+   "Imagine Entertainment",
+   "Film 44"
+  ],
+  "runtime": 128,
+  "lang": "English"
+ },
+ "Minotaur": {
+  "id": 848700,
+  "year": "2026",
+  "release": "2026-10-14",
+  "genres": [
+   "Drama",
+   "Crime",
+   "Thriller"
+  ],
+  "countries": [
+   "France",
+   "Latvia",
+   "USA"
+  ],
+  "poster": "/bM37B5CuMWrPyGPpNsKzTGict4Q.jpg",
+  "budget": 0,
+  "companies": [
+   "MK Productions",
+   "CG Cinéma",
+   "Razor Film Produktion",
+   "Forma Pro Films",
+   "ARTE France Cinéma",
+   "ZDF",
+   "whiz movies",
+   "L.E.A.F. Entertainment"
+  ],
+  "runtime": 135,
+  "lang": "French"
+ },
+ "Josephine": {
+  "id": 1299329,
+  "year": "2026",
+  "release": "2026-11-19",
+  "genres": [
+   "Drama",
+   "Crime"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/8KTcbsdz2PcyA58puJMA3CUnZeA.jpg",
+  "budget": 0,
+  "companies": [
+   "Kaplan Morrison",
+   "Vibrato",
+   "Kinematics",
+   "Spark Features",
+   "Yintai Entertainment",
+   "Free Association",
+   "MACRO"
+  ],
+  "runtime": 119,
+  "lang": "English"
+ },
+ "45 Years": {
+  "id": 311291,
+  "year": "2015",
+  "release": "2015-05-29",
+  "genres": [
+   "Drama",
+   "Romance"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/8elIJYYXWq2HpcZ6TgVMC9EwTnn.jpg",
+  "budget": 0,
+  "companies": [
+   "Film4 Productions",
+   "Creative England",
+   "BFI",
+   "The Bureau"
+  ],
+  "runtime": 95,
+  "lang": "English"
+ },
+ "Candyman": {
+  "id": 9529,
+  "year": "1992",
+  "release": "1992-10-16",
+  "genres": [
+   "Drama",
+   "Horror",
+   "Thriller"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/jQtgkgDZE7egMq532sOt83DnT83.jpg",
+  "budget": 6000000,
+  "companies": [
+   "Propaganda Films",
+   "PolyGram Filmed Entertainment",
+   "Candyman Films"
+  ],
+  "runtime": 100,
+  "lang": "English"
  }
 }
