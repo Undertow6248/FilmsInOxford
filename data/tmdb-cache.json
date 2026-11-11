@@ -47,6 +47,7 @@
    "Aardman",
    "StudioCanal"
   ],
+  "runtime": 81,
   "lang": "English"
  },
  "Forgotten Island#2026": {
@@ -66,6 +67,7 @@
   "companies": [
    "DreamWorks Animation"
   ],
+  "runtime": 109,
   "lang": "English"
  },
  "Verity#2026": {
@@ -90,6 +92,7 @@
    "Amazon MGM Studios",
    "Big Indie Pictures"
   ],
+  "runtime": 117,
   "lang": "English"
  },
  "Heart of the Beast#2026": {
@@ -113,6 +116,7 @@
    "GulfStream Pictures",
    "Kino World"
   ],
+  "runtime": 101,
   "lang": "English"
  },
  "Pressure#2026": {
@@ -135,6 +139,7 @@
    "StudioCanal UK",
    "StudioCanal"
   ],
+  "runtime": 101,
   "lang": "English"
  },
  "Other Mommy#2026": {
@@ -153,6 +158,7 @@
    "Spin a Black Yarn",
    "Blumhouse Atomic"
   ],
+  "runtime": 93,
   "lang": "English"
  },
  "Whalefall#2026": {
@@ -268,6 +274,7 @@
    "PlayStation Productions",
    "TriStar Pictures"
   ],
+  "runtime": 94,
   "lang": "English"
  },
  "Spider-Man: Brand New Day#2026": {
@@ -355,6 +362,7 @@
    "M.A.R.K. 13",
    "Ikiru Films"
   ],
+  "runtime": 82,
   "lang": "English"
  },
  "Fatherland#2026": {
@@ -386,6 +394,7 @@
    "Pathé",
    "MUBI"
   ],
+  "runtime": 82,
   "lang": "Polish"
  },
  "Ghosts: The Possession of Button House#2026": {
@@ -407,6 +416,7 @@
    "Lionsgate UK",
    "Monumental Pictures"
   ],
+  "runtime": 97,
   "lang": "English"
  },
  "Klara and the Sun#2026": {
@@ -442,6 +452,7 @@
   "companies": [
    "LAIKA"
   ],
+  "runtime": 132,
   "lang": "English"
  },
  "Tenzing#2026": {
@@ -481,6 +492,7 @@
    "Troll Court Entertainment",
    "The Safran Company"
   ],
+  "runtime": 109,
   "lang": "English"
  },
  "The Lost Children of Tuam#2026": {
@@ -518,6 +530,7 @@
    "Placeholder Films",
    "Unseen Hand"
   ],
+  "runtime": 77,
   "lang": "English"
  },
  "Ali G: Who Iz I?#2026": {
@@ -686,6 +699,7 @@
    "Escape Plan",
    "Lobo Films"
   ],
+  "runtime": 105,
   "lang": "English"
  },
  "Nightborn#2026": {
@@ -723,6 +737,7 @@
    "Square Peg",
    "Range Media Partners"
   ],
+  "runtime": 110,
   "lang": "English"
  },
  "Radiohead X Nosferatu: A Symphony of Horror#1922": {
@@ -771,6 +786,7 @@
   "companies": [
    "Russo Productions"
   ],
+  "runtime": 112,
   "lang": "English"
  },
  "Beetlejuice#1988": {
@@ -923,6 +939,7 @@
    "Film4 Productions",
    "TSG Entertainment"
   ],
+  "runtime": 117,
   "lang": "English"
  },
  "28 Years Later#2025": {
@@ -1007,6 +1024,7 @@
    "Telefónica Audiovisual Digital",
    "Los Esquiadores"
   ],
+  "runtime": 159,
   "lang": "Spanish"
  },
  "The Scarecrows' Wedding": {
@@ -1048,6 +1066,7 @@
   "poster": "/coQu9VzxITnlRsOy0zn4oXT2Upy.jpg",
   "budget": 0,
   "companies": [],
+  "runtime": 108,
   "lang": "English"
  },
  "The Rocky Horror Picture Show#1975": {
@@ -1226,6 +1245,7 @@
    "L.E.A.F. Entertainment",
    "Mediefondet Zefyr"
   ],
+  "runtime": 146,
   "lang": "Romanian"
  },
  "Sing Sing#2023": {
@@ -1246,6 +1266,7 @@
    "El Artesano Films",
    "CharroNegro Films"
   ],
+  "runtime": 17,
   "lang": "Spanish"
  },
  "The Third Man#1949": {
@@ -1264,6 +1285,7 @@
   "companies": [
    "London Films Productions"
   ],
+  "runtime": 105,
   "lang": "English"
  },
  "Tampopo#1985": {
@@ -1282,6 +1304,7 @@
    "New Century Producers",
    "Itami Productions"
   ],
+  "runtime": 115,
   "lang": "Japanese"
  },
  "Becoming American: Philadelphia's Story#2026": {
@@ -1298,6 +1321,7 @@
    "PBS",
    "Bear House Media"
   ],
+  "runtime": 55,
   "lang": "English"
  },
  "Drain Flies#2026": {
@@ -1317,6 +1341,7 @@
   "companies": [
    "CircleSolid Films"
   ],
+  "runtime": 87,
   "lang": "English"
  },
  "The League of Gentlemen#1960": {
@@ -1335,6 +1360,7 @@
   "companies": [
    "Allied Film Makers"
   ],
+  "runtime": 116,
   "lang": "English"
  },
  "One Flew Over the Cuckoo's Nest#1975": {
@@ -1352,6 +1378,7 @@
   "companies": [
    "Fantasy Films"
   ],
+  "runtime": 135,
   "lang": "English"
  },
  "Who's Afraid Of Virginia Woolf": {
@@ -1385,6 +1412,7 @@
    "Capcom",
    "Legendary Pictures"
   ],
+  "runtime": 120,
   "lang": "English"
  },
  "Sorry to Bother You#2018": {
@@ -1495,6 +1523,7 @@
    "Robot Communications",
    "TOHO Studios"
   ],
+  "runtime": 135,
   "lang": "Japanese"
  },
  "Ramayana: Rise Of A Legend": {
@@ -1517,6 +1546,7 @@
    "Prime Focus Studios",
    "DNEG"
   ],
+  "runtime": 201,
   "lang": "Hindi"
  },
  "George Michael: The Faith Tour": {
@@ -1536,6 +1566,7 @@
    "George Michael Entertainment",
    "Universal Pictures Content Group"
   ],
+  "runtime": 113,
   "lang": "English"
  },
  "exact:harakiri": {
@@ -1662,6 +1693,7 @@
   "poster": "/wLecI5aX1igefG2hhqgazKYKRhF.jpg",
   "budget": 10000,
   "companies": [],
+  "runtime": 50,
   "lang": "English"
  },
  "Coup 53": {
@@ -1723,6 +1755,7 @@
    "Magic Light Pictures",
    "Blue-Zoo Animation Studio"
   ],
+  "runtime": 25,
   "lang": "English"
  },
  "Obsession": {
@@ -1761,6 +1794,7 @@
    "IN.2 FILM",
    "Black Label Media"
   ],
+  "runtime": 115,
   "lang": "English"
  },
  "Mifune's Last Song#1999": {
@@ -1784,6 +1818,7 @@
    "SVT Drama",
    "Zentropa Entertainments"
   ],
+  "runtime": 98,
   "lang": "Danish"
  },
  "exact:the third man": {
@@ -1808,6 +1843,7 @@
    "NOWFILM",
    "Anonymous Content"
   ],
+  "runtime": 165,
   "lang": "Korean"
  },
  "The Peanuts Movie#2015": {
@@ -1831,6 +1867,7 @@
    "Feigco Entertainment",
    "Peanuts Worldwide"
   ],
+  "runtime": 88,
   "lang": "English"
  },
  "Hotel Transylvania": {
@@ -1942,6 +1979,7 @@
    "Metro Designers Productions",
    "The Sun Exploding Words, Sounds, & Pictures"
   ],
+  "runtime": 113,
   "lang": "English"
  },
  "Bad Day at the Office": {
@@ -1974,6 +2012,7 @@
   "companies": [
    "Paramount Pictures"
   ],
+  "runtime": 107,
   "lang": "English"
  },
  "A Talent for Murder": {
@@ -2005,6 +2044,7 @@
    "FilmNation Entertainment",
    "Switzerland the Film"
   ],
+  "runtime": 106,
   "lang": "English"
  },
  "exact:the rocky horror picture show": {
@@ -2032,6 +2072,7 @@
    "about:blank",
    "Studio Babelsberg"
   ],
+  "runtime": 159,
   "lang": "English"
  },
  "Kamikaze Girls": {
@@ -2057,6 +2098,7 @@
    "Horipro",
    "Tokyo FM"
   ],
+  "runtime": 102,
   "lang": "Japanese"
  },
  "exact:sing sing and conversation with ambassadors the ppt": {
@@ -2078,6 +2120,7 @@
   "companies": [
    "Winkler Films"
   ],
+  "runtime": 119,
   "lang": "English"
  },
  "Pip and Posy: Sandpit Friends": {
@@ -2089,6 +2132,7 @@
   "poster": "/fnAQsauDPWajvntFw8gPK83pfdS.jpg",
   "budget": 0,
   "companies": [],
+  "runtime": 60,
   "lang": "English"
  },
  "Mauvais Sang#1986": {
@@ -2110,6 +2154,7 @@
    "Les Films Plain Chant",
    "FR3 Films Production"
   ],
+  "runtime": 119,
   "lang": "French"
  },
  "The Play": {
@@ -2127,6 +2172,7 @@
   "companies": [
    "National Commission for Culture and the Arts"
   ],
+  "runtime": 11,
   "lang": "Tagalog"
  },
  "exact:return": {
@@ -2152,6 +2198,7 @@
    "J.C.STAFF",
    "Bandai Visual"
   ],
+  "runtime": 60,
   "lang": "Japanese"
  },
  "You Can See Everything": {
@@ -2171,6 +2218,7 @@
    "To Be Formed",
    "A24"
   ],
+  "runtime": 174,
   "lang": "English"
  },
  "exact:30pm this": {
@@ -2220,6 +2268,7 @@
    "Salon Films",
    "Era International"
   ],
+  "runtime": 125,
   "lang": "Mandarin"
  },
  "Sunset Boulevard": {
@@ -2237,6 +2286,7 @@
   "companies": [
    "Paramount Pictures"
   ],
+  "runtime": 110,
   "lang": "English"
  },
  "I Play Rocky": {
@@ -2260,6 +2310,7 @@
    "FilmNation Entertainment",
    "International Media Funds Management"
   ],
+  "runtime": 128,
   "lang": "English"
  },
  "Prima Facie": {
@@ -2279,6 +2330,7 @@
    "Bunya Productions",
    "Embankment Films"
   ],
+  "runtime": 109,
   "lang": "English"
  },
  "Doctor Who: The Satan Pit": {
@@ -2298,6 +2350,7 @@
   "companies": [
    "BBC Studios"
   ],
+  "runtime": 120,
   "lang": "English"
  },
  "English": {
@@ -2317,6 +2370,7 @@
    "Savant Entertainment",
    "H1t Entertainment"
   ],
+  "runtime": 80,
   "lang": "English"
  },
  "Marie Antoinette": {
@@ -2340,6 +2394,7 @@
    "American Zoetrope",
    "TFC"
   ],
+  "runtime": 123,
   "lang": "English"
  },
  "Flow": {
@@ -2405,6 +2460,7 @@
   "companies": [
    "DACFILM Rome"
   ],
+  "runtime": 115,
   "lang": "English"
  },
  "The Hunger Games: Sunrise on the Reaping": {
@@ -2443,6 +2499,7 @@
    "The Guber-Peters Company",
    "Polygram Pictures"
   ],
+  "runtime": 94,
   "lang": "English"
  },
  "exact:calligraphic journeys": {
@@ -2481,6 +2538,7 @@
    "Sony Pictures Animation",
    "Aardman"
   ],
+  "runtime": 97,
   "lang": "English"
  },
  "Andrew Lloyd Webber's Starlight Express - Live On Stage": {
@@ -2498,6 +2556,7 @@
   "companies": [
    "Universal Pictures Content Group"
   ],
+  "runtime": 125,
   "lang": "English"
  },
  "Samurai Cop": {
@@ -2517,6 +2576,7 @@
   "companies": [
    "Hollywood Royal Pictures"
   ],
+  "runtime": 96,
   "lang": "English"
  },
  "TOITŪ: Visual Sovereignty": {
@@ -2532,6 +2592,7 @@
   "poster": "/29vToeV7GFrQnlyhWu49JsBbnT1.jpg",
   "budget": 0,
   "companies": [],
+  "runtime": 101,
   "lang": "English"
  },
  "exact:zonasur cinema club geographies of evil geografias del mal": {
@@ -2565,6 +2626,7 @@
    "Universal Pictures",
    "Kennedy Miller Productions"
   ],
+  "runtime": 92,
   "lang": "English"
  },
  "Witness for the Prosecution": {
@@ -2584,6 +2646,7 @@
   "companies": [
    "Edward Small Productions"
   ],
+  "runtime": 116,
   "lang": "English"
  },
  "The Five Obstructions#2003": {
@@ -2606,6 +2669,7 @@
    "Almaz Film Productions",
    "Zentropa Entertainments"
   ],
+  "runtime": 88,
   "lang": "Danish"
  },
  "American Doctor": {
@@ -2628,6 +2692,7 @@
    "Watermelon Pictures",
    "ALEF Multimedia"
   ],
+  "runtime": 91,
   "lang": "English"
  },
  "exact:the league of gentlemen": {
@@ -2653,6 +2718,7 @@
    "Imagine Entertainment",
    "Amazon MGM Studios"
   ],
+  "runtime": 122,
   "lang": "English"
  },
  "The Color of Money": {
@@ -2671,6 +2737,7 @@
    "Touchstone Pictures",
    "Silver Screen Partners II"
   ],
+  "runtime": 119,
   "lang": "English"
  },
  "exact:the holiday film with live orchestra": {
@@ -2695,6 +2762,7 @@
    "New Line Cinema",
    "Guy Walks into a Bar Productions"
   ],
+  "runtime": 97,
   "lang": "English"
  },
  "How the Grinch Stole Christmas": {
@@ -2717,6 +2785,7 @@
    "Imagine Entertainment",
    "LUNI Productions"
   ],
+  "runtime": 105,
   "lang": "English"
  },
  "It Was Just an Accident#2025": {
@@ -2742,6 +2811,7 @@
    "Pio & Co",
    "ARTE France Cinéma"
   ],
+  "runtime": 103,
   "lang": "French"
  },
  "I See Buildings Fall Like Lightning": {
@@ -2763,6 +2833,7 @@
    "BFI",
    "TPC"
   ],
+  "runtime": 109,
   "lang": "English"
  },
  "Home Alone": {
@@ -2782,6 +2853,7 @@
    "Hughes Entertainment",
    "20th Century Fox"
   ],
+  "runtime": 103,
   "lang": "English"
  }
 }
