@@ -34,14 +34,19 @@
   "release": "2026-09-17",
   "genres": [
    "Animation",
-   "Comedy",
-   "Family"
+   "Sci-fi",
+   "Comedy"
   ],
   "countries": [
    "UK",
    "France"
   ],
-  "poster": "/mMOptSPBVGUA9GHgnpsC35GzZ7e.jpg",
+  "poster": "/gayX49siwXf8eNs16rtk1fI91Ey.jpg",
+  "budget": 30000000,
+  "companies": [
+   "Aardman",
+   "StudioCanal"
+  ],
   "lang": "English"
  },
  "Forgotten Island#2026": {
@@ -57,6 +62,10 @@
    "USA"
   ],
   "poster": "/myd1K3gefdNAWFsGNRDdMeiK9Qg.jpg",
+  "budget": 80000000,
+  "companies": [
+   "DreamWorks Animation"
+  ],
   "lang": "English"
  },
  "Verity#2026": {
@@ -70,7 +79,17 @@
   "countries": [
    "USA"
   ],
-  "poster": "/zPHfsaiMZT1HNz1ZS55iyLKZkFG.jpg",
+  "poster": "/rmaNMA1seHqpjtnYKzyynFAr1g8.jpg",
+  "budget": 40000000,
+  "companies": [
+   "Eat the Cat",
+   "Semi-Formal Productions",
+   "Somewhere Pictures",
+   "Shiny Penny Productions",
+   "Heartbones Entertainment",
+   "Amazon MGM Studios",
+   "Big Indie Pictures"
+  ],
   "lang": "English"
  },
  "Heart of the Beast#2026": {
@@ -84,7 +103,16 @@
   "countries": [
    "USA"
   ],
-  "poster": "/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
+  "poster": "/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg",
+  "budget": 82000000,
+  "companies": [
+   "Paramount Pictures",
+   "Wild Chickens Productions",
+   "Temple Hill Entertainment",
+   "Domain Entertainment",
+   "GulfStream Pictures",
+   "Kino World"
+  ],
   "lang": "English"
  },
  "Pressure#2026": {
@@ -101,6 +129,12 @@
    "France"
   ],
   "poster": "/gFjEggtrejCN79r6SXRjM269OtG.jpg",
+  "budget": 30000000,
+  "companies": [
+   "Working Title",
+   "StudioCanal UK",
+   "StudioCanal"
+  ],
   "lang": "English"
  },
  "Other Mommy#2026": {
@@ -113,7 +147,12 @@
   "countries": [
    "USA"
   ],
-  "poster": "/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
+  "poster": "/kNxRgcTeqeU5jauBackTERoO2De.jpg",
+  "budget": 18000000,
+  "companies": [
+   "Spin a Black Yarn",
+   "Blumhouse Atomic"
+  ],
   "lang": "English"
  },
  "Whalefall#2026": {
@@ -218,7 +257,17 @@
    "Germany",
    "France"
   ],
-  "poster": "/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+  "poster": "/gAgWJhUSQWCgtKR8170nMkYlBda.jpg",
+  "budget": 75000000,
+  "companies": [
+   "Constantin Film",
+   "Subconscious",
+   "Vertigo Entertainment",
+   "Davis Films",
+   "Columbia Pictures",
+   "PlayStation Productions",
+   "TriStar Pictures"
+  ],
   "lang": "English"
  },
  "Spider-Man: Brand New Day#2026": {
@@ -297,8 +346,16 @@
    "Germany",
    "Spain"
   ],
-  "poster": "/yQAczp5MMJs9neodhcm3spv9xtv.jpg",
-  "lang": "German"
+  "poster": "/rlAFhlAdaUoujDxWRxBCVwM8esY.jpg",
+  "budget": 10400000,
+  "companies": [
+   "ARX Anima",
+   "Arxlight Pictures",
+   "P!B!T! Films",
+   "M.A.R.K. 13",
+   "Ikiru Films"
+  ],
+  "lang": "English"
  },
  "Fatherland#2026": {
   "id": 1437696,
@@ -314,6 +371,21 @@
    "France"
   ],
   "poster": "/oNejN1l69nBF8LdQwy5FkAQZT44.jpg",
+  "budget": 11700000,
+  "companies": [
+   "Our Films",
+   "Extreme Emotions",
+   "Nine Hours",
+   "Chapter 2",
+   "Wytwórnia Filmów Fabularnych we Wrocławiu",
+   "CANAL+ Polska",
+   "Dolnośląskie Centrum Filmowe",
+   "Silesia Film",
+   "Circle One",
+   "ARTE France Cinéma",
+   "Pathé",
+   "MUBI"
+  ],
   "lang": "Polish"
  },
  "Ghosts: The Possession of Button House#2026": {
@@ -328,6 +400,13 @@
    "UK"
   ],
   "poster": "/vdRbC8masrQDyhFHLOGECEMllPV.jpg",
+  "budget": 0,
+  "companies": [
+   "BBC Film",
+   "BBC Studios",
+   "Lionsgate UK",
+   "Monumental Pictures"
+  ],
   "lang": "English"
  },
  "Klara and the Sun#2026": {
@@ -359,6 +438,10 @@
    "USA"
   ],
   "poster": "/snFM00mpNAfUzUtkdEW0uDEvXA0.jpg",
+  "budget": 100000000,
+  "companies": [
+   "LAIKA"
+  ],
   "lang": "English"
  },
  "Tenzing#2026": {
@@ -389,7 +472,15 @@
   "countries": [
    "USA"
   ],
-  "poster": "/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg",
+  "poster": "/9l1NuFjel2j89hiuiJbsxfblqjy.jpg",
+  "budget": 44000000,
+  "companies": [
+   "DC Studios",
+   "Domain Entertainment",
+   "6th & Idaho Motion Picture Company",
+   "Troll Court Entertainment",
+   "The Safran Company"
+  ],
   "lang": "English"
  },
  "The Lost Children of Tuam#2026": {
@@ -413,14 +504,20 @@
   "year": "2026",
   "release": "2026-09-25",
   "genres": [
-   "Documentary",
-   "War"
+   "Documentary"
   ],
   "countries": [
    "USA",
    "UK"
   ],
-  "poster": "/b4Gyj8VRoJAeU13jfKPuOTMr5GL.jpg",
+  "poster": "/cbxiZ1l21KUATu2KKQQ8J8fJhpe.jpg",
+  "budget": 0,
+  "companies": [
+   "The Guardian",
+   "JW Films",
+   "Placeholder Films",
+   "Unseen Hand"
+  ],
   "lang": "English"
  },
  "Ali G: Who Iz I?#2026": {
@@ -579,6 +676,16 @@
    "USA"
   ],
   "poster": "/6FcBZOKvyrLCKGCyBG0ySCR4okt.jpg",
+  "budget": 10000000,
+  "companies": [
+   "Topic Studios",
+   "Tango Entertainment",
+   "South of the River Pictures",
+   "Votiv Films",
+   "Yoki",
+   "Escape Plan",
+   "Lobo Films"
+  ],
   "lang": "English"
  },
  "Nightborn#2026": {
@@ -601,13 +708,21 @@
   "year": "2026",
   "release": "2026-09-23",
   "genres": [
+   "Thriller",
    "Drama",
-   "Thriller"
+   "Crime"
   ],
   "countries": [
    "USA"
   ],
   "poster": "/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+  "budget": 14500000,
+  "companies": [
+   "A24",
+   "Icki Eneo Arlo",
+   "Square Peg",
+   "Range Media Partners"
+  ],
   "lang": "English"
  },
  "Radiohead X Nosferatu: A Symphony of Horror#1922": {
@@ -652,6 +767,10 @@
    "UK"
   ],
   "poster": "/y1k7eiOFc6fzm8XeTa1kNGx6JIs.jpg",
+  "budget": 4800000,
+  "companies": [
+   "Russo Productions"
+  ],
   "lang": "English"
  },
  "Beetlejuice#1988": {
@@ -797,6 +916,13 @@
    "USA"
   ],
   "poster": "/dNJFRtVg3xLQ7dbNIQ55cmmIniD.jpg",
+  "budget": 13000000,
+  "companies": [
+   "Searchlight Pictures",
+   "Blueprint Pictures",
+   "Film4 Productions",
+   "TSG Entertainment"
+  ],
   "lang": "English"
  },
  "28 Years Later#2025": {
@@ -872,7 +998,15 @@
    "Spain",
    "France"
   ],
-  "poster": "/jT5SR5qc9KvVg7HUEmjMWEUYMce.jpg",
+  "poster": "/7HwFQTMghL6HOvzEnXYUvyuZXeh.jpg",
+  "budget": 11100000,
+  "companies": [
+   "Movistar Plus",
+   "Le Pacte",
+   "El Deseo",
+   "Telefónica Audiovisual Digital",
+   "Los Esquiadores"
+  ],
   "lang": "Spanish"
  },
  "The Scarecrows' Wedding": {
@@ -912,6 +1046,8 @@
   ],
   "countries": [],
   "poster": "/coQu9VzxITnlRsOy0zn4oXT2Upy.jpg",
+  "budget": 0,
+  "companies": [],
   "lang": "English"
  },
  "The Rocky Horror Picture Show#1975": {
@@ -1074,7 +1210,22 @@
    "Norway",
    "France"
   ],
-  "poster": "/rhKlzjAJCEKUjxEk1qwr4bgbXlG.jpg",
+  "poster": "/3PPPIeSdeivjUn3O9RahGiaJ9b8.jpg",
+  "budget": 4750000,
+  "companies": [
+   "Mobra Films",
+   "Why Not Productions",
+   "Eye Eye Pictures",
+   "Snowglobe",
+   "Aamu Film Company",
+   "Garagefilm International",
+   "Film i Väst",
+   "France 3 Cinéma",
+   "Goodfellas",
+   "Library Pictures International",
+   "L.E.A.F. Entertainment",
+   "Mediefondet Zefyr"
+  ],
   "lang": "Romanian"
  },
  "Sing Sing#2023": {
@@ -1090,6 +1241,11 @@
    "Mexico"
   ],
   "poster": "/oZp8M5hY8aXzsbrGlVGC3qg82w3.jpg",
+  "budget": 4000,
+  "companies": [
+   "El Artesano Films",
+   "CharroNegro Films"
+  ],
   "lang": "Spanish"
  },
  "The Third Man#1949": {
@@ -1104,6 +1260,10 @@
    "UK"
   ],
   "poster": "/vqnFHTx1phgTAsLfxZoejSbMVHA.jpg",
+  "budget": 0,
+  "companies": [
+   "London Films Productions"
+  ],
   "lang": "English"
  },
  "Tampopo#1985": {
@@ -1117,6 +1277,11 @@
    "Japan"
   ],
   "poster": "/ArYdSuX3zY9fMsE4LqmBl7xJq5R.jpg",
+  "budget": 1500000,
+  "companies": [
+   "New Century Producers",
+   "Itami Productions"
+  ],
   "lang": "Japanese"
  },
  "Becoming American: Philadelphia's Story#2026": {
@@ -1128,12 +1293,17 @@
   ],
   "countries": [],
   "poster": "/kNqC2xkr3UGn8x7c6eiUNuyZ7HL.jpg",
+  "budget": 0,
+  "companies": [
+   "PBS",
+   "Bear House Media"
+  ],
   "lang": "English"
  },
  "Drain Flies#2026": {
   "id": 1743005,
   "year": "2026",
-  "release": "2026-09-01",
+  "release": "2026-10-15",
   "genres": [
    "Crime",
    "Drama",
@@ -1143,6 +1313,10 @@
    "UK"
   ],
   "poster": "/12mcPZ5ChvfkJvhGG77Pi62uocy.jpg",
+  "budget": 0,
+  "companies": [
+   "CircleSolid Films"
+  ],
   "lang": "English"
  },
  "The League of Gentlemen#1960": {
@@ -1157,6 +1331,10 @@
    "UK"
   ],
   "poster": "/6lJvpL5Z3qZxegmJHUpjGsWROtW.jpg",
+  "budget": 0,
+  "companies": [
+   "Allied Film Makers"
+  ],
   "lang": "English"
  },
  "One Flew Over the Cuckoo's Nest#1975": {
@@ -1170,6 +1348,10 @@
    "USA"
   ],
   "poster": "/kjWsMh72V6d8KRLV4EOoSJLT1H7.jpg",
+  "budget": 3000000,
+  "companies": [
+   "Fantasy Films"
+  ],
   "lang": "English"
  },
  "Who's Afraid Of Virginia Woolf": {
@@ -1190,13 +1372,19 @@
   "release": "2026-10-13",
   "genres": [
    "Action",
-   "Fantasy"
+   "Fantasy",
+   "Comedy"
   ],
   "countries": [
    "Japan",
    "USA"
   ],
-  "poster": "/ccxdepKqORLwccbzvO4eAGkN0IC.jpg",
+  "poster": "/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg",
+  "budget": 82000000,
+  "companies": [
+   "Capcom",
+   "Legendary Pictures"
+  ],
   "lang": "English"
  },
  "Sorry to Bother You#2018": {
@@ -1301,6 +1489,12 @@
    "Japan"
   ],
   "poster": "/hSmIJluOJmTWvJs4d7kHRxjc8s8.jpg",
+  "budget": 15000000,
+  "companies": [
+   "TOHO",
+   "Robot Communications",
+   "TOHO Studios"
+  ],
   "lang": "Japanese"
  },
  "Ramayana: Rise Of A Legend": {
@@ -1316,21 +1510,32 @@
    "India",
    "UK"
   ],
-  "poster": "/hX94xNPYwazKOVGGqL1GiwMSNuY.jpg",
+  "poster": "/dPrtk4iNf6T5w8fWfg4uxDDbJSW.jpg",
+  "budget": 260000000,
+  "companies": [
+   "Monster Mind Creations",
+   "Prime Focus Studios",
+   "DNEG"
+  ],
   "lang": "Hindi"
  },
  "George Michael: The Faith Tour": {
   "id": 1649403,
   "year": "2026",
-  "release": "2026-11-05",
+  "release": "2026-11-04",
   "genres": [
-   "Music",
-   "Documentary"
+   "Music"
   ],
   "countries": [
    "UK"
   ],
   "poster": "/LXqHnaJ4ffkcx5YCuJN1noxkhr.jpg",
+  "budget": 0,
+  "companies": [
+   "Mercury Studios",
+   "George Michael Entertainment",
+   "Universal Pictures Content Group"
+  ],
   "lang": "English"
  },
  "exact:harakiri": {
@@ -1455,6 +1660,8 @@
   ],
   "countries": [],
   "poster": "/wLecI5aX1igefG2hhqgazKYKRhF.jpg",
+  "budget": 10000,
+  "companies": [],
   "lang": "English"
  },
  "Coup 53": {
@@ -1511,6 +1718,11 @@
    "UK"
   ],
   "poster": "/hzvZDTb9r9Yceomz2GCHn2eneiD.jpg",
+  "budget": 0,
+  "companies": [
+   "Magic Light Pictures",
+   "Blue-Zoo Animation Studio"
+  ],
   "lang": "English"
  },
  "Obsession": {
@@ -1540,7 +1752,15 @@
    "USA",
    "UK"
   ],
-  "poster": "/6H2N59jJW1hZEzn2ZdrMvJw5vNI.jpg",
+  "poster": "/wbTHJ5VzOjEq02PYHkLAL7yhhBn.jpg",
+  "budget": 38000000,
+  "companies": [
+   "Paramount Pictures",
+   "Domain Entertainment",
+   "Wattsco",
+   "IN.2 FILM",
+   "Black Label Media"
+  ],
   "lang": "English"
  },
  "Mifune's Last Song#1999": {
@@ -1557,6 +1777,13 @@
    "Sweden"
   ],
   "poster": "/qEg7dmFcPqjF5kBYD0Bkz2CVyYB.jpg",
+  "budget": 0,
+  "companies": [
+   "Nimbus Film",
+   "DR",
+   "SVT Drama",
+   "Zentropa Entertainments"
+  ],
   "lang": "Danish"
  },
  "exact:the third man": {
@@ -1574,7 +1801,13 @@
    "South Korea",
    "USA"
   ],
-  "poster": "/dLz9yHeLw4x4sD0WTSNi7HuK2ke.jpg",
+  "poster": "/1ERGPNiKtnEcsvJS1ywsmqmcIDO.jpg",
+  "budget": 0,
+  "companies": [
+   "Pinehouse Film",
+   "NOWFILM",
+   "Anonymous Content"
+  ],
   "lang": "Korean"
  },
  "The Peanuts Movie#2015": {
@@ -1590,6 +1823,14 @@
    "USA"
   ],
   "poster": "/aiwdwnl7RFs1vcBanOKr13ye3wE.jpg",
+  "budget": 99000000,
+  "companies": [
+   "Blue Sky Studios",
+   "20th Century Fox Animation",
+   "20th Century Fox",
+   "Feigco Entertainment",
+   "Peanuts Worldwide"
+  ],
   "lang": "English"
  },
  "Hotel Transylvania": {
@@ -1691,6 +1932,16 @@
    "USA"
   ],
   "poster": "/4pNKIUFy7tkZiBx0rnSmG9ysRy.jpg",
+  "budget": 20000000,
+  "companies": [
+   "Savage Rose Films",
+   "Waypoint Entertainment",
+   "Ryder Picture Company",
+   "Annapurna Pictures",
+   "NEON",
+   "Metro Designers Productions",
+   "The Sun Exploding Words, Sounds, & Pictures"
+  ],
   "lang": "English"
  },
  "Bad Day at the Office": {
@@ -1719,6 +1970,10 @@
    "USA"
   ],
   "poster": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg",
+  "budget": 927262,
+  "companies": [
+   "Paramount Pictures"
+  ],
   "lang": "English"
  },
  "A Talent for Murder": {
@@ -1736,6 +1991,20 @@
    "UK"
   ],
   "poster": "/mstDPKNKgSGFvVFVdfzeMNkcyw2.jpg",
+  "budget": 0,
+  "companies": [
+   "Lunar Pictures",
+   "Lucky Red",
+   "Zurich Avenue",
+   "LD Entertainment",
+   "Magnolia Mae Films",
+   "Head Gear Films",
+   "Metrol Technology",
+   "Brouhaha Entertainment",
+   "Vacancy Films",
+   "FilmNation Entertainment",
+   "Switzerland the Film"
+  ],
   "lang": "English"
  },
  "exact:the rocky horror picture show": {
@@ -1755,7 +2024,14 @@
    "USA",
    "Germany"
   ],
-  "poster": "/jNcZH8yplxttRlf0wwqfGGMKHxX.jpg",
+  "poster": "/j1MNyNNgNQL6f27cb3m3uKaPKd6.jpg",
+  "budget": 200000000,
+  "companies": [
+   "Lionsgate",
+   "Color Force",
+   "about:blank",
+   "Studio Babelsberg"
+  ],
   "lang": "English"
  },
  "Kamikaze Girls": {
@@ -1768,7 +2044,19 @@
   "countries": [
    "Japan"
   ],
-  "poster": "/7CJTjqJW2Dd5frfogRBYI1fxCDN.jpg",
+  "poster": "/pWKZlOCJzYUH6fLzbCgtuIA5Gcn.jpg",
+  "budget": 0,
+  "companies": [
+   "Amuse Pictures",
+   "Hakuhodo DY Media Partners",
+   "Ogura Jimusyo",
+   "PARCO",
+   "Shogakukan",
+   "TOHO",
+   "TBS",
+   "Horipro",
+   "Tokyo FM"
+  ],
   "lang": "Japanese"
  },
  "exact:sing sing and conversation with ambassadors the ppt": {
@@ -1785,7 +2073,11 @@
   "countries": [
    "USA"
   ],
-  "poster": "/raayaQ9WTUGolsYHPWc2bGonu58.jpg",
+  "poster": "/1mcJmdbRLusxhoSGjFI3pbEboXt.jpg",
+  "budget": 970000,
+  "companies": [
+   "Winkler Films"
+  ],
   "lang": "English"
  },
  "Pip and Posy: Sandpit Friends": {
@@ -1795,6 +2087,8 @@
   "genres": [],
   "countries": [],
   "poster": "/fnAQsauDPWajvntFw8gPK83pfdS.jpg",
+  "budget": 0,
+  "companies": [],
   "lang": "English"
  },
  "Mauvais Sang#1986": {
@@ -1810,6 +2104,12 @@
    "France"
   ],
   "poster": "/yjUmAFx8Z3E0K1IUpQSyUilL5P9.jpg",
+  "budget": 0,
+  "companies": [
+   "Soprofilms",
+   "Les Films Plain Chant",
+   "FR3 Films Production"
+  ],
   "lang": "French"
  },
  "The Play": {
@@ -1823,6 +2123,10 @@
    "Philippines"
   ],
   "poster": "/8bhqVFgLD6pQqrXfXoNOsNJtwIC.jpg",
+  "budget": 0,
+  "companies": [
+   "National Commission for Culture and the Arts"
+  ],
   "lang": "Tagalog"
  },
  "exact:return": {
@@ -1842,6 +2146,12 @@
    "Japan"
   ],
   "poster": "/fNQx9YD4nxpcWvriVm1paIxbMwB.jpg",
+  "budget": 0,
+  "companies": [
+   "Toei Animation",
+   "J.C.STAFF",
+   "Bandai Visual"
+  ],
   "lang": "Japanese"
  },
  "You Can See Everything": {
@@ -1855,6 +2165,12 @@
    "USA"
   ],
   "poster": "/Ap8QwmKfSjYbWC4XIP8w9pdn72O.jpg",
+  "budget": 7000000,
+  "companies": [
+   "Blow Out Productions",
+   "To Be Formed",
+   "A24"
+  ],
   "lang": "English"
  },
  "exact:30pm this": {
@@ -1897,6 +2213,13 @@
    "Hong Kong"
   ],
   "poster": "/j6MGZpg55cTqlHHwahBtzI2qQg1.jpg",
+  "budget": 1000000,
+  "companies": [
+   "China Film Co-Production",
+   "Century Communications",
+   "Salon Films",
+   "Era International"
+  ],
   "lang": "Mandarin"
  },
  "Sunset Boulevard": {
@@ -1910,6 +2233,10 @@
    "USA"
   ],
   "poster": "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
+  "budget": 1752000,
+  "companies": [
+   "Paramount Pictures"
+  ],
   "lang": "English"
  },
  "I Play Rocky": {
@@ -1925,6 +2252,14 @@
    "Australia"
   ],
   "poster": "/xE5tY3lppZUyG7WKKThsuYHuAHr.jpg",
+  "budget": 27000000,
+  "companies": [
+   "Eden Rock Media",
+   "Baha Productions",
+   "Fireside Films",
+   "FilmNation Entertainment",
+   "International Media Funds Management"
+  ],
   "lang": "English"
  },
  "Prima Facie": {
@@ -1939,6 +2274,11 @@
    "UK"
   ],
   "poster": "/elHXJ7WI12COrptmrwGWkgMaCmL.jpg",
+  "budget": 0,
+  "companies": [
+   "Bunya Productions",
+   "Embankment Films"
+  ],
   "lang": "English"
  },
  "Doctor Who: The Satan Pit": {
@@ -1954,6 +2294,10 @@
    "UK"
   ],
   "poster": "/zaR2tGiaDjbenNAWMYKo6E7zmRB.jpg",
+  "budget": 0,
+  "companies": [
+   "BBC Studios"
+  ],
   "lang": "English"
  },
  "English": {
@@ -1967,6 +2311,12 @@
    "USA"
   ],
   "poster": "/7ViVioAG93Xu068ZmyaccIeVduu.jpg",
+  "budget": 500000,
+  "companies": [
+   "Pinnacle Wave Studios",
+   "Savant Entertainment",
+   "H1t Entertainment"
+  ],
   "lang": "English"
  },
  "Marie Antoinette": {
@@ -1983,6 +2333,13 @@
    "France"
   ],
   "poster": "/cybXGmv8Rjd5Os8Xml6YxMBQ0Zt.jpg",
+  "budget": 40000000,
+  "companies": [
+   "Pricel",
+   "Columbia Pictures",
+   "American Zoetrope",
+   "TFC"
+  ],
   "lang": "English"
  },
  "Flow": {
@@ -2044,6 +2401,10 @@
    "Italy"
   ],
   "poster": "/dhk14s8ogQkbf6re3HLKV2UBHjx.jpg",
+  "budget": 3800000,
+  "companies": [
+   "DACFILM Rome"
+  ],
   "lang": "English"
  },
  "The Hunger Games: Sunrise on the Reaping": {
@@ -2075,6 +2436,13 @@
    "USA"
   ],
   "poster": "/aRxbYOYHS8T73nzR8hsLousoplR.jpg",
+  "budget": 15000000,
+  "companies": [
+   "Debra Hill Productions",
+   "Paramount Pictures",
+   "The Guber-Peters Company",
+   "Polygram Pictures"
+  ],
   "lang": "English"
  },
  "exact:calligraphic journeys": {
@@ -2107,6 +2475,12 @@
    "USA"
   ],
   "poster": "/brELZkSbkLrcCXJ0xt5hQUMXhut.jpg",
+  "budget": 10000000,
+  "companies": [
+   "Columbia Pictures",
+   "Sony Pictures Animation",
+   "Aardman"
+  ],
   "lang": "English"
  },
  "Andrew Lloyd Webber's Starlight Express - Live On Stage": {
@@ -2120,6 +2494,10 @@
    "UK"
   ],
   "poster": "/aE8fTHv9lKYmKBM6eqzvCfki8Bw.jpg",
+  "budget": 0,
+  "companies": [
+   "Universal Pictures Content Group"
+  ],
   "lang": "English"
  },
  "Samurai Cop": {
@@ -2135,6 +2513,10 @@
    "USA"
   ],
   "poster": "/4M2FSwfTvhmP4ubF47UKS86BKYO.jpg",
+  "budget": 0,
+  "companies": [
+   "Hollywood Royal Pictures"
+  ],
   "lang": "English"
  },
  "TOITŪ: Visual Sovereignty": {
@@ -2148,6 +2530,8 @@
    "New Zealand"
   ],
   "poster": "/29vToeV7GFrQnlyhWu49JsBbnT1.jpg",
+  "budget": 0,
+  "companies": [],
   "lang": "English"
  },
  "exact:zonasur cinema club geographies of evil geografias del mal": {
@@ -2176,6 +2560,11 @@
    "USA"
   ],
   "poster": "/zKuQMtnbVTz9DsOnOJmlW71v4qH.jpg",
+  "budget": 30000000,
+  "companies": [
+   "Universal Pictures",
+   "Kennedy Miller Productions"
+  ],
   "lang": "English"
  },
  "Witness for the Prosecution": {
@@ -2191,6 +2580,10 @@
    "USA"
   ],
   "poster": "/bCj4EfuehAlgBwVd3diyWyhuuau.jpg",
+  "budget": 3000000,
+  "companies": [
+   "Edward Small Productions"
+  ],
   "lang": "English"
  },
  "The Five Obstructions#2003": {
@@ -2206,6 +2599,13 @@
    "France"
   ],
   "poster": "/xMcCmIdos88yd44xqCXj4NUWph3.jpg",
+  "budget": 0,
+  "companies": [
+   "Panic Productions",
+   "Wajnbrosse Productions",
+   "Almaz Film Productions",
+   "Zentropa Entertainments"
+  ],
   "lang": "Danish"
  },
  "American Doctor": {
@@ -2221,6 +2621,13 @@
    "Denmark"
   ],
   "poster": "/sOSrlaXvItVdwU1P5Qpttcl12sd.jpg",
+  "budget": 875000,
+  "companies": [
+   "Elk Film",
+   "Tiny Boxer Films",
+   "Watermelon Pictures",
+   "ALEF Multimedia"
+  ],
   "lang": "English"
  },
  "exact:the league of gentlemen": {
@@ -2239,7 +2646,13 @@
   "countries": [
    "USA"
   ],
-  "poster": "/ifYDZkr2qkHFz87TNVvlxajOxl5.jpg",
+  "poster": "/8sMzu56Nok5WlEXCRdflEgshYQO.jpg",
+  "budget": 0,
+  "companies": [
+   "87North Productions",
+   "Imagine Entertainment",
+   "Amazon MGM Studios"
+  ],
   "lang": "English"
  },
  "The Color of Money": {
@@ -2253,6 +2666,11 @@
    "USA"
   ],
   "poster": "/dVdnHmdQu3JtLAAksjTmTEF76gD.jpg",
+  "budget": 13800000,
+  "companies": [
+   "Touchstone Pictures",
+   "Silver Screen Partners II"
+  ],
   "lang": "English"
  },
  "exact:the holiday film with live orchestra": {
@@ -2272,6 +2690,11 @@
    "USA"
   ],
   "poster": "/oOleziEempUPu96jkGs0Pj6tKxj.jpg",
+  "budget": 32000000,
+  "companies": [
+   "New Line Cinema",
+   "Guy Walks into a Bar Productions"
+  ],
   "lang": "English"
  },
  "How the Grinch Stole Christmas": {
@@ -2288,6 +2711,12 @@
    "Germany"
   ],
   "poster": "/1WZbbPApEivA421gCOluuzMMKCk.jpg",
+  "budget": 123000000,
+  "companies": [
+   "Universal Pictures",
+   "Imagine Entertainment",
+   "LUNI Productions"
+  ],
   "lang": "English"
  },
  "It Was Just an Accident#2025": {
@@ -2305,6 +2734,14 @@
    "Luxembourg"
   ],
   "poster": "/eNYGj2DG3n8OrVPTfYunpPW9uas.jpg",
+  "budget": 6000000,
+  "companies": [
+   "Jafar Panahi Productions",
+   "Les Films Pelléas",
+   "Bidibul Productions",
+   "Pio & Co",
+   "ARTE France Cinéma"
+  ],
   "lang": "French"
  },
  "I See Buildings Fall Like Lightning": {
@@ -2319,6 +2756,13 @@
    "USA"
   ],
   "poster": "/qoHvMUCuSwdtSZZQpLrZebjVXHg.jpg",
+  "budget": 0,
+  "companies": [
+   "Moonspun Films",
+   "BBC Film",
+   "BFI",
+   "TPC"
+  ],
   "lang": "English"
  },
  "Home Alone": {
@@ -2333,6 +2777,11 @@
    "USA"
   ],
   "poster": "/onTSipZ8R3bliBdKfPtsDuHTdlL.jpg",
+  "budget": 18000000,
+  "companies": [
+   "Hughes Entertainment",
+   "20th Century Fox"
+  ],
   "lang": "English"
  }
 }
