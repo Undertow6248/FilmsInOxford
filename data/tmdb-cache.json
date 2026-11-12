@@ -3048,5 +3048,25 @@
   ],
   "runtime": 100,
   "lang": "English"
+ },
+ "Miracle on 34th Street": {
+  "id": 11881,
+  "year": "1947",
+  "release": "1947-06-04",
+  "genres": [
+   "Comedy",
+   "Drama",
+   "Family"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/vehuIm3y6BeMI7mYjxzaA1H8M0k.jpg",
+  "budget": 630000,
+  "companies": [
+   "20th Century Fox"
+  ],
+  "runtime": 96,
+  "lang": "English"
  }
 }
