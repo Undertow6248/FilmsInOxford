@@ -3068,5 +3068,71 @@
   ],
   "runtime": 96,
   "lang": "English"
+ },
+ "Focker-in-Law": {
+  "id": 1400336,
+  "year": "2026",
+  "release": "2026-11-21",
+  "genres": [
+   "Comedy",
+   "Romance"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/bZhYdECsSuCrmbfYhKAc2bgsNz.jpg",
+  "budget": 0,
+  "companies": [
+   "Universal Pictures",
+   "Tribeca Productions",
+   "Red Hour",
+   "Delirious Media",
+   "Particular Pictures",
+   "Paramount Pictures"
+  ],
+  "runtime": 105,
+  "lang": "English"
+ },
+ "Disney's Hexed": {
+  "id": 1538497,
+  "year": "2026",
+  "release": "2026-11-25",
+  "genres": [
+   "Adventure",
+   "Animation",
+   "Family"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/yykeYKbDBM9eUMJUucaaDo2mi1p.jpg",
+  "budget": 0,
+  "companies": [
+   "Walt Disney Animation Studios"
+  ],
+  "runtime": 103,
+  "lang": "English"
+ },
+ "Tiddler": {
+  "id": 1324019,
+  "year": "2024",
+  "release": "2024-12-25",
+  "genres": [
+   "Family",
+   "Animation",
+   "TV Movie"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/oSbu5XhTHyXFrj04qVDHxD8kQBP.jpg",
+  "budget": 0,
+  "companies": [
+   "Magic Light Pictures",
+   "BBC One",
+   "Red Star 3D"
+  ],
+  "runtime": 23,
+  "lang": "English"
  }
 }
