@@ -3134,5 +3134,49 @@
   ],
   "runtime": 23,
   "lang": "English"
+ },
+ "The Cat in the Hat": {
+  "id": 1117898,
+  "year": "2026",
+  "release": "2026-10-31",
+  "genres": [
+   "Animation",
+   "Fantasy",
+   "Adventure"
+  ],
+  "countries": [
+   "UK",
+   "USA"
+  ],
+  "poster": "/mWN6knIVJ2o7eGwSm7mOgSCwNUc.jpg",
+  "budget": 86000000,
+  "companies": [
+   "DNEG",
+   "Dr. Seuss Enterprises",
+   "Warner Bros. Pictures Animation",
+   "A Stern Talking To",
+   "Domain Entertainment"
+  ],
+  "runtime": 108,
+  "lang": "English"
+ },
+ "Dune": {
+  "id": 438631,
+  "year": "2021",
+  "release": "2021-09-15",
+  "genres": [
+   "Sci-fi",
+   "Adventure"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+  "budget": 165000000,
+  "companies": [
+   "Legendary Pictures"
+  ],
+  "runtime": 155,
+  "lang": "English"
  }
 }
