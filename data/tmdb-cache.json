@@ -3178,5 +3178,91 @@
   ],
   "runtime": 155,
   "lang": "English"
+ },
+ "exact:queen of mars": {
+  "title": "",
+  "at": 1794736852663
+ },
+ "exact:aelita": {
+  "title": "Aelita",
+  "at": 1794736852730
+ },
+ "Aelita": {
+  "id": 478254,
+  "year": "1980",
+  "release": "1980-01-01",
+  "genres": [
+   "Sci-fi"
+  ],
+  "countries": [
+   "Hungary"
+  ],
+  "poster": "/sLnUK5zeYJ9XEO0LJ3fMlINN5Nh.jpg",
+  "budget": 0,
+  "companies": [],
+  "runtime": 111,
+  "lang": "Hungarian"
+ },
+ "Home Alone 2: Lost in New York": {
+  "id": 772,
+  "year": "1992",
+  "release": "1992-11-15",
+  "genres": [
+   "Comedy",
+   "Family",
+   "Adventure"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/uuitWHpJwxD1wruFl2nZHIb4UGN.jpg",
+  "budget": 18000000,
+  "companies": [
+   "20th Century Fox",
+   "Hughes Entertainment"
+  ],
+  "runtime": 120,
+  "lang": "English"
+ },
+ "Dune: Part Two": {
+  "id": 693134,
+  "year": "2024",
+  "release": "2024-02-27",
+  "genres": [
+   "Sci-fi",
+   "Adventure"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+  "budget": 190000000,
+  "companies": [
+   "Legendary Pictures"
+  ],
+  "runtime": 167,
+  "lang": "English"
+ },
+ "The Holiday": {
+  "id": 1581,
+  "year": "2006",
+  "release": "2006-12-05",
+  "genres": [
+   "Comedy",
+   "Romance"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/h1ITOpvJN3Tw4Sy60w2QTfYMvdd.jpg",
+  "budget": 85000000,
+  "companies": [
+   "Relativity Media",
+   "Waverly Films",
+   "Universal Pictures",
+   "Columbia Pictures"
+  ],
+  "runtime": 136,
+  "lang": "English"
  }
 }
