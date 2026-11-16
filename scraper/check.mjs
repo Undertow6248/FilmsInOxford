@@ -34,7 +34,7 @@ for (const [k, h] of Object.entries(j.sources || {})) {
 // The Curzon task in Chrome runs Mon–Thu, so allow a long weekend (100 hours) before flagging it.
 const cc = s.chromeCurzon || {};
 if (cc.hoursAgo == null || cc.hoursAgo > 100)
-  problems.push(`Curzon: the scheduled Claude task that reads Curzon in your Chrome ${cc.last ? `last ran ${Math.round(cc.hoursAgo / 24)} days ago` : "has never sent anything"}, so Curzon only shows Daily Info's next two days. Check Chrome was open with the Claude extension, and the task's latest run in Claude.`);
+  problems.push(`Curzon: no new times from the "Curzon times for Films In Oxford" Claude task ${cc.last ? `for ${Math.round(cc.hoursAgo / 24)} days` : "yet"}. The site keeps using the last ones for a week, then falls back to Daily Info's next two days. Check the task is switched on in Claude (it pauses itself if the computer was off when it was due), and that Chrome is open with the Claude extension.`);
 const lines = problems.length ? ["Problems in this update:", ...problems.map(p => "- " + p)] : ["Everything worked."];
 console.log(lines.join("\n"));
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");

@@ -1,6 +1,6 @@
 # Curzon in Chrome: instructions for the scheduled Claude task
 
-Curzon's website blocks automated browsers with a Cloudflare security check, but it works normally in the owner's own Chrome. A scheduled Claude task reads Curzon's Oxford listings there before 10:15 on weekdays. The page script saves the result to the computer's Downloads folder as `films-in-oxford-curzon.txt`. The Films in Oxford job on the same computer runs at 10:15, uploads that file to the repo (`scraper/local/curzon.json`) and deletes it.
+Curzon's website blocks automated browsers with a Cloudflare security check, but it works normally in the owner's own Chrome. A scheduled Claude task reads Curzon's Oxford listings there late on weekday mornings. The page script saves the result to the computer's Downloads folder as `films-in-oxford-curzon.txt`. On its next run (10:15 or at login), the Films in Oxford job on the same computer uploads that file to the repo (`scraper/local/curzon.json`) and deletes it. Curzon publishes about two weeks ahead, so a day's delay doesn't matter.
 
 The task doesn't touch GitHub. Each run does the following:
 
