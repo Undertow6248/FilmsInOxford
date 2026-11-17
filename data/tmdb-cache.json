@@ -3328,5 +3328,27 @@
   ],
   "runtime": 179,
   "lang": "Tamil"
+ },
+ "exact:one flew over the cuckoo s nest": {
+  "title": "One Flew Over the Cuckoo's Nest",
+  "at": 1794909864707
+ },
+ "Cantona: Flower of Evil + Live Broadcast of Q&A": {
+  "id": 1666705,
+  "year": "2026",
+  "release": "2026-05-15",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/cKAMMOqso5FGGNsugh5mLPjBsxM.jpg",
+  "budget": 0,
+  "companies": [
+   "Pitch Productions"
+  ],
+  "runtime": 115,
+  "lang": "English"
  }
 }
