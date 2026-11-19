@@ -3391,5 +3391,51 @@
   ],
   "runtime": 90,
   "lang": "English"
+ },
+ "exact:machine god": {
+  "title": "",
+  "at": 1795114693100
+ },
+ "Machine God": {
+  "id": 1564418,
+  "year": "2025",
+  "release": "2025-10-16",
+  "genres": [
+   "Documentary"
+  ],
+  "countries": [
+   "Brazil",
+   "USA"
+  ],
+  "poster": "/kuTIIwXc436PTUFVj8F8gTsfsz0.jpg",
+  "budget": 0,
+  "companies": [
+   "Brasil Paralelo"
+  ],
+  "runtime": 0,
+  "lang": "Portuguese"
+ },
+ "Spider-Man: (Brand New) Brand New Day": {
+  "id": 969681,
+  "year": "2026",
+  "release": "2026-07-29",
+  "genres": [
+   "Sci-fi",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+  "budget": 225000000,
+  "companies": [
+   "Marvel Studios",
+   "Columbia Pictures",
+   "Pascal Pictures",
+   "TSG Entertainment"
+  ],
+  "runtime": 145,
+  "lang": "English"
  }
 }
