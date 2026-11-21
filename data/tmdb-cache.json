@@ -3437,5 +3437,46 @@
   ],
   "runtime": 145,
   "lang": "English"
+ },
+ "Hexed": {
+  "id": 1538497,
+  "year": "2026",
+  "release": "2026-11-25",
+  "genres": [
+   "Adventure",
+   "Animation",
+   "Family"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/yykeYKbDBM9eUMJUucaaDo2mi1p.jpg",
+  "budget": 0,
+  "companies": [
+   "Walt Disney Animation Studios"
+  ],
+  "runtime": 103,
+  "lang": "English"
+ },
+ "Onwards and Sideways": {
+  "id": 1567265,
+  "year": "2026",
+  "release": "2026-11-06",
+  "genres": [
+   "Comedy",
+   "Drama"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/9GrdyiydFaa0OP7bjQrp8exlcPi.jpg",
+  "budget": 0,
+  "companies": [
+   "Hilltop Screen",
+   "John Gore Studios",
+   "BBC"
+  ],
+  "runtime": 105,
+  "lang": "English"
  }
 }
