@@ -3560,5 +3560,145 @@
   ],
   "runtime": 103,
   "lang": "English"
+ },
+ "Buddy": {
+  "id": 1514026,
+  "year": "2026",
+  "release": "2026-08-27",
+  "genres": [
+   "Horror",
+   "Comedy",
+   "Fantasy"
+  ],
+  "countries": [
+   "USA",
+   "Israel"
+  ],
+  "poster": "/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg",
+  "budget": 3000000,
+  "companies": [
+   "BoulderLight Pictures",
+   "Low Spark Films",
+   "SIPUR",
+   "Substance"
+  ],
+  "runtime": 96,
+  "lang": "English"
+ },
+ "Filipiñana": {
+  "id": 1417935,
+  "year": "2026",
+  "release": "2026-08-26",
+  "genres": [
+   "Comedy",
+   "Drama",
+   "Mystery"
+  ],
+  "countries": [
+   "Philippines",
+   "Singapore",
+   "UK"
+  ],
+  "poster": "/64hnrTmeJEvUYoJyuOM7taE3CqT.jpg",
+  "budget": 55000,
+  "companies": [
+   "Film4 Productions",
+   "PŌTOCOL",
+   "Epicmedia",
+   "Ossian International",
+   "Easy Riders Films",
+   "Idle Eye",
+   "Happy Infinite Productions",
+   "Nathan Studios",
+   "Wapak Studios",
+   "Narra Post-Production Studios",
+   "Kongchak Pictures",
+   "Harbor Picture Company",
+   "CMB Film Services",
+   "Filmpost Studios"
+  ],
+  "runtime": 101,
+  "lang": "Tagalog"
+ },
+ "Your Mother Your Mother Your Mot": {
+  "id": 1437396,
+  "year": "2026",
+  "release": "2026-09-25",
+  "genres": [
+   "Drama",
+   "Action",
+   "Crime"
+  ],
+  "countries": [
+   "USA",
+   "UK"
+  ],
+  "poster": "/58g3PjU11nBszOWc836lC8t2Mzi.jpg",
+  "budget": 10000000,
+  "companies": [
+   "Two & Two Pictures",
+   "Orion Pictures"
+  ],
+  "runtime": 112,
+  "lang": "English"
+ },
+ "Cotton Queen": {
+  "id": 265676,
+  "year": "1937",
+  "release": "1937-06-01",
+  "genres": [
+   "Comedy",
+   "Romance"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/mM31u4OFWRXAzTEW45Coc9bGE6b.jpg",
+  "budget": 0,
+  "companies": [
+   "Joe Rock Productions"
+  ],
+  "runtime": 80,
+  "lang": "English"
+ },
+ "The Holdovers + Mulled Wine & Festive Cakes": {
+  "id": 840430,
+  "year": "2023",
+  "release": "2023-10-27",
+  "genres": [
+   "Drama",
+   "Comedy"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
+  "budget": 13000000,
+  "companies": [
+   "Miramax",
+   "Gran Via Productions"
+  ],
+  "runtime": 133,
+  "lang": "English"
+ },
+ "Remember the Night": {
+  "id": 29617,
+  "year": "1940",
+  "release": "1940-01-19",
+  "genres": [
+   "Comedy",
+   "Romance",
+   "Drama"
+  ],
+  "countries": [
+   "USA"
+  ],
+  "poster": "/kPeGe9VApDwwWgUSRiUCch7Huj7.jpg",
+  "budget": 0,
+  "companies": [
+   "Paramount Pictures"
+  ],
+  "runtime": 94,
+  "lang": "English"
  }
 }
