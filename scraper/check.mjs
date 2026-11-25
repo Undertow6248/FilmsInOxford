@@ -8,7 +8,8 @@ const s = d.status || {};
 const NAMES = { vue: "Vue", phx: "Phoenix", cur: "Curzon", ocf: "Oxford Cinema & Cafe", upp: "UPP",
   "ev:dailyinfo": "Daily Info", "ev:oxevents": "University events calendar", "ev:wegottickets": "WeGotTickets",
   "ev:eventbrite": "Eventbrite", "ev:magdalen": "Magdalen Monday Movies" };
-const problems = [];
+const problems = [];   // fail the run (GitHub emails you)
+const warnings = [];   // shown in the run's summary only: the site is still fine
 
 for (const k of ["vue", "phx", "cur", "ocf", "upp"]) {
   const v = s[k];
@@ -31,12 +32,20 @@ for (const [k, h] of Object.entries(j.sources || {})) {
   if (j.hoursAgo != null && j.hoursAgo <= 48 && h > 48)
     problems.push(`${NAMES[k] || k}: the job on your computer hasn't managed to read it for ${Math.round(h / 24)} days (it still runs, but this part fails). Check fetch.log in %LOCALAPPDATA%\\FilmsInOxford.`);
 }
-// The Curzon task in Chrome runs Mon–Thu, so allow a long weekend (100 hours) before flagging it.
+// Curzon times come from the job on your computer (or, as a back-up, the Claude task in Chrome). The site uses them for
+// a week, so until then it's only a heads-up; after that the site is down to Daily Info's two days, so fail the run.
 const cc = s.chromeCurzon || {};
-if (cc.hoursAgo == null || cc.hoursAgo > 100)
-  problems.push(`Curzon: no new times from the "Curzon times for Films In Oxford" Claude task ${cc.last ? `for ${Math.round(cc.hoursAgo / 24)} days` : "yet"}. The site keeps using the last ones for a week, then falls back to Daily Info's next two days. Check the task is switched on in Claude (it pauses itself if the computer was off when it was due), and that Chrome is open with the Claude extension.`);
-const lines = problems.length ? ["Problems in this update:", ...problems.map(p => "- " + p)] : ["Everything worked."];
+const ccWhere = `Check "curzon" lines in fetch.log in %LOCALAPPDATA%\\FilmsInOxford, and/or that the "Curzon times for Films In Oxford" Claude task is switched on (it pauses itself if the computer was off when it was due).`;
+if (cc.hoursAgo == null || cc.hoursAgo > 168)
+  problems.push(`Curzon: no new times ${cc.last ? `for ${Math.round(cc.hoursAgo / 24)} days` : "yet"}, so the site only has Daily Info's next two days. ${ccWhere}`);
+else if (cc.hoursAgo > 72)
+  warnings.push(`Curzon: no new times for ${Math.round(cc.hoursAgo / 24)} days. The site still uses the last ones; this becomes an error after 7 days. ${ccWhere}`);
+const lines = [
+  ...(problems.length ? ["Problems in this update:", ...problems.map(p => "- " + p)] : ["Everything important worked."]),
+  ...(warnings.length ? ["Heads-up (not failing the run):", ...warnings.map(w => "- " + w)] : []),
+];
 console.log(lines.join("\n"));
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
 for (const p of problems) console.log("::error::" + p);
+for (const w of warnings) console.log("::warning::" + w);
 process.exit(problems.length ? 1 : 0);

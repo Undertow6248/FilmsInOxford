@@ -7,6 +7,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { spawn, spawnSync } from "node:child_process";
 import { chromium } from "playwright-core";
 
 const REPO = "Undertow6248/FilmsInOxford";
@@ -14,7 +15,8 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CONFIG = path.join(HERE, "config.json");   // { "token": "github_pat_..." }
 const STATE = path.join(HERE, "last-run.json");
 const LOG = path.join(HERE, "fetch.log");
-// Curzon is not here: it blocks automated browsers (a Cloudflare security check), so its times come from Daily Info.
+// Curzon is separate (tryCurzon below): it blocks browsers that a tool has started (a Cloudflare security check),
+// so it gets an ordinary Chrome, started normally with its own saved profile, which this job only attaches to.
 const SOURCES = { vue: "sources/vue.mjs" };
 const EVENTS = "sources/events.mjs"; // University events calendar + Eventbrite
 
@@ -33,7 +35,16 @@ async function main() {
   // Keep this script up to date too (takes effect from the next run).
   try {
     const r = await gh(`https://raw.githubusercontent.com/${REPO}/main/local/fetch.mjs`, { cache: "no-store" });
-    if (r.ok) { const t = await r.text(); if (t.includes("films-in-oxford-local") && t !== fs.readFileSync(fileURLToPath(import.meta.url), "utf8")) fs.writeFileSync(fileURLToPath(import.meta.url), t); }
+    if (r.ok) {
+      const t = await r.text();
+      if (t.includes("films-in-oxford-local") && t !== fs.readFileSync(fileURLToPath(import.meta.url), "utf8")) {
+        fs.writeFileSync(fileURLToPath(import.meta.url), t);
+        // Run the new version straight away, rather than waiting until tomorrow.
+        log("updated this script, restarting it");
+        process.exitCode = spawnSync(process.execPath, process.argv.slice(1), { stdio: "inherit" }).status ?? 1;
+        return;
+      }
+    }
   } catch {}
   const saved = JSON.parse(fs.readFileSync(CONFIG, "utf8").replace(/^\uFEFF/, "")).token || ""; // Windows may add a BOM
   // Pasting into a terminal can add invisible characters around the token; keep just the token itself.
@@ -124,6 +135,77 @@ async function main() {
   if (!put.ok) throw new Error(`GitHub said ${put.status}: ${(await put.text()).slice(0, 200)}`);
   fs.writeFileSync(STATE, JSON.stringify({ ok: new Date().toISOString() }));
   log("sent to GitHub");
+
+  try { await tryCurzon(token); } catch (e) { log("curzon FAILED:", e.message.split("\n")[0]); }
+}
+
+// Curzon. A Chrome started by Playwright is marked as automated, and Cloudflare stops it. So start Chrome the
+// ordinary way, with its own profile kept in this folder (Cloudflare's "you passed" cookie then carries over between
+// days), attach to it afterwards, and run the same page script the Claude task uses. If Cloudflare still shows its
+// check, log that and give up: nothing else depends on this, and the Claude task / Daily Info still cover Curzon.
+async function tryCurzon(token) {
+  const exe = [
+    process.env.PROGRAMFILES && path.join(process.env.PROGRAMFILES, "Google/Chrome/Application/chrome.exe"),
+    process.env["PROGRAMFILES(X86)"] && path.join(process.env["PROGRAMFILES(X86)"], "Google/Chrome/Application/chrome.exe"),
+    process.env.LOCALAPPDATA && path.join(process.env.LOCALAPPDATA, "Google/Chrome/Application/chrome.exe"),
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  ].find(p => p && fs.existsSync(p));
+  if (!exe) throw new Error("Chrome isn't installed in the usual place");
+  const profile = path.join(HERE, "chrome-profile");
+  fs.mkdirSync(profile, { recursive: true });
+  const portFile = path.join(profile, "DevToolsActivePort");
+  try { fs.unlinkSync(portFile); } catch {}
+  const chrome = spawn(exe, [`--user-data-dir=${profile}`, "--remote-debugging-port=0", "--no-first-run", "--disable-blink-features=AutomationControlled",
+    "--no-default-browser-check", "--window-position=-2400,-2400", "--window-size=1366,900", "about:blank"], { stdio: "ignore" });
+  let browser;
+  try {
+    let port;
+    for (let i = 0; i < 60 && !port; i++) {
+      await new Promise(r => setTimeout(r, 500));
+      try { port = fs.readFileSync(portFile, "utf8").split("\n")[0].trim(); } catch {}
+    }
+    if (!port) throw new Error("Chrome didn't start (is another copy using its profile?)");
+    browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`);
+    // The page script saves a copy to Downloads for the Claude task's hand-over; not needed here.
+    try { await (await browser.newBrowserCDPSession()).send("Browser.setDownloadBehavior", { behavior: "deny" }); } catch {}
+    const ctx = browser.contexts()[0];
+    const page = ctx.pages()[0] || await ctx.newPage();
+    await page.goto("https://www.curzon.com/venues/oxford/", { waitUntil: "domcontentloaded", timeout: 60000 });
+    // Cloudflare's check, when it lets a browser through, finishes by itself within a few seconds.
+    try { await page.waitForSelector(".v-date-picker [role=tab]", { timeout: 60000 }); }
+    catch {
+      const title = await page.title().catch(() => "");
+      throw new Error(/just a moment/i.test(title) ? "blocked by Cloudflare's security check" : `listings didn't appear (page title ${JSON.stringify(title)})`);
+    }
+    const r = await fetch(`https://raw.githubusercontent.com/${REPO}/main/chrome/curzon-page.js`, { cache: "no-store" });
+    if (!r.ok) throw new Error(`couldn't download curzon-page.js: ${r.status}`);
+    await page.evaluate(await r.text());
+    await page.waitForFunction(() => typeof window.__curzonDone === "number", null, { timeout: 180000, polling: 2000 });
+    const text = await page.evaluate(() => document.getElementById("curzon-out")?.textContent || "");
+    const { at, rows } = parseCurzon(text);
+    await putFile(token, "scraper/local/curzon.json", JSON.stringify({ at, rows }), `Curzon times from this computer (${at.slice(0, 10)})`);
+    log("curzon", rows.length, "screenings,", new Set(rows.map(r => r.date)).size, "days, sent to GitHub");
+  } finally {
+    try { await browser?.close(); } catch {}
+    try { chrome.kill(); } catch {}
+  }
+}
+
+// Lines from curzon-page.js (AT|time, F|title|film-path, S|date|time|booking-number, END|count) -> screenings
+function parseCurzon(text, fallbackAt) {
+  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const end = lines.find(l => l.startsWith("END|"));
+  if (!end) throw new Error("the Curzon read is incomplete (no END line)");
+  const at = (lines.find(l => l.startsWith("AT|")) || "").slice(3) || fallbackAt || new Date().toISOString();
+  const rows = []; let film = null;
+  for (const l of lines) {
+    const p = l.split("|");
+    if (p[0] === "F") film = { title: p[1], url: p[2] ? new URL(p[2], "https://www.curzon.com/").href : "" };
+    else if (p[0] === "S" && film && /^\d{4}-\d\d-\d\d$/.test(p[1]) && /^\d\d:\d\d$/.test(p[2]))
+      rows.push({ date: p[1], time: p[2], title: film.title, venue: "cur", tags: [], url: p[3] ? `https://www.curzon.com/ticketing/seats/OXF1-${p[3]}/` : film.url, filmUrl: film.url });
+  }
+  if (!rows.length || rows.length !== +end.split("|")[1]) throw new Error(`the Curzon read has ${rows.length} screenings but says ${end.split("|")[1]}`);
+  return { at, rows };
 }
 
 // Save a file to the repo through GitHub's API (creating or replacing it).
@@ -145,19 +227,7 @@ async function uploadCurzon(token) {
       .map(f => ({ p: path.join(dl, f), t: fs.statSync(path.join(dl, f)).mtimeMs })).sort((a, b) => b.t - a.t);
   } catch { return; }
   if (!files.length) return;
-  const text = fs.readFileSync(files[0].p, "utf8");
-  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-  const end = lines.find(l => l.startsWith("END|"));
-  if (!end) throw new Error("the Curzon file is incomplete (no END line)");
-  const at = (lines.find(l => l.startsWith("AT|")) || "").slice(3) || new Date(files[0].t).toISOString();
-  const rows = []; let film = null;
-  for (const l of lines) {
-    const p = l.split("|");
-    if (p[0] === "F") film = { title: p[1], url: p[2] ? new URL(p[2], "https://www.curzon.com/").href : "" };
-    else if (p[0] === "S" && film && /^\d{4}-\d\d-\d\d$/.test(p[1]) && /^\d\d:\d\d$/.test(p[2]))
-      rows.push({ date: p[1], time: p[2], title: film.title, venue: "cur", tags: [], url: p[3] ? `https://www.curzon.com/ticketing/seats/OXF1-${p[3]}/` : film.url, filmUrl: film.url });
-  }
-  if (!rows.length || rows.length !== +end.split("|")[1]) throw new Error(`the Curzon file has ${rows.length} screenings but says ${end.split("|")[1]}`);
+  const { at, rows } = parseCurzon(fs.readFileSync(files[0].p, "utf8"), new Date(files[0].t).toISOString());
   await putFile(token, "scraper/local/curzon.json", JSON.stringify({ at, rows }), `Curzon times via Chrome (${at.slice(0, 10)})`);
   // Uploaded: tidy up the file(s) the task left in Downloads.
   for (const f of files) try { fs.unlinkSync(f.p); } catch {}
