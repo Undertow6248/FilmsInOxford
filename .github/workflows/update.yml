@@ -24,7 +24,7 @@ jobs:
     timeout-minutes: 30
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy2.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -74,7 +74,16 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+      # GitHub sometimes doesn't list the upload yet when the deploy looks for it a moment later ("No artifacts
+      # named github-pages"). Give it a few seconds, and if the deploy still fails, wait and try once more.
+      - run: sleep 10
       - id: deploy
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      - if: steps.deploy.outcome == 'failure'
+        run: sleep 45
+      - id: deploy2
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v4
 
       # Fail the run (so GitHub emails you) if anything didn't work: a cinema, an event source, TMDB,
