@@ -3700,5 +3700,85 @@
   ],
   "runtime": 94,
   "lang": "English"
+ },
+ "This Symphony May Contain Hope": {
+  "id": 1832527,
+  "year": "2026",
+  "release": "2026-12-13",
+  "genres": [
+   "Music"
+  ],
+  "countries": [
+   "UK"
+  ],
+  "poster": "/5V5VEgSGH3rg5eMwfNseirCCiZI.jpg",
+  "budget": 0,
+  "companies": [
+   "Aldgate Pictures"
+  ],
+  "runtime": 135,
+  "lang": "English"
+ },
+ "The Invite": {
+  "id": 950028,
+  "year": "2026",
+  "release": "2026-06-25",
+  "genres": [
+   "Comedy",
+   "Drama",
+   "Romance"
+  ],
+  "countries": [
+   "United States"
+  ],
+  "poster": "/b7Dr8Chzse8VagexAporUu2RtLx.jpg",
+  "budget": 12000000,
+  "companies": [
+   "Annapurna Pictures",
+   "FilmNation Entertainment",
+   "Permut Presentations"
+  ],
+  "runtime": 107,
+  "lang": "English"
+ },
+ "100 Sunset": {
+  "id": 1511781,
+  "year": "2026",
+  "release": "2026-05-01",
+  "genres": [
+   "Mystery",
+   "Drama"
+  ],
+  "countries": [
+   "Canada"
+  ],
+  "poster": "/2u6ooivRDu6Yc9qPuJ18UjSMLKY.jpg",
+  "budget": 385000,
+  "companies": [
+   "Migmar Pictures"
+  ],
+  "runtime": 99,
+  "lang": "Tibetan"
+ },
+ "Dune: Part Three": {
+  "id": 1170608,
+  "year": "2026",
+  "release": "2026-12-15",
+  "genres": [
+   "Sci-fi",
+   "Adventure"
+  ],
+  "countries": [
+   "United States",
+   "United Arab Emirates"
+  ],
+  "poster": "/d43fvHQsIMa4kpyhKXw0haEJIvI.jpg",
+  "budget": 200000000,
+  "companies": [
+   "Legendary Pictures",
+   "Image Nation Studios"
+  ],
+  "runtime": 150,
+  "lang": "English"
  }
 }
