@@ -36,8 +36,8 @@ fs.rmSync(new URL("../data/debug/", import.meta.url), { recursive: true, force: 
 const raw = [], status = {};
 // Vue and Curzon block GitHub's servers, so a job on the owner's computer (local/fetch.mjs) sends their times here.
 const local = read("./local/listings.json", { sources: {} });
-// Curzon blocks automated browsers, so the job on the owner's computer reads it in an ordinary Chrome (back-up: a
-// scheduled Claude task in the owner's own Chrome) and saves scraper/local/curzon.json. Its times cover ~9 days ahead, so they're used for up to a week.
+// Curzon blocks automated browsers, so the job on the owner's computer reads it in an ordinary Chrome (formerly a
+// scheduled Claude task in the owner's own Chrome, now off) and saves scraper/local/curzon.json. Its times cover ~9 days ahead, so they're used for up to a week.
 const chromeCur = read("./local/curzon.json", null);
 const chromeCurOk = chromeCur?.rows?.length && Date.now() - Date.parse(chromeCur.at) < 7 * 864e5;
 // Screenings outside cinemas (and Daily Info's copy of the cinema times, used as a back-up below).

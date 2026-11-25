@@ -32,10 +32,10 @@ for (const [k, h] of Object.entries(j.sources || {})) {
   if (j.hoursAgo != null && j.hoursAgo <= 48 && h > 48)
     problems.push(`${NAMES[k] || k}: the job on your computer hasn't managed to read it for ${Math.round(h / 24)} days (it still runs, but this part fails). Check fetch.log in %LOCALAPPDATA%\\FilmsInOxford.`);
 }
-// Curzon times come from the job on your computer (or, as a back-up, the Claude task in Chrome). The site uses them for
+// Curzon times come from the job on your computer. The site uses them for
 // a week, so until then it's only a heads-up; after that the site is down to Daily Info's two days, so fail the run.
 const cc = s.chromeCurzon || {};
-const ccWhere = `Check "curzon" lines in fetch.log in %LOCALAPPDATA%\\FilmsInOxford, and/or that the "Curzon times for Films In Oxford" Claude task is switched on (it pauses itself if the computer was off when it was due).`;
+const ccWhere = `Check the "curzon" lines in fetch.log in %LOCALAPPDATA%\\FilmsInOxford. If it says Cloudflare blocked it, the old "Curzon times for Films In Oxford" Claude task (switched off, see chrome/TASK.md) can be switched back on as a fallback.`;
 if (cc.hoursAgo == null || cc.hoursAgo > 168)
   problems.push(`Curzon: no new times ${cc.last ? `for ${Math.round(cc.hoursAgo / 24)} days` : "yet"}, so the site only has Daily Info's next two days. ${ccWhere}`);
 else if (cc.hoursAgo > 72)
