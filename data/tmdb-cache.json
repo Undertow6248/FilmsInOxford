@@ -3780,5 +3780,28 @@
   ],
   "runtime": 150,
   "lang": "English"
+ },
+ "Spider-Man: “Brand New” Brand New Day": {
+  "id": 969681,
+  "year": "2026",
+  "release": "2026-07-29",
+  "genres": [
+   "Sci-fi",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "United States"
+  ],
+  "poster": "/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+  "budget": 225000000,
+  "companies": [
+   "Marvel Studios",
+   "Columbia Pictures",
+   "Pascal Pictures",
+   "TSG Entertainment"
+  ],
+  "runtime": 145,
+  "lang": "English"
  }
 }
