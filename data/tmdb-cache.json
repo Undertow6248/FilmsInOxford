@@ -3822,5 +3822,81 @@
   ],
   "runtime": 108,
   "lang": "English"
+ },
+ "Behemoth!": {
+  "id": 1452168,
+  "year": "2026",
+  "release": "2026-12-02",
+  "genres": [
+   "Music",
+   "Drama"
+  ],
+  "countries": [
+   "United States"
+  ],
+  "poster": "/bcyGYWfcXr0GnXewaE5gkvYy1iQ.jpg",
+  "budget": 36000000,
+  "companies": [
+   "Searchlight Pictures"
+  ],
+  "runtime": 127,
+  "lang": "English"
+ },
+ "Paper Tiger": {
+  "id": 1381273,
+  "year": "2026",
+  "release": "2026-11-13",
+  "genres": [
+   "Crime",
+   "Drama",
+   "Thriller"
+  ],
+  "countries": [
+   "United States",
+   "Brazil",
+   "Italy"
+  ],
+  "poster": "/p6oLmq5KmuWY6uRXBQBL2q30jia.jpg",
+  "budget": 15000000,
+  "companies": [
+   "RT Features",
+   "Leone Film Group",
+   "Keep Your Head Productions",
+   "Vixens",
+   "Jury Rigged Pictures",
+   "Vice Pictures",
+   "Mid March Media",
+   "L.E.A.F. Entertainment",
+   "Lotus Production",
+   "BNF Capital",
+   "Streamline Global",
+   "Film Committee at Media City Qatar",
+   "Orogen Entertainment",
+   "LB Entertainment"
+  ],
+  "runtime": 115,
+  "lang": "English"
+ },
+ "Avengers: Doomsday": {
+  "id": 1003596,
+  "year": "2026",
+  "release": "2026-12-16",
+  "genres": [
+   "Sci-fi",
+   "Action",
+   "Adventure"
+  ],
+  "countries": [
+   "United States"
+  ],
+  "poster": "/1zqWkLwC1zLBBBtIWzmkmWeMWnT.jpg",
+  "budget": 0,
+  "companies": [
+   "Marvel Studios",
+   "Kevin Feige Productions",
+   "AGBO"
+  ],
+  "runtime": 165,
+  "lang": "English"
  }
 }
