@@ -26,6 +26,12 @@
    "UK"
   ],
   "poster": "/vh2ggFtDpYW1zoOx1bfEAuCkiQ0.jpg",
+  "budget": 0,
+  "companies": [
+   "Herrick Entertainment",
+   "Channel 4 Television"
+  ],
+  "runtime": 30,
   "lang": "English"
  },
  "Shaun the Sheep: The Beast of Mossy Bottom#2026": {
@@ -3897,6 +3903,29 @@
    "AGBO"
   ],
   "runtime": 165,
+  "lang": "English"
+ },
+ "The Gruffalo": {
+  "id": 28118,
+  "year": "2009",
+  "release": "2009-12-25",
+  "genres": [
+   "Animation",
+   "Family",
+   "TV Movie"
+  ],
+  "countries": [
+   "UK",
+   "Germany"
+  ],
+  "poster": "/bB1kAXPFwF63WW6SgHsqluEBVPR.jpg",
+  "budget": 0,
+  "companies": [
+   "Magic Light Pictures",
+   "Orange Eyes",
+   "Studio Soi"
+  ],
+  "runtime": 27,
   "lang": "English"
  }
 }
