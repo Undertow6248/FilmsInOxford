@@ -833,9 +833,16 @@
    "Horror"
   ],
   "countries": [
-   "USA"
+   "United States"
   ],
   "poster": "/wpRrdm6g8zWtJnzVqME5QwSKkn7.jpg",
+  "budget": 40000000,
+  "companies": [
+   "American Zoetrope",
+   "Osiris Films",
+   "Columbia Pictures"
+  ],
+  "runtime": 128,
   "lang": "English"
  },
  "Minions & Monsters#2026": {
@@ -3926,6 +3933,28 @@
    "Studio Soi"
   ],
   "runtime": 27,
+  "lang": "English"
+ },
+ "Fargo": {
+  "id": 275,
+  "year": "1996",
+  "release": "1996-03-08",
+  "genres": [
+   "Crime",
+   "Drama",
+   "Thriller"
+  ],
+  "countries": [
+   "UK",
+   "United States"
+  ],
+  "poster": "/rt7cpEr1uP6RTZykBFhBTcRaKvG.jpg",
+  "budget": 7000000,
+  "companies": [
+   "PolyGram Filmed Entertainment",
+   "Working Title"
+  ],
+  "runtime": 98,
   "lang": "English"
  }
 }
